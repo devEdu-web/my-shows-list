@@ -1,0 +1,30 @@
+{
+  "name": "my_shows_list",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "start-dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devEdu-web/my-shows-list.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devEdu-web/my-shows-list/issues"
+  },
+  "homepage": "https://github.com/devEdu-web/my-shows-list#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
