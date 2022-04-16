@@ -1,0 +1,65 @@
+body {
+    background-color: #02020A;
+    color: white;
+    min-height: 100vh;
+    background-image: url('/assets/images/main-background1920_1080.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+#mainTitle {
+    font-size: 1.8em;
+}
+
+#mainTitle:hover {
+    font-size: 1.8em;
+    color: white;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.auth-div-desktop{
+    display: block;
+}
+
+.auth-div-mobile{
+    display: none;
+}
+
+.auth-buttons {
+    width: 120px;
+    border-radius: 120px;
+}
+
+#login {
+    background-color: #004FFF;
+    color: white;
+}
+
+#register {
+    background-color: white;
+    color: #004FFF;
+}
+
+main {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@media screen and (max-width: 540px) {
+    .auth-div-desktop {
+        display: none;
+    }
+
+    .auth-div-mobile{
+        display: flex;
+    }
+    .auth-buttons {
+        width: 100px;
+    }
+}
