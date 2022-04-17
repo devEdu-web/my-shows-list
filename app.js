@@ -24,10 +24,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.use('/', authRouter)
+app.get('/', authRouter)
 
-app.use('/', (req, res, next) => {
+app.get('/', (req, res, next) => {
     res.render('index');
+})
+
+app.get('/home', (req, res, next) => {
+    res.render('home')
 })
 
 export {__dirname};

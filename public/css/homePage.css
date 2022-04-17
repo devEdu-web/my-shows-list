@@ -1,0 +1,39 @@
+body {
+    background-color: #02020A;
+    color: white;
+}
+
+#mainTitle {
+    color: white;
+    font-size: 1.8em;
+}
+
+.nav-link, .nav-item {
+    color: white;
+}
+
+.profilePicture {
+    width: 55px;
+    height: 55px;
+    background-color: grey;
+    border-radius: 50%;
+}
+
+@media screen and (max-width: 990px) {
+    #mainTitle {
+        color: white;
+        font-size: 1.2em;
+    }
+
+    input[type="search"] {
+        width: 40%;
+        margin-bottom: 16px;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+    input[type="search"] {
+        width: 80%;
+    }
+}
