@@ -4,6 +4,7 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import {engine} from 'express-handlebars';
 import dotenv from 'dotenv';
+import authRouter from './routes/auth.routes.js'
 dotenv.config()
 
 const app = express();
@@ -23,8 +24,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+app.use('/', authRouter)
+
 app.use('/', (req, res, next) => {
-    res.sendFile(path.join(__dirname, 'public', 'pages', 'index.html'))
+    res.render('index');
 })
 
 export {__dirname};
