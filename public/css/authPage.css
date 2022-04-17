@@ -47,7 +47,7 @@ input[type="submit"] {
     font-weight: bold;
 }
 
-#loginLink {
+#loginLink, #registerLink {
     color: #E28413;
 }
 
@@ -83,7 +83,7 @@ input[type="submit"] {
 
 }
 
-@media screen and (max-height: 1200px) {
+@media screen and (min-height: 900px) {
     #registerContainer {
         height: 50vh;
     }

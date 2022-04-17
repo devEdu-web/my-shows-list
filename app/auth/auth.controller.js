@@ -5,7 +5,11 @@ function getRegisterPage(req, res, next) {
     res.render('register')
 }
 
+function getLoginPage(req, res, next) {
+    res.render('login')
+}
 
 export {
-    getRegisterPage
+    getRegisterPage,
+    getLoginPage
 }
