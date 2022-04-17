@@ -9,3 +9,9 @@
     color: black;
     height: 60vh;
 }
+
+@media screen and (min-height: 900px) {
+    #registerContainer {
+        height: 40vh;
+    }
+}
