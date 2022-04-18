@@ -1,54 +1,43 @@
 body {
     background-color: #02020A;
     color: white;
+    min-height: 80vh;
 }
 
-#mainTitle {
-    color: white;
-    font-size: 1.8em;
+main {
+    width: 70vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%)
 }
 
-.nav-link, .nav-item {
-    color: white;
+.info-title {
+    color: #E28413;
 }
 
-.profilePicture {
-    width: 55px;
-    height: 55px;
-    background-color: grey;
-    border-radius: 50%;
+.shows-container{
+    width: 100%;
+    margin-bottom: 24px;
 }
 
-.dropdown-menu {
-    background-color: #02020A;
-    border: 1px solid white;
-    color: white;
+
+.control {
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 }
 
-.dropdown-item {
-    color: white;
+img {
+    height: 60%;
 }
 
-.dropdown-item:hover {
-    background-color: #004FFF;
-    color: white;
+.card {
+    background-color: #1E1E2E;
+    margin: 10px;
+    max-height: 325px;
 }
 
-@media screen and (max-width: 990px) {
-    #mainTitle {
-        color: white;
-        font-size: 1.2em;
-    }
-
-    input[type="search"] {
-        width: 40%;
-        margin-bottom: 16px;
-    }
-
-}
-
-@media screen and (max-width: 500px) {
-    input[type="search"] {
-        width: 80%;
-    }
+img, .card {
+    border-radius: 10px;
 }

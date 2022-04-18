@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg navbar-light px-4 py-2">
+    <div class="container-fluid">
+        <a class="navbar-brand me-4" href="/" id="mainTitle">MyEverythingList</a>
+        <!-- {{!-- Toggle button  for responsivity--}} -->
+        <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse gap-4" id="navbarSupportedContent">
+            <form class="d-flex align-items-start" action="/search" method="GET">
+                <input name="query" class="form-control me-2" type="search" placeholder="Search movies and series" aria-label="Search">
+                <button class="btn btn-outline-primary" type="submit">Search</button>
+            </form>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link text-light" aria-current="page" href="/movies">Movies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="/series">Series</a>
+                </li>
+            </ul>
+            <div class="profile-container dropdown d-flex align-items-center gap-2">
+                <span class="dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">username</span>
+
+                <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#">Profile </a></li>
+                    <li><a class="dropdown-item" href="#">Movies List</a></li>
+                    <li><a class="dropdown-item" href="#">Series List</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Logout</a></li>
+                </ul>
+                <div class="profilePicture d-flex align-items-center justify-content-center">
+                    <small>50x50</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

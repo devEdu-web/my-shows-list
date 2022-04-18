@@ -1,0 +1,49 @@
+#mainTitle {
+    color: white;
+    font-size: 1.8em;
+}
+
+.nav-link, .nav-item {
+    color: white;
+}
+
+.profilePicture {
+    width: 55px;
+    height: 55px;
+    background-color: grey;
+    border-radius: 50%;
+}
+
+.dropdown-menu {
+    background-color: #02020A;
+    border: 1px solid white;
+    color: white;
+}
+
+.dropdown-item {
+    color: white;
+}
+
+.dropdown-item:hover {
+    background-color: #004FFF;
+    color: white;
+}
+
+@media screen and (max-width: 990px) {
+    #mainTitle {
+        color: white;
+        font-size: 1.2em;
+    }
+
+    input[type="search"] {
+        width: 40%;
+        margin-bottom: 16px;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+    input[type="search"] {
+        width: 80%;
+    }
+}
