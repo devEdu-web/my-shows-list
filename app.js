@@ -4,6 +4,11 @@ import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import authRouter from './routes/auth.routes.js'
+import moviesRouter from './routes/movies.routes.js';
+import homeRouter from './routes/home.routes.js';
+import searchRouter from './routes/search.routes.js'
+import showsRouter from './routes/shows.routes.js'
+
 dotenv.config()
 
 const app = express();
@@ -18,15 +23,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
+app.get('/', (req, res, next) => {res.render('index');})
 app.use('/', authRouter)
-
-app.get('/', (req, res, next) => {
-    res.render('index');
-})
-
-app.get('/home', (req, res, next) => {
-    res.render('home')
-})
+app.use('/search', searchRouter)
+app.use('/movies', moviesRouter)
+app.use('/shows', showsRouter)
+app.use(homeRouter)
 
 export {__dirname};
 export default app;
