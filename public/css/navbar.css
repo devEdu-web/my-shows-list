@@ -1,7 +1,4 @@
-#mainTitle {
-    color: white;
-    font-size: 1.8em;
-}
+
 
 .nav-link, .nav-item {
     color: white;
@@ -31,7 +28,6 @@
 
 @media screen and (max-width: 990px) {
     #mainTitle {
-        color: white;
         font-size: 1.2em;
     }
 

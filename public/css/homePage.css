@@ -1,14 +1,5 @@
 body {
-    background-color: #02020A;
-    color: white;
     min-height: 80vh;
-}
-
-main {
-    width: 60vw;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%)
 }
 
 .info-title {
@@ -33,13 +24,18 @@ img {
 }
 
 .card {
-    background-color: #1E1E2E;
-    margin: 10px;
-    max-height: 360px;
+    width: 325px;
+    height: 150px;
+    margin: 5px;
 }
 
-img, .card {
-    border-radius: 10px;
+img {
+    width: 100%;
+    height: 100%;
+}
+
+.movie-title {
+    background-color: rgba(0, 0, 0, 0.486);
 }
 
 @media screen and (min-width: 1500px) {

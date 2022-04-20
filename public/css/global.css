@@ -1,0 +1,21 @@
+body {
+    background-color: #02020A;
+    color: white;
+}
+
+main {
+    width: 75vw;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%)
+}
+
+#mainTitle {
+    color: white;
+    font-size: 1.8em;
+}
+
+#mainTitle:hover {
+    font-size: 1.8em;
+    color: white;
+}

@@ -1,8 +1,8 @@
+import { getSearchResult } from '../app/movies/movies.controller.js'
 import express from 'express'
 const searchRouter = express.Router()
 
-searchRouter.get('/movie')
-searchRouter.get('/show')
+searchRouter.get('/', getSearchResult)
 
 
 export default searchRouter
