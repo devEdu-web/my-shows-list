@@ -1,0 +1,32 @@
+main {
+    border: 0.5px solid rgba(255, 255, 255, 0.5);
+}
+
+img {
+    width: 100%;
+    height: 50vh;
+}
+
+.first-word {
+    color: #E28413;
+}
+
+input[type="submit"] {
+    border: none;
+    outline: none;
+    background-color: #004FFF;
+    width: 120px;
+    border-radius: 120px;
+    padding: 5px 10px;
+}
+
+@media screen and (max-width: 575px) {
+    img {
+        height: 40vw;
+        margin-bottom: 16px;
+    }
+}
+
+/* .img-container {
+    width: %;
+} */

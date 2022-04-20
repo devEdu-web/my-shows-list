@@ -1,4 +1,4 @@
-import {getHomePage} from '../app/home/home.controller.js'
+import {getHomePage} from '../app/controllers/home.controller.js'
 import express from 'express'
 const homeRouter = express.Router()
 
