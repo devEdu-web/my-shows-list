@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/settings.css">
+    <title>Settings</title>
+</head>
+<body>
+    
+    <header class="mb-5">
+        <%- include('./templates/navigation') %> 
+    </header>
+
+
+    <main class="d-flex flex-column align-items-center gap-5 p-3">
+
+        <div class="change-password-container settings-container d-flex flex-column align-items-center">
+            <p class="fs-5 fw-bold">Change password</p>
+            <form class="d-flex flex-column align-items-center gap-3" action="">
+                <input type="password" name="password" id="" placeholder="New password">
+                <input type="password" name="currentPassword" id="" placeholder="Confirm current password">
+                <input class="btn btn-primary" type="submit" value="Change password">
+            </form>
+        </div>
+
+        <div class="change-email-container settings-container d-flex flex-column align-items-center">
+            <p class="fs-5 fw-bold">Change Email</p>
+            <form class="d-flex flex-column align-items-center gap-3" action="">
+                <input type="email" name="email" id="" placeholder="New Email">
+                <input type="password" name="currentPassword" id="" placeholder="Confirm current password">
+                <input class="btn btn-primary" type="submit" value="Change password">
+            </form>
+        </div>
+
+        <div class="change-username-container settings-container d-flex flex-column align-items-center">
+            <p class="fs-5 fw-bold">Change Username</p>
+            <form class="d-flex flex-column align-items-center gap-3" action="">
+                <input type="text" name="username" id="" placeholder="New username">
+                <input type="password" name="currentPassword" id="" placeholder="Confirm current password">
+                <input class="btn btn-primary" type="submit" value="Change password">
+            </form>
+        </div>
+
+
+    </main>
+
+
+</body>
+</html>

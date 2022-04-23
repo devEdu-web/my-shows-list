@@ -1,0 +1,15 @@
+main {
+    width: 40vw;
+    min-height: 80vh;
+    /* background-color: red; */
+}
+
+.settings-container {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    width: 80%;
+    padding: 20px;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+    padding: 5px 10px;
+}
