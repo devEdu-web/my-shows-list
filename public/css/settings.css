@@ -1,15 +1,24 @@
 main {
-    width: 40vw;
+    width: 65vw;
     min-height: 80vh;
     /* background-color: red; */
 }
 
 .settings-container {
     border: 1px solid rgba(255, 255, 255, 0.5);
-    width: 80%;
+    width: 70%;
     padding: 20px;
 }
 
 input[type="text"], input[type="email"], input[type="password"] {
     padding: 5px 10px;
+}
+
+@media screen  and (max-width: 650px) {
+    main {
+        width: 90vw;
+    }
+    input[type="text"], input[type="email"], input[type="password"] {
+        width: 100%;
+    }
 }
