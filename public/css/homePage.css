@@ -20,19 +20,25 @@ body {
 }
 
 img {
-    height: 60%;
+    /* height: 60%; */
 }
 
-.card {
+.card, img {
+    width: 250px;
+    height: 275px;
+    background-color: transparent !important;
+}
+
+/* .card {
     width: 325px;
     height: 150px;
     margin: 5px;
-}
+} */
 
-img {
+/* img {
     width: 100%;
     height: 100%;
-}
+} */
 
 .movie-title {
     background-color: rgba(0, 0, 0, 0.486);
@@ -40,7 +46,6 @@ img {
 
 @media screen and (min-width: 1500px) {
     main {
-        /* background-color: red; */
         width: 50vw;
     }
 }
