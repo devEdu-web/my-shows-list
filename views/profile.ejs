@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/css/homePage.css">
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/profile.css">
+    <!-- <link rel="stylesheet" href="/css/detail.css"> -->
     <title>Profile</title>
 </head>
 <body>
@@ -16,149 +17,141 @@
         <%- include('./templates/navigation') %> 
     </header>
 
-
-    <main class=" p-3">
-
-        <div class="user-info d-flex flex-column align-items-center gap-2 mb-4">
-
-            <div class="user-picture">
-                <img src="https://images4.alphacoders.com/653/thumb-1920-653613.jpg" alt="">
-            </div>
-
-            <span class="fs-4">Username</span>
-
+    <main class="p-2">
+        <div class="username-container row p-2 mb-3 g-0">
+            <h2>Username</h2>
         </div>
 
+        <div class="user-info-container row d-flex justify-content-center gap-3 g-0">
+            <div class="user-info col-1  g-0 mb-1">
+                <img class="mb-2" src="https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg" alt="">
+            </div>
 
-        <div class="row  p-3">
-
-            <div class="col-12 col-sm-6 d-flex flex-column align-items-center align-items-sm-start gap-2 mb-5 mb-sm-0">
-                <h3>Shows Stats</h3>
-                <span class="fs-5"><span class="first-word">Total</span> hours: 300</span>
-                <div class="categories-stats">
-                    <div class="stats-container d-flex align-items-center gap-2">
-                        <div class="dot"></div>
-                        <span>Action: 10</span>
+            <div class="col-12 col-lg-7 gap-3 d-flex flex-column gap-2">
+                <div class="movies-stats-card stats-card p-2">
+                    <div class="mb-2 d-flex justify-content-between">
+                        <h4>Movie stats</h4>
+                        <span class="mb-3">Total hours: 10</span>
                     </div>
 
-                    <div class="stats-container d-flex align-items-center gap-2">
-                        <div class="dot"></div>
-                        <span>Action: 10</span>
-                    </div>
-
-                    <div class="stats-container d-flex align-items-center gap-2">
-                        <div class="dot"></div>
-                        <span>Action: 10</span>
-                    </div>
-
-                    <div class="stats-container d-flex align-items-center gap-2">
-                        <div class="dot"></div>
-                        <span>Action: 10</span>
-                    </div>
-
-                    <div class="stats-container d-flex align-items-center gap-2">
-                        <div class="dot"></div>
-                        <span>Action: 10</span>
-                    </div>
-
-                    <div class="stats-container d-flex align-items-center gap-2">
-                        <div class="dot"></div>
-                        <span>Action: 10</span>
-                    </div>
-
-                    <div class="stats-container d-flex align-items-center gap-2">
-                        <div class="dot"></div>
-                        <span>Action: 10</span>
-                    </div>
-
-                    <div class="stats-container d-flex align-items-center gap-2">
-                        <div class="dot"></div>
-                        <span>Action: 10</span>
-                    </div>
-
-                    <div class="stats-container d-flex align-items-center gap-2">
-                        <div class="dot"></div>
-                        <span>Action: 10</span>
-                    </div>
-
-                    <div class="stats-container d-flex align-items-center gap-2">
-                        <div class="dot"></div>
-                        <span>Action: 10</span>
+                    <div class="categories-stats d-flex flex-wrap gap-4">
+                        <div class="stats-container d-flex align-items-center gap-2">
+                            <div class="dot"></div>
+                            <span>Action: 10</span>
+                        </div>
+    
+                        <div class="stats-container d-flex align-items-center gap-2">
+                            <div class="dot"></div>
+                            <span>Action: 10</span>
+                        </div>
+    
+                        <div class="stats-container d-flex align-items-center gap-2">
+                            <div class="dot"></div>
+                            <span>Action: 10</span>
+                        </div>
+    
+                        <div class="stats-container d-flex align-items-center gap-2">
+                            <div class="dot"></div>
+                            <span>Action: 10</span>
+                        </div>
+    
+                        <div class="stats-container d-flex align-items-center gap-2">
+                            <div class="dot"></div>
+                            <span>Action: 10</span>
+                        </div>
+    
+                        <div class="stats-container d-flex align-items-center gap-2">
+                            <div class="dot"></div>
+                            <span>Action: 10</span>
+                        </div>
+    
+                        <div class="stats-container d-flex align-items-center gap-2">
+                            <div class="dot"></div>
+                            <span>Action: 10</span>
+                        </div>
+    
+                        <div class="stats-container d-flex align-items-center gap-2">
+                            <div class="dot"></div>
+                            <span>Action: 10</span>
+                        </div>
+    
+                        <div class="stats-container d-flex align-items-center gap-2">
+                            <div class="dot"></div>
+                            <span>Action: 10</span>
+                        </div>
+    
+                        <div class="stats-container d-flex align-items-center gap-2">
+                            <div class="dot"></div>
+                            <span>Action: 10</span>
+                        </div>
                     </div>
                 </div>
 
-                <a href="" class="btn btn-primary">Shows list</a>
-
-            </div>
-
-
-            <div class="col-12 col-sm-6 d-flex flex-column align-items-center align-items-sm-start align  gap-2">
-                <h3>Movies stats</h3>
-                <span class="fs-5"><span class="first-word">Total</span> hours: 300</span>
-                <div class="categories-stats">
-
-                    <div class="stats-container d-flex align-items-center gap-2">
-                        <div class="dot"></div>
-                        <span>Action: 10</span>
+                <div class="shows-stats-card stats-card p-2">
+                    <div class="mb-2 d-flex justify-content-between">
+                        <h4>Movie stats</h4>
+                        <span class="mb-3">Total hours: 10</span>
                     </div>
 
-                    <div class="stats-container d-flex align-items-center gap-2">
-                        <div class="dot"></div>
-                        <span>Action: 10</span>
+                    <div class="categories-stats d-flex flex-wrap gap-4">
+                        <div class="stats-container d-flex align-items-center gap-2">
+                            <div class="dot"></div>
+                            <span>Action: 10</span>
+                        </div>
+    
+                        <div class="stats-container d-flex align-items-center gap-2">
+                            <div class="dot"></div>
+                            <span>Action: 10</span>
+                        </div>
+    
+                        <div class="stats-container d-flex align-items-center gap-2">
+                            <div class="dot"></div>
+                            <span>Action: 10</span>
+                        </div>
+    
+                        <div class="stats-container d-flex align-items-center gap-2">
+                            <div class="dot"></div>
+                            <span>Action: 10</span>
+                        </div>
+    
+                        <div class="stats-container d-flex align-items-center gap-2">
+                            <div class="dot"></div>
+                            <span>Action: 10</span>
+                        </div>
+    
+                        <div class="stats-container d-flex align-items-center gap-2">
+                            <div class="dot"></div>
+                            <span>Action: 10</span>
+                        </div>
+    
+                        <div class="stats-container d-flex align-items-center gap-2">
+                            <div class="dot"></div>
+                            <span>Action: 10</span>
+                        </div>
+    
+                        <div class="stats-container d-flex align-items-center gap-2">
+                            <div class="dot"></div>
+                            <span>Action: 10</span>
+                        </div>
+    
+                        <div class="stats-container d-flex align-items-center gap-2">
+                            <div class="dot"></div>
+                            <span>Action: 10</span>
+                        </div>
+    
+                        <div class="stats-container d-flex align-items-center gap-2">
+                            <div class="dot"></div>
+                            <span>Action: 10</span>
+                        </div>
                     </div>
-
-                    <div class="stats-container d-flex align-items-center gap-2">
-                        <div class="dot"></div>
-                        <span>Action: 10</span>
-                    </div>
-
-                    <div class="stats-container d-flex align-items-center gap-2">
-                        <div class="dot"></div>
-                        <span>Action: 10</span>
-                    </div>
-
-                    <div class="stats-container d-flex align-items-center gap-2">
-                        <div class="dot"></div>
-                        <span>Action: 10</span>
-                    </div>
-
-                    <div class="stats-container d-flex align-items-center gap-2">
-                        <div class="dot"></div>
-                        <span>Action: 10</span>
-                    </div>
-
-                    <div class="stats-container d-flex align-items-center gap-2">
-                        <div class="dot"></div>
-                        <span>Action: 10</span>
-                    </div>
-
-                    <div class="stats-container d-flex align-items-center gap-2">
-                        <div class="dot"></div>
-                        <span>Action: 10</span>
-                    </div>
-
-                    <div class="stats-container d-flex align-items-center gap-2">
-                        <div class="dot"></div>
-                        <span>Action: 10</span>
-                    </div>
-
-                    <div class="stats-container d-flex align-items-center gap-2">
-                        <div class="dot"></div>
-                        <span>Action: 10</span>
-                    </div>
-
                 </div>
-                <a href="" class="btn btn-primary">Movies list</a>
 
-
+                <div class="lists-container d-flex justify-content-center gap-2">
+                    <a href="#" class="btn btn-primary">Shows list</a>
+                    <a href="#" class="btn btn-primary">Movies list</a>
+                </div>
             </div>
-
-
         </div>
-
-        
     </main>
-
-
 </body>
 </html>

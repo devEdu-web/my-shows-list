@@ -1,4 +1,39 @@
 main {
+    width: 60vw;
+    /* border: 0.5px solid rgba(255, 255, 255, 0.5); */
+    background-color: #1E1E1E;
+    border-radius: 10px;
+}
+
+
+.username-container {
+    width: 100%;
+    background-color: #2E2E2E;
+}
+
+.user-info-container {
+    width: 100%;
+}
+
+.user-info {
+    width: 260px;
+    height: 345px;
+}
+
+.stats-card {
+    background-color: #2E2E2E;
+    border-radius: 10px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: green;
+}
+
+
+/* main {
     min-height: 80vh;
     border: 1px solid rgba(255, 255, 255, 0.5);
 }
@@ -46,4 +81,4 @@ h3 {
     h3 {
         width: 90%;
     }
-}
+} */
