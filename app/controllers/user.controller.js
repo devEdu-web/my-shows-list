@@ -6,7 +6,12 @@ function getSettingsPage(req, res, next) {
     res.render('settings')
 }
 
+function getUserListPage(req, res, next) {
+    res.render('userMovieList')
+}
+
 export {
     getProfile,
-    getSettingsPage
+    getSettingsPage,
+    getUserListPage
 }

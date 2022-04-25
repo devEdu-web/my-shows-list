@@ -1,0 +1,13 @@
+.card, img {
+    width: 230px;
+    height: 260px;
+    background-color: transparent !important;
+}
+
+.overlay-content {
+    background-color: rgba(0, 0, 0, 0.552);
+}
+
+i {
+    color: #E28413;
+}
