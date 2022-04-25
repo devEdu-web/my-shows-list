@@ -19,10 +19,6 @@ body {
     cursor: pointer;
 }
 
-img {
-    /* height: 60%; */
-}
-
 .card, img {
     width: 250px;
     height: 275px;
