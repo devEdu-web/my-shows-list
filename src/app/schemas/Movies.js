@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose')
 const { Schema } = mongoose
 
 const MoviesSchema = new Schema({
@@ -40,3 +40,5 @@ const MoviesSchema = new Schema({
 })
 
 const Movie = mongoose.model('Movies', MoviesSchema)
+
+module.exports = Movie

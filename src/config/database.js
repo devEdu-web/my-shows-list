@@ -1,5 +1,4 @@
-import dotenv from 'dotenv'
-dotenv.config()
+require('dotenv').config()
 
 let db_url;
 
@@ -13,4 +12,4 @@ if(process.env.NODE_ENV == 'development') {
     db_url = process.env.DEV_DB_URL
 }
 
-export default db_url;
+module.exports = db_url;

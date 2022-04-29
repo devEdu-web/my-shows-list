@@ -2,6 +2,6 @@ function getHomePage(req, res, next) {
     res.render('home')
 }
 
-export {
+module.exports = {
     getHomePage
 }

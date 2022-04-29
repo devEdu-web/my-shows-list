@@ -7,7 +7,7 @@ function getShowDetails(req, res, next) {
     res.render('details')
 }
 
-export {
+module.exports = {
     getSearchResult,
     getShowDetails
 }

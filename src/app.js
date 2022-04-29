@@ -1,17 +1,15 @@
-import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 dotenv.config()
 
-import express from 'express';
-import path from 'path';
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
+const express = require('express');
+const path = require('path');
 
-import authRouter from './routes/auth.routes.js'
-import homeRouter from './routes/home.routes.js';
-import searchRouter from './routes/search.routes.js'
-import userRouter from './routes/user.routes.js'
+const authRouter = require('./routes/auth.routes.js')
+const homeRouter = require('./routes/home.routes.js')
+const searchRouter = require('./routes/search.routes.js')
+const userRouter = require('./routes/user.routes.js')
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+// const __dirname = dirname(fileURLToPath(import.meta.url));
 
 class App {
     constructor() {
@@ -42,5 +40,5 @@ class App {
     }
 }
 
-export {__dirname};
-export default new App().express;
+// export {__dirname};
+module.exports = new App().express;
