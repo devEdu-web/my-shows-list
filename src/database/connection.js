@@ -3,10 +3,11 @@ const { MongoMemoryServer } = require('mongodb-memory-server')
 
 
 class Database {
-    dbConnect(url) {
-        return mongoose.connect(url, {
+    async dbConnect(url) {
+        await mongoose.connect(url, {
             autoIndex: true
         });
+        console.log('ok')
     }
 
     async memoryDbConnect() {

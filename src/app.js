@@ -14,9 +14,9 @@ const userRouter = require('./routes/user.routes.js')
 class App {
     constructor() {
         this.express = express()
-        this.routes()
-        this.middlewares()
         this.appSettings()
+        this.middlewares()
+        this.routes()
     }
 
     middlewares() {
@@ -27,7 +27,7 @@ class App {
 
     routes() {
         this.express.get('/', (req, res, next) => {res.render('index');})
-        this.express.use('/', authRouter)
+        this.express.use('/auth', authRouter)
         this.express.use('/search', searchRouter)
         this.express.use('/user', userRouter)
         this.express.use(homeRouter)

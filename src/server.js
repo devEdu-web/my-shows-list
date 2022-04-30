@@ -8,14 +8,11 @@ const app = require('./app.js')
 
 const server = http.createServer(app);
 
-database
-.dbConnect(db_url)
-.then(() => {
-            server.listen(process.env.PORT)
-            console.log(db_url)
-            console.log('Database ready and server listening')
-        })
-        .catch(error => {
-            console.log(db_url)
-            throw error
-        })
+async function start() {
+    await database.dbConnect(db_url)
+    server.listen(process.env.PORT)
+    console.log(db_url)
+    console.log('Database ready and server listening')
+}
+
+start()
