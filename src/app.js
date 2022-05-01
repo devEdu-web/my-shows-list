@@ -3,6 +3,7 @@ dotenv.config()
 
 const express = require('express');
 const path = require('path');
+const cookieParser = require('cookie-parser')
 
 const authRouter = require('./routes/auth.routes.js')
 const homeRouter = require('./routes/home.routes.js')
@@ -23,6 +24,7 @@ class App {
         this.express.use(express.static(path.join(__dirname, '..', 'public')));
         this.express.use(express.json());
         this.express.use(express.urlencoded({extended: true}));
+        this.express.use(cookieParser())
     }
 
     routes() {

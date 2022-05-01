@@ -1,37 +1,26 @@
 const mongoose = require("mongoose");
 const { MongoMemoryServer } = require('mongodb-memory-server')
 
+const mongoServer = new MongoMemoryServer()
 
 class Database {
+
     async dbConnect(url) {
         await mongoose.connect(url, {
             autoIndex: true
         });
-        console.log('ok')
+
+        return mongoose.connection.readyState
     }
 
-    async memoryDbConnect() {
-        const mongod = await MongoMemoryServer.create()
-        const url = mongod.getUri()
-        await mongoose.connect(url)
+    async dbDisconnect(url) {
+        await mongoose.disconnect()
+
+        return mongoose.connection.readyState
     }
 
-    async closeMemoryDb() {
-        const mongod = await MongoMemoryServer.create()
-        await mongoose.connection.dropDatabase()
-        await mongoose.connection.close()
-        await mongod.stop()
-    }
-
-    async clearMemoryDb() {
-        const collections = mongoose.connection.collections
-    
-        for(const key in collections) {
-            const collection = collections[key]
-            collection.drop((error, result) => {
-                if(error) console.log(error)
-            })
-        }
+    async clearCollection() {
+        await mongoose.connection.db.dropCollection('users')
     }
 }
 

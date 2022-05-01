@@ -14,6 +14,10 @@ class Validator {
                 return true
             })
         ]
+
+        this.loginValidation = [
+            body('email').isEmail()
+        ]
     }
 }
 
