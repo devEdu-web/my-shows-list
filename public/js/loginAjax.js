@@ -1,31 +1,27 @@
 const errorSpan = document.querySelector('#errorSpan');
 
-document.registerForm.onsubmit = postRegister;
+document.loginForm.onsubmit = postLogin;
 
-async function postRegister(event) {
+async function postLogin(event) {
   event.preventDefault(event);
-
   const form = event.target;
   const userData = new FormData(form);
-  const options = {
+  const fetchOptions = {
     method: 'POST',
     body: new URLSearchParams(userData),
     redirect: 'follow',
   };
 
   try {
-    const response = await fetch(form.action, options);
+    const response = await fetch(form.action, fetchOptions);
     if (response.status === 400) {
       const jsonResponse = await response.json();
-      if (jsonResponse.errors) {
-        errorSpan.innerHTML = jsonResponse.errors[0].msg;
-      } else {
-        console.log(jsonResponse);
-        errorSpan.innerHTML = jsonResponse.msg;
-      }
+      errorSpan.innerHTML = jsonResponse.msg;
     } else {
       const location = response.headers.get('location');
-      window.location.href = location;
+      window.location.href = response.url;
     }
-  } catch (error) {}
+  } catch (error) {
+    errorSpan.innerHTML = error.message;
+  }
 }

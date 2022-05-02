@@ -1,7 +1,7 @@
 const path = require('path');
 const User = require('../schemas/User');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator');
 
 class Auth {
@@ -25,38 +25,41 @@ class Auth {
         email,
         password: encryptedPassword,
       });
-      res.location('/auth/login')
+      res.location('/auth/login');
       return res.status(201).json(newUser);
     } catch (error) {
-      return res.status(400).json({msg: 'Email already exists.'});
+      return res.status(400).json({ msg: 'Email already exists.' });
     }
   }
 
   async logUser(req, res, next) {
     const { email, password } = req.body;
-    
+
     try {
       const user = await User.findOne({ email });
-      if (!user) return res.sendStatus(400);
-
+      if (!user)
+        return res.status(400).json({ msg: 'Email or password invalid.' });
       const doesPasswordsMatch = await bcrypt.compare(password, user.password);
-      if (!doesPasswordsMatch) return res.sendStatus(400);
 
-      const token = jwt.sign({
-        id: user._id,
-        name: user.name
-      }, process.env.JWT_SECRET, {
-        expiresIn: '1h'
-      })
+      if (!user || !doesPasswordsMatch)
+        return res.status(400).json({ msg: 'Email or password invalid.' });
 
-      res.cookie('token', token)
+      const token = jwt.sign(
+        {
+          id: user._id,
+          name: user.name,
+        },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: '1h',
+        }
+      );
+
+      res.cookie('token', token);
 
       return res.status(302).redirect('/home');
-      
-
-
     } catch (error) {
-      return res.status(400).json(error);
+      return res.status(400).json({ msg: error.message });
     }
   }
 }

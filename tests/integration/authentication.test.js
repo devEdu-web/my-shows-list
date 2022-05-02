@@ -1,18 +1,16 @@
-require('dotenv').config()
+require('dotenv').config();
 const database = require('../../src/database/connection.js');
-const { faker } = require('@faker-js/faker')
+const { faker } = require('@faker-js/faker');
 const request = require('supertest');
 const app = require('../../src/app');
-// const { db } = require('../../src/app/schemas/User.js');
 
 beforeAll(async () => {
-  await database.dbConnect(process.env.TEST_DB_URL)
-})
+  await database.dbConnect(process.env.TEST_DB_URL);
+});
 
 afterAll(async () => {
-  // await database.clearCollection()
-  await database.dbDisconnect()
-})
+  await database.dbDisconnect();
+});
 
 describe('Authentication', () => {
   it('should save a user with valid credentials', (done) => {
@@ -33,7 +31,7 @@ describe('Authentication', () => {
           return done();
         });
     } catch (error) {
-      throw error
+      throw error;
     }
   });
 
@@ -55,7 +53,7 @@ describe('Authentication', () => {
           return done();
         });
     } catch (error) {
-        throw error
+      throw error;
     }
   });
 
@@ -65,15 +63,9 @@ describe('Authentication', () => {
       password: 'eduardo',
     };
 
-
-    const response = 
-      await request(app)
-        .post('/auth/login')
-        .send(mockUser)
+    const response = await request(app).post('/auth/login').send(mockUser);
     // console.log(response.header['set-cookie'])
-    expect(response.status).toBe(302)
-    expect(response.header['set-cookie'].length).toEqual(1)
-  })
-
-
+    expect(response.status).toBe(302);
+    expect(response.header['set-cookie'].length).toEqual(1);
+  });
 });
