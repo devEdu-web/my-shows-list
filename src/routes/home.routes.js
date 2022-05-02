@@ -1,7 +1,8 @@
 const {getHomePage} = require('../app/controllers/home.controller.js')
+const { isUserAuthorized } = require('../app/middlewares/permissions')
 const express = require('express')
 const homeRouter = express.Router()
 
-homeRouter.get('/home', getHomePage)
+homeRouter.get('/home', isUserAuthorized, getHomePage)
 
 module.exports = homeRouter

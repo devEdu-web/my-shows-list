@@ -1,12 +1,13 @@
 const express = require('express');
 const {getRegisterPage, getLoginPage, saveUser, logUser} = require('../app/controllers/auth.controller.js');
-const { registerValidation, loginValidation } = require('../app/middlewares/validation')
+const { registerValidation, loginValidation } = require('../app/middlewares/validation');
+const { isUserAuthenticated } = require('../app/middlewares/permissions')
 const authRouter = express.Router();
 
 
-authRouter.get('/register', getRegisterPage)
-authRouter.get('/login', getLoginPage)
-authRouter.post('/register', registerValidation, saveUser)
-authRouter.post('/login', logUser)
+authRouter.get('/register', isUserAuthenticated, getRegisterPage)
+authRouter.get('/login', isUserAuthenticated, getLoginPage)
+authRouter.post('/register', isUserAuthenticated, registerValidation, saveUser)
+authRouter.post('/login', isUserAuthenticated, logUser)
 
 module.exports = authRouter
