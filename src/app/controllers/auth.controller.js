@@ -25,9 +25,10 @@ class Auth {
         email,
         password: encryptedPassword,
       });
+      res.location('/auth/login')
       return res.status(201).json(newUser);
     } catch (error) {
-      return res.status(400).json(error);
+      return res.status(400).json({msg: 'Email already exists.'});
     }
   }
 
@@ -51,7 +52,7 @@ class Auth {
       res.cookie('token', token)
 
       return res.status(302).redirect('/home');
-      // Todo redirect user
+      
 
 
     } catch (error) {

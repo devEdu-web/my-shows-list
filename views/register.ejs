@@ -20,7 +20,7 @@
 
         <h2>Create a new account</h2>
 
-        <form action="/auth/register" method="post" class="d-flex flex-column align-items-center justify-content-center gap-3 w-75">
+        <form name="registerForm" action="/auth/register" method="post" class="d-flex flex-column align-items-center justify-content-center gap-3 w-75">
         
             <input class="w-100" type="text" name="name" id="nameInput" placeholder="Name">
             <input class="w-100" type="email" name="email" id="emailInput" placeholder="Email">
@@ -29,7 +29,7 @@
             <input class="" type="submit" value="Register">
         
             <span>Already have an account? <a href="/login" id="loginLink">Log in</a></span>
-
+            <span id="errorSpan" class="text-danger"></span>
         </form>
 
     </main>
@@ -37,5 +37,6 @@
 
 
 	 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+     <script src="/js/registerAjax.js"></script>
 </body>
 </html>
