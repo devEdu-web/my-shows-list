@@ -14,4 +14,16 @@ describe('Shows', () => {
         done()
       })
   })
+  it('should return top rated shows', (done) => {
+    showClass.getTopRatedShows()
+      .then(shows => {
+        const resultLength = shows.results.length
+        expect(resultLength).toBeGreaterThan(0)
+        done()
+      })
+      .catch(error => {
+        if(error) return done(error)
+        done()
+      })
+  })
 });
