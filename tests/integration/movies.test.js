@@ -1,16 +1,36 @@
-const movie = require('../../src/services/tmdb/movies')
-const Movie = new movie()
+const Movie = require('../../src/services/tmdb/movies')
+const movieClass = new Movie()
 
-it('should return popular movies', (done) => {
-  Movie.getPopularMovies()
+
+describe('Movies', () => {
+  it('should return popular movies', (done) => {
+    movieClass.getPopularMovies()
+      .then(movies => {
+        const resultLength = movies.results.length
+        expect(resultLength).toBeGreaterThan(0)
+        done()
+      })
+      .catch(error => {
+        if(error) return done(error)
+        done(error)
+      })
+      done()
+  })
+
+  it('should return top rated movies', (done) => {
+    movieClass.getTopRatingMovies()
     .then(movies => {
-      const resultLength = Object.entries(movies.results).length
+      const resultLength = movies.results.length
       expect(resultLength).toBeGreaterThan(0)
       done()
     })
     .catch(error => {
       if(error) return done(error)
-      done(error)
+      done()
     })
-    done()
-})
+  })
+});
+
+
+
+
