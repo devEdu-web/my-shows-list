@@ -29,6 +29,19 @@ describe('Movies', () => {
       done()
     })
   })
+
+  it('should return a movie details', (done) => {
+    movieClass.getMovieDetails(335787)
+      .then(details => {
+        console.log(details)
+        expect(typeof details).toBe("object")
+        done()
+      })
+      .catch(error => {
+        if(error) return done(error)
+        done()
+      })
+  })
 });
 
 

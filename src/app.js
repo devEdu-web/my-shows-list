@@ -9,6 +9,7 @@ const authRouter = require('./routes/auth.routes.js')
 const homeRouter = require('./routes/home.routes.js')
 const searchRouter = require('./routes/search.routes.js')
 const userRouter = require('./routes/user.routes.js')
+const moviesRouter = require('./routes/movies.routes')
 const { isUserAuthenticated } = require('./app/middlewares/permissions')
 
 // const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -33,6 +34,7 @@ class App {
         this.express.use('/auth', authRouter)
         this.express.use('/search', searchRouter)
         this.express.use('/user', userRouter)
+        this.express.use('/movies', moviesRouter)
         this.express.use(homeRouter)
     }
 

@@ -12,8 +12,12 @@ class Show {
   }
 
   async getTopRatedShows() {
-    const response = await axios.get(this.#topRatedShowsUrl)
-    return response.data
+    try {
+      const response = await axios.get(this.#topRatedShowsUrl)
+      return response.data
+    } catch(error) {
+      return undefined
+    }
   }
 
 }
