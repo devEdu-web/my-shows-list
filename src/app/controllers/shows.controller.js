@@ -5,7 +5,6 @@ class showsController {
     const {id} = req.params
     try {
       const showDetails = await Show.getShowDetails(id)
-      console.log(showDetails)
       res.render('details', {
         posterPathUrl,
         details: showDetails
