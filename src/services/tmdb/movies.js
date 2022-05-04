@@ -19,8 +19,13 @@ class Movie {
   }
 
   async getMovieDetails(id) {
-    const response = await axios.get(`${this.#movieDetailsUrl}/${id}?api_key=${API_KEY}`)
-    return response.data
+
+    try {
+      const response = await axios.get(`${this.#movieDetailsUrl}/${id}?api_key=${API_KEY}`)
+      return response.data
+    } catch(error) {
+      return response.data
+    }
 
   }
 

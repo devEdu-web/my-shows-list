@@ -34,7 +34,7 @@ class App {
         this.express.use('/auth', authRouter)
         this.express.use('/search', searchRouter)
         this.express.use('/user', userRouter)
-        this.express.use('/movies', moviesRouter)
+        this.express.use('/movie', moviesRouter)
         this.express.use(homeRouter)
     }
 

@@ -38,7 +38,7 @@
                  
                     <% topRatedMovies.forEach(movie => { %> 
                         <div class="card text-white">
-                            <a href="<%= `/search/details/${movie.id}` %>">
+                            <a href="<%= `/movie/details/${movie.id}` %>">
                                 <img class="card-img" src="<%= `${posterPathUrl}/${movie.poster_path}` %>" alt="">
                             </a>
                         </div>
@@ -59,7 +59,7 @@
 
                     <% popularMovies.forEach(movie => { %> 
                         <div class="card text-white">
-                            <a href="<%= `/search/details/${movie.id}` %>">
+                            <a href="<%= `/movie/details/${movie.id}` %>">
                                 <img class="card-img" src="<%= `${posterPathUrl}/${movie.poster_path}` %>" alt="">
                             </a>
                         </div>

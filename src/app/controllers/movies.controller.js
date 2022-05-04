@@ -1,8 +1,21 @@
 const Movie = require('../../services/tmdb/movies')
 const movieClass = new Movie()
+const posterPathUrl = 'https://image.tmdb.org/t/p/original/'
 
 class moviesController {
-  movieDetailsHandler(req, res, next) {
-
+  async movieDetailsHandler(req, res, next) {
+    const {id} = req.params
+    console.log(id)
+    try {
+      const movieDetails = await movieClass.getMovieDetails(id)
+      res.render('details', {
+        posterPathUrl,
+        details: movieDetails
+      })
+    } catch(error) {
+      res.send('not found')
+    }
   }
 }
+
+module.exports = new moviesController()
