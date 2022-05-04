@@ -3,12 +3,10 @@ const Show =  require('../../services/tmdb/shows')
 const posterPathUrl = 'https://image.tmdb.org/t/p/original/'
 
 async function getHomePage(req, res, next) {
-    const movies = new Movie()
-    const shows = new Show()
-    const popularMovies = await movies.getPopularMovies()
-    const topRatedMovies = await movies.getTopRatingMovies()
-    const popularShows = await shows.getPopularShows()
-    const topRatedShows = await shows.getTopRatedShows()
+    const popularMovies = await Movie.getPopularMovies()
+    const topRatedMovies = await Movie.getTopRatingMovies()
+    const popularShows = await Show.getPopularShows()
+    const topRatedShows = await Show.getTopRatedShows()
 
     res.render('home', {
         posterPathUrl,

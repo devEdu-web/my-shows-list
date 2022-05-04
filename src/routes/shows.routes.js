@@ -1,3 +1,7 @@
-const showsRoutes = require('express').Router()
+const showsRouter = require('express').Router()
+const { showDetailsHandler } = require('../app/controllers/shows.controller')
 
-showsRoutes.get('/details/:id')
+
+showsRouter.get('/details/:id', showDetailsHandler)
+
+module.exports = showsRouter
