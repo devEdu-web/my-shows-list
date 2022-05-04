@@ -1,5 +1,5 @@
-const Movie = require('../../src/services/tmdb/movies')
-const movieClass = new Movie()
+const movieClass = require('../../src/services/tmdb/movies')
+// const movieClass = new Movie()
 
 
 describe('Movies', () => {

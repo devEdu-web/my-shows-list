@@ -1,5 +1,5 @@
-const Show = require('../../src/services/tmdb/shows')
-const showClass = new Show
+const showClass = require('../../src/services/tmdb/shows')
+// const showClass = new Show
 
 describe('Shows', () => {
   it('should return popular shows', (done) => {
@@ -19,6 +19,18 @@ describe('Shows', () => {
       .then(shows => {
         const resultLength = shows.results.length
         expect(resultLength).toBeGreaterThan(0)
+        done()
+      })
+      .catch(error => {
+        if(error) return done(error)
+        done()
+      })
+  })
+  it('should return show details', (done) => {
+    showClass.getShowDetails(130392)
+      .then(details => {
+        console.log(details)
+        expect(typeof details).toBe("object")
         done()
       })
       .catch(error => {

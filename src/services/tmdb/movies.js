@@ -8,14 +8,22 @@ class Movie {
   #topRatingMoviesUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}`
   #movieDetailsUrl = `https://api.themoviedb.org/3/movie`
   async getPopularMovies() {
-    const response = await axios.get(this.#popularMoviesUrl)
-    return response.data
+    try {
+      const response = await axios.get(this.#popularMoviesUrl)
+      return response.data
+    } catch(error) {
+      return undefined
+    }
     
   }
 
   async getTopRatingMovies() {
-    const response = await axios.get(this.#topRatingMoviesUrl)
-    return response.data
+    try {
+      const response = await axios.get(this.#topRatingMoviesUrl)
+      return response.data
+    } catch(error) {
+      return undefined
+    }
   }
 
   async getMovieDetails(id) {
@@ -24,11 +32,11 @@ class Movie {
       const response = await axios.get(`${this.#movieDetailsUrl}/${id}?api_key=${API_KEY}`)
       return response.data
     } catch(error) {
-      return response.data
+      return undefined
     }
 
   }
 
 }
 
-module.exports = Movie
+module.exports = new Movie()
