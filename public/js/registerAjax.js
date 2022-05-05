@@ -20,7 +20,6 @@ async function postRegister(event) {
       if (jsonResponse.errors) {
         errorSpan.innerHTML = jsonResponse.errors[0].msg;
       } else {
-        console.log(jsonResponse);
         errorSpan.innerHTML = jsonResponse.msg;
       }
     } else {

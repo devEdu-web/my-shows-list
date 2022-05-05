@@ -1,19 +1,19 @@
 class UserController {
-    getProfilePage(req, res, next) {
-        res.render('profile')
-    }
+  getProfilePage(req, res, next) {
+    res.render('profile');
+  }
 
-    getSettingsPage() {
-        res.render('settings')
-    }
+  getSettingsPage() {
+    res.render('settings');
+  }
 
-    getMoviesListPage() {
-        res.render('userMovieList')
-    }
+  getMoviesListPage() {
+    res.render('userMovieList');
+  }
 
-    getShowsListPage() {
-        res.render('userShowsList')
-    }
+  getShowsListPage() {
+    res.render('userShowsList');
+  }
 }
 
-module.exports = new UserController()
+module.exports = new UserController();

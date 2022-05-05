@@ -1,11 +1,11 @@
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 
 function isUserAuthorized(req, res, next) {
   const { token } = req.cookies;
   try {
-    jwt.verify(token, process.env.JWT_SECRET)
-    next()
-  } catch(error) {
+    jwt.verify(token, process.env.JWT_SECRET);
+    next();
+  } catch (error) {
     res.redirect(302, '/auth/login');
   }
 }
@@ -13,14 +13,14 @@ function isUserAuthorized(req, res, next) {
 function isUserAuthenticated(req, res, next) {
   const { token } = req.cookies;
   try {
-    jwt.verify(token, process.env.JWT_SECRET)
+    jwt.verify(token, process.env.JWT_SECRET);
     res.redirect(302, '/home');
-  } catch(error) {
-    next()
+  } catch (error) {
+    next();
   }
 }
 
 module.exports = {
   isUserAuthorized,
-  isUserAuthenticated
-}
+  isUserAuthenticated,
+};
