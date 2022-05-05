@@ -17,89 +17,19 @@
     </header>
 
     <main class="container container-fluid p-3 d-flex flex-wrap gap-3 justify-content-center">
-        <div class="card text-white">
-            <img class="card-img" src="https://image.tmdb.org/t/p/original/wToO8opxkGwKgSfJ1JK8tGvkG6U.jpg" alt="">
 
-            <div class="card-img-overlay p-0 d-flex flex-column justify-content-end gap-1">
-                <div class="overlay-content p-2 fw-bold">
-                    <span>Star wars: the last jedi</span>
-                </div>
+        <% result.forEach(show => {%> 
+            <div class="card text-white">
+                <a href="<%= `/movie/details/${show.id}` %>">
+                    <img class="card-img" src="<%= `${posterPathUrl}/${show.poster_path}` %>" alt="">
+                </a>
             </div>
-        </div>
+        <% })  %> 
 
 
-        <div class="card text-white">
-            <img class="card-img" src="https://image.tmdb.org/t/p/original/cFOWiYDQ8Nttmt0K6PU38L48wWK.jpg" alt="">
-
-            <div class="card-img-overlay p-0 d-flex flex-column justify-content-end gap-1">
-                <div class="overlay-content p-2 fw-bold">
-                    <span>Star wars: the last jedi</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="card text-white">
-            <img class="card-img" src="https://image.tmdb.org/t/p/original/9dKCd55IuTT5QRs989m9Qlb7d2B.jpg" alt="">
-
-            <div class="card-img-overlay p-0 d-flex flex-column justify-content-end gap-1">
-                <div class="overlay-content p-2 fw-bold">
-                    <span>Star wars: the last jedi</span>
-                </div>
-            </div>
-        </div>
 
 
-        <div class="card text-white">
-            <img class="card-img" src="https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg" alt="">
-
-            <div class="card-img-overlay p-0 d-flex flex-column justify-content-end gap-1">
-                <div class="overlay-content p-2 fw-bold">
-                    <span>Star wars: the last jedi</span>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="card text-white">
-            <img class="card-img" src="https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg" alt="">
-
-            <div class="card-img-overlay p-0 d-flex flex-column justify-content-end gap-1">
-                <div class="overlay-content p-2 fw-bold">
-                    <span>Star wars: the last jedi</span>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="card text-white">
-            <img class="card-img" src="https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg" alt="">
-
-            <div class="card-img-overlay p-0 d-flex flex-column justify-content-end gap-1">
-                <div class="overlay-content p-2 fw-bold">
-                    <span>Star wars: the last jedi</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="card text-white">
-            <img class="card-img" src="https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg" alt="">
-
-            <div class="card-img-overlay p-0 d-flex flex-column justify-content-end gap-1">
-                <div class="overlay-content p-2 fw-bold">
-                    <span>Star wars: the last jedi</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="card text-white">
-            <img class="card-img" src="https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg" alt="">
-
-            <div class="card-img-overlay p-0 d-flex flex-column justify-content-end gap-1">
-                <div class="overlay-content p-2 fw-bold">
-                    <span>Star wars: the last jedi</span>
-                </div>
-            </div>
-        </div>
+        
 
 
     </main>

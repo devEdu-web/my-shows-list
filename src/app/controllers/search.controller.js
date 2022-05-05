@@ -1,13 +1,27 @@
-function getSearchResult(req, res, next) {
-    res.render('searchResult')
+const Search = require('../../services/tmdb/search')
+const posterPathUrl = 'https://image.tmdb.org/t/p/original/';
+
+class searchController {
+    async searchResult(req, res, next) {
+        try {
+            const {query} = req.query
+            const showsResult = await Search.searchShow(query);
+            const moviesResult = await Search.searchMovie(query);
+            const result = showsResult.results.concat(moviesResult.results)
+            const resultSorted = result.sort((a, b) => {
+                if(a.popularity > b.popularity) return -1
+            })
+
+            res.render('searchResult', {
+                posterPathUrl,
+                result: resultSorted
+            })
+        } catch(error) {
+            res.send(error)
+        }
+    }
 }
 
-function getShowDetails(req, res, next) {
-    // Todo: pass shows details to populate page
-    res.render('details')
-}
 
-module.exports = {
-    getSearchResult,
-    getShowDetails
-}
+
+module.exports = new searchController()
