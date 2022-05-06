@@ -20,7 +20,7 @@
 
         <% result.forEach(show => {%> 
             <div class="card text-white">
-                <a href="<%= `/movie/details/${show.id}` %>">
+                <a href="<%= show.type == 'movie' ? `/search/details/${show.id}?type=movie` : `/search/details/${show.id}?type=show` %>">
                     <img class="card-img" src="<%= `${posterPathUrl}/${show.poster_path}` %>" alt="">
                 </a>
             </div>

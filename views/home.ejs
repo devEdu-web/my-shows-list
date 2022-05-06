@@ -38,7 +38,7 @@
                  
                     <% topRatedMovies.forEach(movie => { %> 
                         <div class="card text-white">
-                            <a href="<%= `/movie/details/${movie.id}` %>">
+                            <a href="<%= `/search/details/${movie.id}?type=movie` %>">
                                 <img class="card-img" src="<%= `${posterPathUrl}/${movie.poster_path}` %>" alt="">
                             </a>
                         </div>
@@ -59,7 +59,7 @@
 
                     <% popularMovies.forEach(movie => { %> 
                         <div class="card text-white">
-                            <a href="<%= `/movie/details/${movie.id}` %>">
+                            <a href="<%= `/search/details/${movie.id}?type=movie` %>">
                                 <img class="card-img" src="<%= `${posterPathUrl}/${movie.poster_path}` %>" alt="">
                             </a>
                         </div>
@@ -83,7 +83,7 @@
 
                     <% topRatedShows.forEach(show => { %> 
                         <div class="card text-white">
-                            <a href="<%= `/show/details/${show.id}` %>">
+                            <a href="<%= `/search/details/${show.id}?type=show` %>">
                                 <img class="card-img" src="<%= `${posterPathUrl}/${show.poster_path}` %>" alt="">
                             </a>
                         </div>
@@ -104,7 +104,7 @@
                 <div class="glider popular-shows-glider">
                     <% popularShows.forEach(show => { %> 
                         <div class="card text-white">
-                            <a href="<%= `/show/details/${show.id}` %>">
+                            <a href="<%= `/search/details/${show.id}?type=show` %>">
                                 <img class="card-img" src="<%= `${posterPathUrl}/${show.poster_path}` %>" alt="">
                             </a>
                         </div>
