@@ -17,148 +17,23 @@
     </header>
 
     <main class="container container-fluid p-3 d-flex flex-wrap gap-3 justify-content-center">
-        <div class="card text-white">
-            <img class="card-img" src="https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg" alt="">
-
-            <div class="card-img-overlay p-0 d-flex flex-column justify-content-end gap-1">
-                <div class="overlay-content p-2 fw-bold">
-                    <span>Star wars: the last jedi</span>
-                    <div class="user-score">
-                        <i class="fa-solid fa-star"></i>
-                        <span>7.3</span>
+        <% list.forEach(movie => { %> 
+            <div class="card text-white">
+                <img class="card-img" src="<%= `${posterPathUrl}/${movie.posterPath}` %>" alt="">
+    
+                <div class="card-img-overlay p-0 d-flex flex-column justify-content-end gap-1">
+                    <div class="overlay-content p-2 fw-bold d-flex justify-content-between align-items-center">
+                        <div class="user-score">
+                            <i class="fa-solid fa-star"></i>
+                            <span>7.3</span>
+                        </div>
+                        <small class="">
+                            <a href="" class="link-light">Edit</a>
+                        </small>
                     </div>
-                    <small class="">
-                        <a href="" class="link-light">Edit</a>
-                    </small>
                 </div>
             </div>
-        </div>
-
-
-        <div class="card text-white">
-            <img class="card-img" src="https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg" alt="">
-
-            <div class="card-img-overlay p-0 d-flex flex-column justify-content-end gap-1">
-                <div class="overlay-content p-2 fw-bold">
-                    <span>Star wars: the last jedi</span>
-                    <div class="user-score">
-                        <i class="fa-solid fa-star"></i>
-                        <span>7.3</span>
-                    </div>
-                    <small class="">
-                        <a href="" class="link-light">Edit</a>
-                    </small>
-                </div>
-            </div>
-        </div>
-
-        <div class="card text-white">
-            <img class="card-img" src="https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg" alt="">
-
-            <div class="card-img-overlay p-0 d-flex flex-column justify-content-end gap-1">
-                <div class="overlay-content p-2 fw-bold">
-                    <span>Star wars: the last jedi</span>
-                    <div class="user-score">
-                        <i class="fa-solid fa-star"></i>
-                        <span>7.3</span>
-                    </div>
-                    <small class="">
-                        <a href="" class="link-light">Edit</a>
-                    </small>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="card text-white">
-            <img class="card-img" src="https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg" alt="">
-
-            <div class="card-img-overlay p-0 d-flex flex-column justify-content-end gap-1">
-                <div class="overlay-content p-2 fw-bold">
-                    <span>Star wars: the last jedi</span>
-                    <div class="user-score">
-                        <i class="fa-solid fa-star"></i>
-                        <span>7.3</span>
-                    </div>
-                    <small class="">
-                        <a href="" class="link-light">Edit</a>
-                    </small>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="card text-white">
-            <img class="card-img" src="https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg" alt="">
-
-            <div class="card-img-overlay p-0 d-flex flex-column justify-content-end gap-1">
-                <div class="overlay-content p-2 fw-bold">
-                    <span>Star wars: the last jedi</span>
-                    <div class="user-score">
-                        <i class="fa-solid fa-star"></i>
-                        <span>7.3</span>
-                    </div>
-                    <small class="">
-                        <a href="" class="link-light">Edit</a>
-                    </small>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="card text-white">
-            <img class="card-img" src="https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg" alt="">
-
-            <div class="card-img-overlay p-0 d-flex flex-column justify-content-end gap-1">
-                <div class="overlay-content p-2 fw-bold">
-                    <span>Star wars: the last jedi</span>
-                    <div class="user-score">
-                        <i class="fa-solid fa-star"></i>
-                        <span>7.3</span>
-                    </div>
-                    <small class="">
-                        <a href="" class="link-light">Edit</a>
-                    </small>
-                </div>
-            </div>
-        </div>
-
-        <div class="card text-white">
-            <img class="card-img" src="https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg" alt="">
-
-            <div class="card-img-overlay p-0 d-flex flex-column justify-content-end gap-1">
-                <div class="overlay-content p-2 fw-bold">
-                    <span>Star wars: the last jedi</span>
-                    <div class="user-score">
-                        <i class="fa-solid fa-star"></i>
-                        <span>7.3</span>
-                    </div>
-                    <small class="">
-                        <a href="" class="link-light">Edit</a>
-                    </small>
-                </div>
-            </div>
-        </div>
-
-        <div class="card text-white">
-            <img class="card-img" src="https://image.tmdb.org/t/p/original/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg" alt="">
-
-            <div class="card-img-overlay p-0 d-flex flex-column justify-content-end gap-1">
-                <div class="overlay-content p-2 fw-bold">
-                    <span>Star wars: the last jedi</span>
-                    <div class="user-score">
-                        <i class="fa-solid fa-star"></i>
-                        <span>7.3</span>
-                    </div>
-                    <small class="">
-                        <a href="" class="link-light">Edit</a>
-                    </small>
-                </div>
-            </div>
-        </div>
-
-        
-
+        <% }) %> 
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

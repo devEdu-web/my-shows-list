@@ -1,6 +1,7 @@
 const Show = require('../schemas/Shows')
 const Movie = require('../schemas/Movies')
 const TMDBMovie = require('../../services/tmdb/movies')
+const posterPathUrl = 'https://image.tmdb.org/t/p/original/';
 class UserController {
   getProfilePage(req, res, next) {
     res.render('profile');
@@ -10,8 +11,15 @@ class UserController {
     res.render('settings');
   }
 
-  getMoviesListPage(req, res, next) {
-    res.render('userMovieList');
+  async getMoviesListPage(req, res, next) {
+    const { userId } = req.cookies
+    console.log(userId)
+    const list = await Movie.find({userId})
+    console.log(list)
+    res.render('userMovieList', {
+      list,
+      posterPathUrl
+    });
   }
 
   getShowsListPage(req, res, next) {
