@@ -27,13 +27,15 @@ class UserController {
   }
 
   async addMovieToList(req, res, next) {
-    const { id } = req.body;
+    const { id, score } = req.body;
     const { userId } = req.cookies
+
 
     try {
       const movieDetails = await TMDBMovie.getMovieDetails(id)
       const movieToBeSaved = new Movie({
         userId,
+        userScore: score,
         movieId: id,
         title: movieDetails.original_title,
         overview: movieDetails.overview,
@@ -44,10 +46,12 @@ class UserController {
         releaseDate: movieDetails.release_date
       })
       const movie = await movieToBeSaved.save()
-      res.json(movieToBeSaved)
+      res.status(201).json(movieToBeSaved)
     } catch(error) {
       console.log(error)
-      res.send(error)
+      res.status(400).json({
+        msg: 'Item already on list.'
+      })
     }
 
   }

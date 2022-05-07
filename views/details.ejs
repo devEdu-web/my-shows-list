@@ -51,7 +51,7 @@
                     <span class="mb-2 fs-5" id="add-to-list-title">Add to my list</span>
                     
 
-                    <form action="<%= type == 'movie' ? `/user/list/movies/add/` : `/user/list/shows/add/` %>" method="post" class="d-flex flex-column aling-items-start gap-3">
+                    <form name="addForm" action="<%= type == 'movie' ? `/user/list/movies/add/` : `/user/list/shows/add/` %>" method="post" class="d-flex flex-column aling-items-start gap-3">
                         <input type="hidden" name="id" value="<%= details.id %>">
 
                         <div class="form-gorup d-flex align-items-center gap-2">
@@ -72,7 +72,8 @@
 
                         <div class="form-group d-flex gap-2 align-items-center">
                             <input type="submit" value="Add">
-                            <!-- <small><a href="">Add detailed info</a></small> -->
+                            <span id="errorSpan" class="text-danger"></span>
+                            <span id="successSpan" class="text-success"></span>
                         </div>
 
                     </form>
@@ -87,6 +88,6 @@
 
     </main>
 
-
+    <script src="/js/addToListAjax.js"></script>
 </body>
 </html>

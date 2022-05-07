@@ -6,6 +6,10 @@ const MoviesSchema = new Schema({
         type: String,
         required: true
     },
+    userScore: {
+        type: Number,
+        required: true
+    },
     movieId: {
         type: String,
         required: true,
