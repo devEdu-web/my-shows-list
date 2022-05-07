@@ -6,7 +6,12 @@ const MoviesSchema = new Schema({
         type: String,
         required: true
     },
-    movieTitle: {
+    movieId: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    title: {
         type: String,
         required: true
     },

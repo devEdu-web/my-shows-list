@@ -49,14 +49,17 @@ class searchController {
             const showDetails = await Show.getShowDetails(id)
             return res.render('details', {
                 posterPathUrl,
-                details: showDetails
+                details: showDetails,
+                type: 'show'
             })
         } else {
             // type == movie
             const movieDetails = await Movie.getMovieDetails(id)
             return res.render('details', {
                 posterPathUrl,
-                details: movieDetails
+                details: movieDetails,
+                type: 'movie'
+
             })
         }
 

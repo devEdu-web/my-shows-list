@@ -56,6 +56,7 @@ class Auth {
       );
 
       res.cookie('token', token);
+      res.cookie('userId', user._id.toString())
 
       return res.status(302).redirect('/home');
     } catch (error) {

@@ -51,14 +51,8 @@
                     <span class="mb-2 fs-5" id="add-to-list-title">Add to my list</span>
                     
 
-                    <form action="" class="d-flex flex-column aling-items-start gap-3">
-                        <!-- <div class="form-gorup d-flex align-items-center gap-2">
-                            <label for="status" class="">Status: </label>
-                            <select name="status" id="status">
-                                <option value="watching">Watching</option>
-                                <option value="finished">Finished</option>
-                            </select>
-                        </div> -->
+                    <form action="<%= type == 'movie' ? `/user/list/movies/add/` : `/user/list/shows/add/` %>" method="post" class="d-flex flex-column aling-items-start gap-3">
+                        <input type="hidden" name="id" value="<%= details.id %>">
 
                         <div class="form-gorup d-flex align-items-center gap-2">
                             <label for="score" class="">Score: </label>
