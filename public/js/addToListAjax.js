@@ -1,6 +1,6 @@
-const errorSpan = document.querySelector('#errorSpan')
-const successSpan = document.querySelector('#successSpan')
-document.addForm.onsubmit = addToList
+const errorSpan = document.querySelector('#errorSpan');
+const successSpan = document.querySelector('#successSpan');
+document.addForm.onsubmit = addToList;
 
 async function addToList(event) {
   event.preventDefault(event);
@@ -14,16 +14,15 @@ async function addToList(event) {
 
   try {
     const response = await fetch(form.action, fetchOptions);
-    if(response.status === 400) {
-      const error = await response.json()
-      successSpan.innerHTML = ''
-      errorSpan.innerHTML = error.msg
+    if (response.status === 400) {
+      const error = await response.json();
+      successSpan.innerHTML = '';
+      errorSpan.innerHTML = error.msg;
     } else {
-      errorSpan.innerHTML = ''
-      successSpan.innerHTML = 'Item added.'
+      errorSpan.innerHTML = '';
+      successSpan.innerHTML = 'Item added.';
     }
-  } catch(error) {
-    console.log(error)
+  } catch (error) {
+    console.log(error);
   }
-
 }

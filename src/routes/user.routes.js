@@ -7,5 +7,6 @@ userRouter.get('/list/movies', isUserAuthorized, UserController.getMoviesListPag
 userRouter.get('/list/shows', isUserAuthorized, UserController.getShowsListPage)
 userRouter.get('/profile', isUserAuthorized, UserController.getProfilePage)
 userRouter.get('/settings', isUserAuthorized, UserController.getSettingsPage)
-userRouter.post('/list/movies/:id', UserController.addMovieToList)
+userRouter.post('/list/movies/add', UserController.addMovieToList)
+userRouter.post('/list/shows/add/', UserController.addShowToList)
 module.exports = userRouter
