@@ -13,7 +13,7 @@ const ShowsSchema = new Schema({
   showId: {
     type: String,
     required: true,
-    unique: true,
+    unique: false,
   },
   showTitle: {
     type: String,

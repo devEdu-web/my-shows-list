@@ -1,5 +1,6 @@
 const Show = require('../schemas/Shows');
 const Movie = require('../schemas/Movies');
+// const User = require('../schemas/Movies')
 const TMDBMovie = require('../../services/tmdb/movies');
 const TMDBShow = require('../../services/tmdb/shows');
 const posterPathUrl = 'https://image.tmdb.org/t/p/original/';
@@ -43,7 +44,11 @@ class UserController {
     const { userId } = req.cookies;
 
     try {
+      const movieExistsInUserList = await Movie.findOne({ movieId: id });
       const movieDetails = await TMDBMovie.getMovieDetails(id);
+      if (movieExistsInUserList)
+        return res.status(400).json({ msg: 'Item already on list.' });
+
       const movieToBeSaved = new Movie({
         userId,
         userScore: score,
@@ -57,21 +62,22 @@ class UserController {
       const movie = await movieToBeSaved.save();
       res.status(201).json(movieToBeSaved);
     } catch (error) {
-      console.log(error);
-      res.status(400).json({
-        msg: 'Item already on list.',
-      });
+      res.status(400).json(error);
     }
   }
   async addShowToList(req, res, next) {
     const { id, score } = req.body;
     const { userId } = req.cookies;
     try {
+      const showExistsInUserList = await Show.findOne({ showId: id });
+      if (showExistsInUserList)
+        return res.status(400).json({ msg: 'Item already on list' });
+
       const showDetails = await TMDBShow.getShowDetails(id);
       const showToBeSaved = new Show({
         userId,
         userScore: score,
-        showId: id,
+        showId: showDetails.id,
         showTitle: showDetails.name,
         overview: showDetails.overview,
         posterPath: showDetails.poster_path,
@@ -81,7 +87,6 @@ class UserController {
       const show = await showToBeSaved.save();
       return res.status(201).json(show);
     } catch (error) {
-      console.log(error);
       return res.status(400).json({
         msg: 'Item already on list.',
       });
