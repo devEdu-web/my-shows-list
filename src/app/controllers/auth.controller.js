@@ -56,12 +56,17 @@ class Auth {
       );
 
       res.cookie('token', token);
-      res.cookie('userId', user._id.toString())
+      res.cookie('userId', user._id.toString());
 
       return res.status(302).redirect('/home');
     } catch (error) {
       return res.status(400).json({ msg: error.message });
     }
+  }
+
+  async logout(req, res, next) {
+    res.cookie('token', '');
+    res.redirect('/auth/login');
   }
 }
 
