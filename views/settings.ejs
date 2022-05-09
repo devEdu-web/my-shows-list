@@ -21,28 +21,30 @@
 
         <div class="change-password-container settings-container d-flex flex-column align-items-center">
             <p class="fs-5 fw-bold">Change password</p>
-            <form class="d-flex flex-column align-items-center gap-3" action="">
-                <input type="password" name="password" id="" placeholder="New password">
+            <form name="updatePassword" class="d-flex flex-column align-items-center gap-3" action="/user/settings/newPassword" method="post">
+                <input type="password" name="newPassword" id="" placeholder="New password">
                 <input type="password" name="currentPassword" id="" placeholder="Confirm current password">
                 <input class="btn btn-primary" type="submit" value="Change password">
+                <span id="updatePasswordErrorSpan" class="text-danger"></span>
+                <span id="updatePasswordSuccessSpan" class="text-success"></span>
             </form>
         </div>
 
         <div class="change-email-container settings-container d-flex flex-column align-items-center">
             <p class="fs-5 fw-bold">Change Email</p>
-            <form class="d-flex flex-column align-items-center gap-3" action="">
+            <form class="d-flex flex-column align-items-center gap-3" action="user/settings/newPassword">
                 <input type="email" name="email" id="" placeholder="New Email">
                 <input type="password" name="currentPassword" id="" placeholder="Confirm current password">
-                <input class="btn btn-primary" type="submit" value="Change password">
+                <input class="btn btn-primary" type="submit" value="Change email">
             </form>
         </div>
 
         <div class="change-username-container settings-container d-flex flex-column align-items-center">
             <p class="fs-5 fw-bold">Change Username</p>
-            <form class="d-flex flex-column align-items-center gap-3" action="">
+            <form class="d-flex flex-column align-items-center gap-3" action="/user/settings/newUsername">
                 <input type="text" name="username" id="" placeholder="New username">
                 <input type="password" name="currentPassword" id="" placeholder="Confirm current password">
-                <input class="btn btn-primary" type="submit" value="Change password">
+                <input class="btn btn-primary" type="submit" value="Change username">
             </form>
         </div>
 
@@ -50,5 +52,6 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="/js/updateAjax.js"></script>
 </body>
 </html>

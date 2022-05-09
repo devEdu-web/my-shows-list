@@ -13,7 +13,7 @@ class Validator {
 
       body('password')
         .isLength({ min: 6 })
-        .withMessage('Password must at least 5 characters long.'),
+        .withMessage('Password must at least 6 characters long.'),
 
       body('confirmPassword')
         .custom((value, { req }) => {
@@ -23,6 +23,11 @@ class Validator {
             return true;
       }),
     ];
+    this.updatePasswordValidation = [
+      body('newPassword')
+        .isLength({ min: 6 })
+        .withMessage('Password must at least 6 characters long.'),
+    ]
   }
 }
 

@@ -1,9 +1,12 @@
+const bcrypt = require('bcrypt');
+const { validationResult } = require('express-validator');
 const Show = require('../schemas/Shows');
 const Movie = require('../schemas/Movies');
-// const User = require('../schemas/Movies')
+const User = require('../schemas/User');
 const TMDBMovie = require('../../services/tmdb/movies');
 const TMDBShow = require('../../services/tmdb/shows');
 const posterPathUrl = 'https://image.tmdb.org/t/p/original/';
+
 class UserController {
   getProfilePage(req, res, next) {
     res.render('profile');
@@ -11,6 +14,32 @@ class UserController {
 
   getSettingsPage(req, res, next) {
     res.render('settings');
+  }
+
+  async updatePassword(req, res, next) {
+    const { userId } = req.cookies;
+    const { newPassword, currentPassword } = req.body;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) return res.status(400).json(errors);
+
+    try {
+      const user = await User.findById(userId);
+      const doesPasswordsMatch = await bcrypt.compare(
+        currentPassword,
+        user.password
+      );
+      if (!doesPasswordsMatch) throw new Error('Wrong password.');
+
+      const encryptedPassword = await bcrypt.hash(newPassword, 10);
+      const updatedUser = await User.updateOne(
+        { _id: userId },
+        { password: encryptedPassword }
+      );
+
+      return res.status(201).json({ msg: 'Password updated.' });
+    } catch (error) {
+      return res.status(400).json({ msg: error.message });
+    }
   }
 
   async getMoviesListPage(req, res, next) {
