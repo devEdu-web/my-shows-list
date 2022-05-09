@@ -28,6 +28,11 @@ class Validator {
         .isLength({ min: 6 })
         .withMessage('Password must at least 6 characters long.'),
     ]
+    this.updateEmailValidation = [
+      body('newEmail')
+        .isEmail()
+        .withMessage('Invalid email.')
+    ]
   }
 }
 

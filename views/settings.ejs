@@ -32,10 +32,12 @@
 
         <div class="change-email-container settings-container d-flex flex-column align-items-center">
             <p class="fs-5 fw-bold">Change Email</p>
-            <form class="d-flex flex-column align-items-center gap-3" action="user/settings/newPassword">
-                <input type="email" name="email" id="" placeholder="New Email">
+            <form name="updateEmail" class="d-flex flex-column align-items-center gap-3" action="/user/settings/newEmail" method="post">
+                <input required type="email" name="newEmail" id="" placeholder="New Email">
                 <input type="password" name="currentPassword" id="" placeholder="Confirm current password">
                 <input class="btn btn-primary" type="submit" value="Change email">
+                <span id="updateEmailErrorSpan" class="text-danger"></span>
+                <span id="updateEmailSuccessSpan" class="text-success"></span>
             </form>
         </div>
 

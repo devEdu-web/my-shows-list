@@ -31,7 +31,7 @@ class UserController {
       if (!doesPasswordsMatch) throw new Error('Wrong password.');
 
       const encryptedPassword = await bcrypt.hash(newPassword, 10);
-      const updatedUser = await User.updateOne(
+      await User.updateOne(
         { _id: userId },
         { password: encryptedPassword }
       );
@@ -40,6 +40,32 @@ class UserController {
     } catch (error) {
       return res.status(400).json({ msg: error.message });
     }
+  }
+
+  async updateEmail(req, res, next) {
+    const { userId } = req.cookies
+    const { newEmail, currentPassword } = req.body
+
+    try {
+      // TODO: Maybe add this kind of code to a middleware
+      const findExistingEmail = await User.findOne({email: newEmail})
+      if(findExistingEmail) throw new Error('Email already in use.')
+
+      const user = await User.findById(userId)
+      const doesPasswordsMatch = await bcrypt.compare(currentPassword, user.password)
+      if(!doesPasswordsMatch) throw new Error('Wrong password.')
+
+      await User.updateOne({
+        _id: userId,
+        email: newEmail
+      })
+
+      return res.status(201).json({msg: 'Email updated.'})
+
+    } catch(error) {
+      return res.status(400).json({ msg: error.message });
+    }
+
   }
 
   async getMoviesListPage(req, res, next) {
