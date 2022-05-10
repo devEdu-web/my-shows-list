@@ -16,6 +16,22 @@ class UserController {
     res.render('settings');
   }
 
+  async getEditShowPage(req, res, next) {
+    const { id } = req.params;
+    const { userId } = req.cookies;
+    try {
+      const show = await Show.findOne({ movieId: id, userId: userId });
+      // console.log(show)
+      res.render('editShow', {
+        posterPathUrl,
+        show: show,
+        type: 'show',
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async updatePassword(req, res, next) {
     const { userId } = req.cookies;
     const { newPassword, currentPassword } = req.body;
@@ -31,10 +47,7 @@ class UserController {
       if (!doesPasswordsMatch) throw new Error('Wrong password.');
 
       const encryptedPassword = await bcrypt.hash(newPassword, 10);
-      await User.updateOne(
-        { _id: userId },
-        { password: encryptedPassword }
-      );
+      await User.updateOne({ _id: userId }, { password: encryptedPassword });
 
       return res.status(201).json({ msg: 'Password updated.' });
     } catch (error) {
@@ -43,29 +56,30 @@ class UserController {
   }
 
   async updateEmail(req, res, next) {
-    const { userId } = req.cookies
-    const { newEmail, currentPassword } = req.body
+    const { userId } = req.cookies;
+    const { newEmail, currentPassword } = req.body;
 
     try {
       // TODO: Maybe add this kind of code to a middleware
-      const findExistingEmail = await User.findOne({email: newEmail})
-      if(findExistingEmail) throw new Error('Email already in use.')
+      const findExistingEmail = await User.findOne({ email: newEmail });
+      if (findExistingEmail) throw new Error('Email already in use.');
 
-      const user = await User.findById(userId)
-      const doesPasswordsMatch = await bcrypt.compare(currentPassword, user.password)
-      if(!doesPasswordsMatch) throw new Error('Wrong password.')
+      const user = await User.findById(userId);
+      const doesPasswordsMatch = await bcrypt.compare(
+        currentPassword,
+        user.password
+      );
+      if (!doesPasswordsMatch) throw new Error('Wrong password.');
 
       await User.updateOne({
         _id: userId,
-        email: newEmail
-      })
+        email: newEmail,
+      });
 
-      return res.status(201).json({msg: 'Email updated.'})
-
-    } catch(error) {
+      return res.status(201).json({ msg: 'Email updated.' });
+    } catch (error) {
       return res.status(400).json({ msg: error.message });
     }
-
   }
 
   async getMoviesListPage(req, res, next) {
@@ -99,7 +113,10 @@ class UserController {
     const { userId } = req.cookies;
 
     try {
-      const movieExistsInUserList = await Movie.findOne({ movieId: id });
+      const movieExistsInUserList = await Movie.findOne({
+        movieId: id,
+        userId: userId,
+      });
       const movieDetails = await TMDBMovie.getMovieDetails(id);
       if (movieExistsInUserList)
         return res.status(400).json({ msg: 'Item already on list.' });
@@ -145,6 +162,22 @@ class UserController {
       return res.status(400).json({
         msg: 'Item already on list.',
       });
+    }
+  }
+  async updateShow(req, res, next) {
+    const { id, newScore } = req.body;
+    const { userId } = req.cookies;
+
+    try {
+      await Show.findOneAndUpdate(
+        { userId: userId, showId: id },
+        {
+          userScore: newScore,
+        }
+      );
+      res.status(201).json({ msg: 'Show Updated' });
+    } catch (error) {
+      res.status(400).json({ msg: error.message });
     }
   }
 }

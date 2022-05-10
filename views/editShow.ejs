@@ -20,43 +20,46 @@
     <main class="bg d-flex p-sm-5 flex-column align-items-center">
 
         <div class="title-container row p-2 mb-3">
-            <h2><%= details.name || details.original_title%> </h2>
+            <h2><%= show.showTitle %> </h2>
         </div>
 
         <div class="show-info-container row d-flex justify-content-center gap-3">
             <div class="show-poster col-1 g-0 bg-danger">
-                <img src="<%= `${posterPathUrl}/${details.poster_path}` %>" alt="">
+                <img src="<%= `${posterPathUrl}/${show.posterPath}` %>" alt="">
             </div>
 
             <div class="col">
 
                 <div class="row mb-3">
                     <div class="major-info-container p-3 d-flex justify-content-between align-items-center">
+
+                        <span class="me-1">Your score: </span>
+
+                        
                         <div>
                             <i class="fa-solid fa-star"></i>
-                            <span><%= details.vote_average %> </span>
+                            <span><%= show.userScore %> </span>
                         </div>
 
-                        <span>Popularity: <%= details.popularity %> </span>
-                        <span>Vote count: <%= details.vote_count %> </span>
+
 
                     </div>
                 </div>
 
                 <div class="row mb-2 border-bottom border-light">
-                    <p class="text-justify" id="show-description"><%= details.overview %> </p>
+                    <p class="text-justify" id="show-description"><%= show.overview %> </p>
                 </div>
 
                 <div class="row">
-                    <span class="mb-2 fs-5" id="add-to-list-title">Add to my list</span>
+                    <span class="mb-2 fs-5" id="add-to-list-title">Update</span>
                     
 
-                    <form name="addForm" action="<%= type == 'movie' ? `/user/list/movies/add/` : `/user/list/shows/add/` %>" method="post" class="d-flex flex-column aling-items-start gap-3">
-                        <input type="hidden" name="id" value="<%= details.id %>">
+                    <form name="editShowForm" action="/user/list/shows/update/" method="post" class="d-flex flex-column aling-items-start gap-3">
+                        <input type="hidden" name="id" value="<%= show.showId %>">
 
                         <div class="form-gorup d-flex align-items-center gap-2">
                             <label for="score" class="">Score: </label>
-                            <select name="score" id="score" class="">
+                            <select name="newScore" id="score" class="">
                                 <option value="1">1 (Appalling)</option>
                                 <option value="2">2 (Horrible)</option>
                                 <option value="3">3 (Very bad)</option>
@@ -71,7 +74,7 @@
                         </div>
 
                         <div class="form-group d-flex gap-2 align-items-center">
-                            <input type="submit" value="Add">
+                            <input type="submit" value="Update">
                             <span id="errorSpan" class="text-danger"></span>
                             <span id="successSpan" class="text-success"></span>
                         </div>
@@ -89,6 +92,6 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="/js/addToListAjax.js"></script>
+    <script src="/js/editMovieAjax.js"></script>
 </body>
 </html>
