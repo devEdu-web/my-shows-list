@@ -1,6 +1,6 @@
 const errorSpan = document.querySelector('#errorSpan');
 const successSpan = document.querySelector('#successSpan');
-document.editMovieForm.onsubmit = addToList;
+document.editShowForm.onsubmit = addToList;
 
 async function addToList(event) {
   event.preventDefault(event);
@@ -14,7 +14,6 @@ async function addToList(event) {
 
   try {
     const response = await fetch(form.action, fetchOptions);
-    console.log(response)
     if (response.status === 400) {
       const error = await response.json();
       successSpan.innerHTML = '';

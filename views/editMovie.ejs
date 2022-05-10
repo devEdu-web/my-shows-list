@@ -20,12 +20,12 @@
     <main class="bg d-flex p-sm-5 flex-column align-items-center">
 
         <div class="title-container row p-2 mb-3">
-            <h2><%= show.showTitle %> </h2>
+            <h2><%= movie.title %> </h2>
         </div>
 
         <div class="show-info-container row d-flex justify-content-center gap-3">
             <div class="show-poster col-1 g-0 bg-danger">
-                <img src="<%= `${posterPathUrl}/${show.posterPath}` %>" alt="">
+                <img src="<%= `${posterPathUrl}/${movie.posterPath}` %>" alt="">
             </div>
 
             <div class="col">
@@ -38,7 +38,7 @@
                         
                         <div>
                             <i class="fa-solid fa-star"></i>
-                            <span><%= show.userScore %> </span>
+                            <span><%= movie.userScore %> </span>
                         </div>
 
 
@@ -47,15 +47,15 @@
                 </div>
 
                 <div class="row mb-2 border-bottom border-light">
-                    <p class="text-justify" id="show-description"><%= show.overview %> </p>
+                    <p class="text-justify" id="show-description"><%= movie.overview %> </p>
                 </div>
 
                 <div class="row">
                     <span class="mb-2 fs-5" id="add-to-list-title">Update</span>
                     
 
-                    <form name="editShowForm" action="/user/list/shows/update/" method="post" class="d-flex flex-column aling-items-start gap-3">
-                        <input type="hidden" name="id" value="<%= show.showId %>">
+                    <form name="editMovieForm" action="/user/list/movies/update/" method="post" class="d-flex flex-column aling-items-start gap-3">
+                        <input type="hidden" name="id" value="<%= movie.movieId %>">
 
                         <div class="form-gorup d-flex align-items-center gap-2">
                             <label for="score" class="">Score: </label>
@@ -92,6 +92,6 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="/js/editShowAjax.js"></script>
+    <script src="/js/editMovieAjax.js"></script>
 </body>
 </html>

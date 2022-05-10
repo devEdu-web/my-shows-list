@@ -20,12 +20,27 @@ class UserController {
     const { id } = req.params;
     const { userId } = req.cookies;
     try {
-      const show = await Show.findOne({ movieId: id, userId: userId });
-      // console.log(show)
+      const show = await Show.findOne({ showId: id, userId: userId });
       res.render('editShow', {
         posterPathUrl,
         show: show,
         type: 'show',
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async getEditMoviePage(req, res, next) {
+    const { id } = req.params;
+    const { userId } = req.cookies;
+
+    try {
+      const movie = await Movie.findOne({ movieId: id, userId: userId });
+      res.render('editMovie', {
+        posterPathUrl,
+        movie: movie,
+        type: 'movie',
       });
     } catch (error) {
       console.log(error);
@@ -137,11 +152,32 @@ class UserController {
       res.status(400).json(error);
     }
   }
+
+  async updateMovie(req, res, next) {
+    const { id, newScore } = req.body;
+    const { userId } = req.cookies;
+    try {
+      const movie = await Movie.findOneAndUpdate(
+        { userId: userId, movieId: id },
+        {
+          userScore: newScore,
+        }
+      );
+      console.log(movie);
+      res.status(201).json({ msg: 'Movie Updated' });
+    } catch (error) {
+      res.status(400).json({ msg: error.message });
+    }
+  }
+
   async addShowToList(req, res, next) {
     const { id, score } = req.body;
     const { userId } = req.cookies;
     try {
-      const showExistsInUserList = await Show.findOne({ showId: id });
+      const showExistsInUserList = await Show.findOne({
+        showId: id,
+        userId: userId,
+      });
       if (showExistsInUserList)
         return res.status(400).json({ msg: 'Item already on list' });
 
