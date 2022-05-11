@@ -170,6 +170,20 @@ class UserController {
     }
   }
 
+  async deleteMovie(req, res, next) {
+    const { userId } = req.cookies
+    const { id } = req.params
+
+    try {
+      const movie = await Movie.findOneAndDelete({ userId, movieId: id })
+      res.redirect('/user/list/movies')
+    } catch(error) {
+      throw error
+      res.json({msg: error.message})
+    }
+
+  }
+
   async addShowToList(req, res, next) {
     const { id, score } = req.body;
     const { userId } = req.cookies;

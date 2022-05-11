@@ -19,4 +19,6 @@ userRouter.post('/list/movies/add', UserController.addMovieToList)
 userRouter.post('/list/shows/add/', UserController.addShowToList)
 userRouter.post('/list/shows/update', UserController.updateShow)
 userRouter.post('/list/movies/update/', UserController.updateMovie)
+
+userRouter.get('/list/movies/delete/:id', UserController.deleteMovie)
 module.exports = userRouter

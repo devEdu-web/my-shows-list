@@ -27,8 +27,9 @@
                             <i class="fa-solid fa-star"></i>
                             <span><%= movie.userScore %></span>
                         </div>
-                        <small class="">
+                        <small class="d-flex align-items-start gap-2">
                             <a href="/user/list/movies/edit/<%= movie.movieId %>" class="link-light">Edit</a>
+                            <a href="/user/list/movies/delete/<%= movie.movieId %>"><i class="fa-solid fa-xmark text-danger fs-5"></i></a>
                         </small>
                     </div>
                 </div>
