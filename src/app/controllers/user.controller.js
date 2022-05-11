@@ -171,17 +171,16 @@ class UserController {
   }
 
   async deleteMovie(req, res, next) {
-    const { userId } = req.cookies
-    const { id } = req.params
+    const { userId } = req.cookies;
+    const { id } = req.params;
 
     try {
-      const movie = await Movie.findOneAndDelete({ userId, movieId: id })
-      res.redirect('/user/list/movies')
-    } catch(error) {
-      throw error
-      res.json({msg: error.message})
+      await Movie.findOneAndDelete({ userId, movieId: id });
+      res.redirect('/user/list/movies');
+    } catch (error) {
+      res.json({ msg: error.message });
+      throw error;
     }
-
   }
 
   async addShowToList(req, res, next) {
@@ -228,6 +227,19 @@ class UserController {
       res.status(201).json({ msg: 'Show Updated' });
     } catch (error) {
       res.status(400).json({ msg: error.message });
+    }
+  }
+
+  async deleteShow(req, res, next) {
+    const { userId } = req.cookies;
+    const { id } = req.params;
+
+    try {
+      await Show.findOneAndDelete({ userId, showId: id });
+      res.redirect('/user/list/shows');
+    } catch (error) {
+      res.json({ msg: error.message });
+      throw error;
     }
   }
 }
