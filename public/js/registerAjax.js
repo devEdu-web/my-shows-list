@@ -1,30 +1,14 @@
 const errorSpan = document.querySelector('#errorSpan');
+const ajax = new Ajax()
 
 document.registerForm.onsubmit = postRegister;
 
 async function postRegister(event) {
   event.preventDefault(event);
-
-  const form = event.target;
-  const userData = new FormData(form);
-  const options = {
-    method: 'POST',
-    body: new URLSearchParams(userData),
-    redirect: 'follow',
-  };
-
+  const form = event.target
   try {
-    const response = await fetch(form.action, options);
-    if (response.status === 400) {
-      const jsonResponse = await response.json();
-      if (jsonResponse.errors) {
-        errorSpan.innerHTML = jsonResponse.errors[0].msg;
-      } else {
-        errorSpan.innerHTML = jsonResponse.msg;
-      }
-    } else {
-      const location = response.headers.get('location');
-      window.location.href = location;
-    }
-  } catch (error) {}
+    await ajax.postAuth(form)
+  } catch(error) {
+    throw error
+  }
 }

@@ -58,7 +58,11 @@ class Auth {
       res.cookie('token', token);
       res.cookie('userId', user._id.toString());
 
-      return res.status(302).redirect('/home');
+      res.location('/home')
+      res.status(200).json({
+        msg: 'User logged.'
+      })
+
     } catch (error) {
       return res.status(400).json({ msg: error.message });
     }
