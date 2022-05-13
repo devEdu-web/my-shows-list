@@ -10,6 +10,6 @@ async function updateMovie(event) {
   try {
     await ajax.postUpdateAndAdd(form);
   } catch (error) {
-    console.log(error);
+    throw error
   }
 }

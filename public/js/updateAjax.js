@@ -34,7 +34,7 @@ async function updatePassword(event) {
       updatePasswordSuccessSpan.innerHTML = jsonResponse.msg;
     }
   } catch (error) {
-    console.log(error);
+    throw error
   }
 }
 
@@ -63,6 +63,6 @@ async function updateEmail(event) {
       updateEmailSuccessSpan.innerHTML = jsonResponse.msg;
     }
   } catch (error) {
-    console.log(error);
+    throw error
   }
 }

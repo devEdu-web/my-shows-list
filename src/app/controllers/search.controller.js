@@ -31,7 +31,7 @@ class searchController {
                 if(a.popularity > b.popularity) return -1
             })
 
-            console.log(resultSorted[0].type)
+            // console.log(resultSorted[0].type)
 
             res.render('searchResult', {
                 posterPathUrl,

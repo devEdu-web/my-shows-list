@@ -1,5 +1,3 @@
-const teste = 'meu amigo'
-
 class Ajax {
   constructor() {
     this.registerEndpoint = '/auth/register'
@@ -77,7 +75,6 @@ class Ajax {
   }
 
   async postUpdateAndAdd(form) {
-    // event.preventDefault(event);
     const userData = new FormData(form);
     const fetchOptions = {
       method: 'POST',

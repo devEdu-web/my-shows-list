@@ -27,7 +27,7 @@ class UserController {
         type: 'show',
       });
     } catch (error) {
-      console.log(error);
+      throw error
     }
   }
 
@@ -43,7 +43,7 @@ class UserController {
         type: 'movie',
       });
     } catch (error) {
-      console.log(error);
+      throw error
     }
   }
 
@@ -168,7 +168,6 @@ class UserController {
           userScore: newScore,
         }
       );
-      console.log(movie);
       res.status(201).json({ msg: 'Movie Updated' });
     } catch (error) {
       res.status(400).json({ msg: error.message });
