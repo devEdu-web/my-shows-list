@@ -14,7 +14,6 @@ async function addToList(event) {
 
   try {
     const response = await fetch(form.action, fetchOptions);
-    console.log(response)
     if (response.status === 400) {
       const error = await response.json();
       successSpan.innerHTML = '';

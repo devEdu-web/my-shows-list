@@ -16,13 +16,43 @@ class Ajax {
     this.updateUsername = '/user/settings/newUsername'
   }
 
-  /**
+    /**
    * Make a request to the specified endpoint.
    * @param {String} endpoint 
    * @param {Object} options {method, body, redirect}
    * @returns <Promise> 
    * 
    */
+
+     async request(endpoint, options) {
+      try {
+        const response = await fetch(endpoint, options);
+        if (response.status >= 400) {
+          const jsonResponse = await response.json();
+          if (jsonResponse.errors) {
+            return {
+              error: true,
+              errors: jsonResponse.errors[0]
+            }
+          } else {
+            return {
+              error: true,
+              errors: jsonResponse
+            }
+          }
+        } else if (response.status >= 200 && response.status < 300) {
+          const jsonResponse = await response.json();
+          const redirectEndpoint = response.headers.get('location')
+          return {
+            error: false,
+            data: jsonResponse,
+            location: redirectEndpoint
+          }
+        }
+      } catch(error) {
+        return error
+      }
+    }
 
    async postAuth(form) {
     const userData = new FormData(form);
@@ -33,7 +63,7 @@ class Ajax {
     };
   
     try {
-      const response = await ajax.request(form.target, fetchOptions)
+      const response = await this.request(form.action, fetchOptions)
       if(!response.error) {
         const url = response.location
         window.location.href = url;
@@ -46,38 +76,25 @@ class Ajax {
   
   }
 
-  async request(endpoint, options) {
+  async postUpdate(form) {
+    // event.preventDefault(event);
+    const userData = new FormData(form);
+    const fetchOptions = {
+      method: 'POST',
+      body: new URLSearchParams(userData),
+      redirect: 'follow',
+    };
+  
     try {
-      const response = await fetch(endpoint, options);
-      if (response.status >= 400) {
-        const jsonResponse = await response.json();
-        if (jsonResponse.errors) {
-          return {
-            error: true,
-            errors: jsonResponse.errors[0]
-          }
-        } else {
-          return {
-            error: true,
-            errors: jsonResponse
-          }
-        }
-      } else if (response.status >= 200 && response.status < 300) {
-        const jsonResponse = await response.json();
-        const redirectEndpoint = response.headers.get('location')
-        // console.log(`Headers ${headers}`)
-        return {
-          error: false,
-          data: jsonResponse,
-          location: redirectEndpoint
-        }
+      const response = await this.request(form.action, fetchOptions)
+      if(!response.error) {
+        successSpan.innerHTML = response.data.msg
+      } else {
+        errorSpan.innerHTML = response.data.msg
       }
-    } catch(error) {
-      return error
+    } catch (error) {
+      throw error
     }
   }
   
 }
-
-
-// module.exports = Ajax
