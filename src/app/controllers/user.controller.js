@@ -147,9 +147,14 @@ class UserController {
         voteCount: movieDetails.vote_count,
       });
       const movie = await movieToBeSaved.save();
-      res.status(201).json(movieToBeSaved);
+      res.status(201).json({
+        msg: 'Movie added.',
+        movieAdded: movie
+      });
     } catch (error) {
-      res.status(400).json(error);
+      res.status(400).json({
+        msg: 'Movie already on list'
+      });
     }
   }
 
@@ -206,7 +211,10 @@ class UserController {
         voteCount: showDetails.vote_count,
       });
       const show = await showToBeSaved.save();
-      return res.status(201).json(show);
+      return res.status(201).json({
+        msg: 'Show added.',
+        showAdded: show
+      });
     } catch (error) {
       return res.status(400).json({
         msg: 'Item already on list.',

@@ -7,7 +7,7 @@ async function updateShow(event) {
   event.preventDefault(event);
   const form = event.target;
   try {
-    await ajax.postUpdate(form);
+    await ajax.postUpdateAndAdd(form);
   } catch (error) {
     console.log(error);
   }

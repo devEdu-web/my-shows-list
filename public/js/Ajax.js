@@ -76,7 +76,7 @@ class Ajax {
   
   }
 
-  async postUpdate(form) {
+  async postUpdateAndAdd(form) {
     // event.preventDefault(event);
     const userData = new FormData(form);
     const fetchOptions = {
@@ -90,10 +90,10 @@ class Ajax {
       if(!response.error) {
         successSpan.innerHTML = response.data.msg
       } else {
-        errorSpan.innerHTML = response.data.msg
+        errorSpan.innerHTML = response.errors.msg
       }
     } catch (error) {
-      throw error
+      
     }
   }
   
