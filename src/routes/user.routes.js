@@ -6,7 +6,7 @@ const userRouter = express.Router()
 
 userRouter.get('/list/movies', isUserAuthorized, UserController.getMoviesListPage)
 userRouter.get('/list/shows', isUserAuthorized, UserController.getShowsListPage)
-userRouter.get('/profile', isUserAuthorized, UserController.getProfilePage)
+// userRouter.get('/profile', isUserAuthorized, UserController.getProfilePage)
 userRouter.get('/settings', isUserAuthorized, UserController.getSettingsPage)
 userRouter.get('/list/shows/edit/:id', UserController.getEditShowPage)
 userRouter.get('/list/movies/edit/:id', UserController.getEditMoviePage)

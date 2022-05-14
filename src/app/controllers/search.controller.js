@@ -7,6 +7,7 @@ class searchController {
     async searchResult(req, res, next) {
         try {
             const {query} = req.query
+            const { userName } = req.cookies
             const showsResult = await Search.searchShow(query);
             const moviesResult = await Search.searchMovie(query);
 
@@ -34,6 +35,7 @@ class searchController {
             // console.log(resultSorted[0].type)
 
             res.render('searchResult', {
+                userName,
                 posterPathUrl,
                 result: resultSorted
             })
@@ -44,10 +46,12 @@ class searchController {
     async getDetails(req, res, next) {
         const { id } = req.params
         const { type } = req.query
+        const { userName } = req.cookies
 
         if(type == 'show') {
             const showDetails = await Show.getShowDetails(id)
             return res.render('details', {
+                userName,
                 posterPathUrl,
                 details: showDetails,
                 type: 'show'
@@ -56,6 +60,7 @@ class searchController {
             // type == movie
             const movieDetails = await Movie.getMovieDetails(id)
             return res.render('details', {
+                userName,
                 posterPathUrl,
                 details: movieDetails,
                 type: 'movie'

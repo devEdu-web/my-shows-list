@@ -57,6 +57,7 @@ class Auth {
 
       res.cookie('token', token);
       res.cookie('userId', user._id.toString());
+      res.cookie('userName', user.name)
 
       res.location('/home')
       res.status(200).json({

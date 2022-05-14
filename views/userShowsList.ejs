@@ -12,11 +12,15 @@
     <title>MyShowsList</title>
 </head>
 <body>
-    <header class="mb-3">
+    <header class="mb-1">
         <%- include('./templates/navigation') %> 
     </header>
 
     <main class="container container-fluid p-3 d-flex flex-wrap gap-3 justify-content-center">
+        <div id="totalBanner" class="w-100 px-4 d-flex justify-content-between align-items-end">
+            <span class="fs-4">Total</span>
+            <span class="fs-4"><%= quantity %></span>
+        </div>
         <% showsList.forEach(show => { %> 
             <div class="card text-white">
                 <img class="card-img" src="<%= `${posterPathUrl}/${show.posterPath}` %>" alt="">

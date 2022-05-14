@@ -8,20 +8,28 @@ const TMDBShow = require('../../services/tmdb/shows');
 const posterPathUrl = 'https://image.tmdb.org/t/p/original/';
 
 class UserController {
-  getProfilePage(req, res, next) {
-    res.render('profile');
-  }
+  // getProfilePage(req, res, next) {
+  //   const { userName } = req.cookies
+  //   res.render('profile', {
+  //     userName
+  //   });
+  // }
 
   getSettingsPage(req, res, next) {
-    res.render('settings');
+    const { userName } = req.cookies
+    res.render('settings', {
+      userName
+    });
   }
 
   async getEditShowPage(req, res, next) {
     const { id } = req.params;
     const { userId } = req.cookies;
+    const { userName } = req.cookies
     try {
       const show = await Show.findOne({ showId: id, userId: userId });
       res.render('editShow', {
+        userName,
         posterPathUrl,
         show: show,
         type: 'show',
@@ -34,10 +42,12 @@ class UserController {
   async getEditMoviePage(req, res, next) {
     const { id } = req.params;
     const { userId } = req.cookies;
+    const { userName } = req.cookies
 
     try {
       const movie = await Movie.findOne({ movieId: id, userId: userId });
       res.render('editMovie', {
+        userName,
         posterPathUrl,
         movie: movie,
         type: 'movie',
@@ -99,9 +109,12 @@ class UserController {
 
   async getMoviesListPage(req, res, next) {
     const { userId } = req.cookies;
+    const { userName } = req.cookies
     try {
       const moviesList = await Movie.find({ userId });
       res.render('userMovieList', {
+        userName,
+        quantity: moviesList.length,
         moviesList,
         posterPathUrl,
       });
@@ -112,9 +125,12 @@ class UserController {
 
   async getShowsListPage(req, res, next) {
     const { userId } = req.cookies;
+    const { userName } = req.cookies
     try {
       const showsList = await Show.find({ userId });
       res.render('userShowsList', {
+        userName,
+        quantity: showsList.length,
         showsList,
         posterPathUrl,
       });
