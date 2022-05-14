@@ -64,24 +64,22 @@ describe('Authentication', () => {
     };
 
     const response = await request(app).post('/auth/login').send(mockUser);
-    expect(response.status).toBe(302);
-    expect(response.header['set-cookie'].length).toEqual(1);
+    expect(response.status).toBe(200);
+    expect(response.header['set-cookie'].length).toBeGreaterThan(1);
   });
 
   it('should not be able to access protected routes', async () => {
     const home = await request(app).get('/home');
     const search = await request(app).get('/search');
-    const searchDetails = await request(app).get('/search/details');
+    const searchDetails = await request(app).get('/search/details/278');
     const moviesList = await request(app).get('/user/list/movies');
     const showsList = await request(app).get('/user/list/shows');
-    const profile = await request(app).get('/user/profile');
     const settings = await request(app).get('/user/settings');
     expect(home.status).toBe(302);
     expect(search.status).toBe(302);
     expect(searchDetails.status).toBe(302);
     expect(moviesList.status).toBe(302);
     expect(showsList.status).toBe(302);
-    expect(profile.status).toBe(302);
     expect(settings.status).toBe(302);
   })
 

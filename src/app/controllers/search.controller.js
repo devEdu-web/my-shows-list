@@ -1,76 +1,66 @@
-const Search = require('../../services/tmdb/search')
-const Movie = require('../../services/tmdb/movies')
-const Show = require('../../services/tmdb/shows')
+const Search = require('../../services/tmdb/search');
+const Movie = require('../../services/tmdb/movies');
+const Show = require('../../services/tmdb/shows');
+const addProperty = require('../../utils/addProperty');
 const posterPathUrl = 'https://image.tmdb.org/t/p/original/';
 
 class searchController {
-    async searchResult(req, res, next) {
-        try {
-            const {query} = req.query
-            const { userName } = req.cookies
-            const showsResult = await Search.searchShow(query);
-            const moviesResult = await Search.searchMovie(query);
+  async searchResult(req, res, next) {
+    try {
+      const { query } = req.query;
+      const { userName } = req.cookies;
+      const showsResult = await Search.searchShow(query);
+      const moviesResult = await Search.searchMovie(query);
 
-            // Aqui tut a adicionando um tipo nos filmes e series pra poder peagar os detalhes na hora da busca
-            // por enquando tá tudo certo mas faz mais uns testes ai pra ter certeza
+      const showsResultWithType = addProperty(
+        showsResult.results,
+        'type',
+        'show'
+      );
+      const moviesResultWithType = addProperty(
+        moviesResult.results,
+        'type',
+        'movie'
+      );
 
-            for(let i = 0; i < showsResult.results.length; i++) {
-                Object.defineProperty(showsResult.results[i], 'type', {
-                    value: 'show'
-                })
-            }
+      const result = showsResultWithType.concat(moviesResultWithType);
+      const resultSorted = result.sort((a, b) => {
+        if (a.popularity > b.popularity) return -1;
+      });
 
-            for(let i = 0; i < moviesResult.results.length; i++) {
-                Object.defineProperty(moviesResult.results[i], 'type', {
-                    value: 'movie'
-                })
-            }
-
-            
-            const result = showsResult.results.concat(moviesResult.results)
-            const resultSorted = result.sort((a, b) => {
-                if(a.popularity > b.popularity) return -1
-            })
-
-            // console.log(resultSorted[0].type)
-
-            res.render('searchResult', {
-                userName,
-                posterPathUrl,
-                result: resultSorted
-            })
-        } catch(error) {
-            res.send(error)
-        }
+      res.render('searchResult', {
+        userName,
+        posterPathUrl,
+        result: resultSorted,
+      });
+    } catch (error) {
+      res.send(error);
     }
-    async getDetails(req, res, next) {
-        const { id } = req.params
-        const { type } = req.query
-        const { userName } = req.cookies
-
-        if(type == 'show') {
-            const showDetails = await Show.getShowDetails(id)
-            return res.render('details', {
-                userName,
-                posterPathUrl,
-                details: showDetails,
-                type: 'show'
-            })
-        } else {
-            // type == movie
-            const movieDetails = await Movie.getMovieDetails(id)
-            return res.render('details', {
-                userName,
-                posterPathUrl,
-                details: movieDetails,
-                type: 'movie'
-
-            })
-        }
-
+  }
+  async getDetails(req, res, next) {
+    const { id } = req.params;
+    const { type } = req.query;
+    const { userName } = req.cookies;
+    // TODO put this inside a try / catch
+    if (type == 'show') {
+      const showDetails = await Show.getShowDetails(id);
+      return res.render('details', {
+        userName,
+        posterPathUrl,
+        details: showDetails,
+        type: 'show',
+      });
+    } else {
+      // type == movie
+      const movieDetails = await Movie.getMovieDetails(id);
+      return res.render('details', {
+        userName,
+        posterPathUrl,
+        details: movieDetails,
+        type: 'movie',
+      });
     }
+  }
 }
 
-
-
-module.exports = new searchController()
+module.exports = new searchController();
