@@ -7,7 +7,7 @@ async function postRegister(event) {
   event.preventDefault(event);
   const form = event.target
   try {
-    await ajax.postAuth(form, errorSpan, successSpan)
+    await ajax.postAuth(form, errorSpan)
   } catch(error) {
     throw error
   }
