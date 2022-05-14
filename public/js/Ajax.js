@@ -52,7 +52,7 @@ class Ajax {
       }
     }
 
-   async postAuth(form) {
+   async postAuth(form, errorSpan, successSpan) {
     const userData = new FormData(form);
     const fetchOptions = {
       method: 'POST',
@@ -74,7 +74,7 @@ class Ajax {
   
   }
 
-  async postUpdateAndAdd(form) {
+  async postUpdateAndAdd(form, errorSpan, successSpan) {
     const userData = new FormData(form);
     const fetchOptions = {
       method: 'POST',

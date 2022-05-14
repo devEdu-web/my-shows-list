@@ -22,8 +22,8 @@
         <div class="change-password-container settings-container d-flex flex-column align-items-center">
             <p class="fs-5 fw-bold">Change password</p>
             <form name="updatePassword" class="d-flex flex-column align-items-center gap-3" action="/user/settings/newPassword" method="post">
-                <input type="password" name="newPassword" id="" placeholder="New password">
-                <input type="password" name="currentPassword" id="" placeholder="Confirm current password">
+                <input type="password" name="newPassword" placeholder="New password">
+                <input type="password" name="currentPassword" placeholder="Confirm current password">
                 <input class="btn btn-primary" type="submit" value="Change password">
                 <span id="updatePasswordErrorSpan" class="text-danger"></span>
                 <span id="updatePasswordSuccessSpan" class="text-success"></span>
@@ -33,8 +33,8 @@
         <div class="change-email-container settings-container d-flex flex-column align-items-center">
             <p class="fs-5 fw-bold">Change Email</p>
             <form name="updateEmail" class="d-flex flex-column align-items-center gap-3" action="/user/settings/newEmail" method="post">
-                <input required type="email" name="newEmail" id="" placeholder="New Email">
-                <input type="password" name="currentPassword" id="" placeholder="Confirm current password">
+                <input required type="email" name="newEmail" placeholder="New Email">
+                <input type="password" name="currentPassword" placeholder="Confirm current password">
                 <input class="btn btn-primary" type="submit" value="Change email">
                 <span id="updateEmailErrorSpan" class="text-danger"></span>
                 <span id="updateEmailSuccessSpan" class="text-success"></span>
@@ -54,6 +54,7 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="/js/Ajax.js"></script>
     <script src="/js/updateAjax.js"></script>
 </body>
 </html>

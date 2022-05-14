@@ -8,13 +8,6 @@ const TMDBShow = require('../../services/tmdb/shows');
 const posterPathUrl = 'https://image.tmdb.org/t/p/original/';
 
 class UserController {
-  // getProfilePage(req, res, next) {
-  //   const { userName } = req.cookies
-  //   res.render('profile', {
-  //     userName
-  //   });
-  // }
-
   getSettingsPage(req, res, next) {
     const { userName } = req.cookies
     res.render('settings', {

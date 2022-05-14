@@ -1,3 +1,5 @@
+const ajax = new Ajax()
+
 const updatePasswordErrorSpan = document.querySelector('#updatePasswordErrorSpan');
 const updatePasswordSuccessSpan = document.querySelector('#updatePasswordSuccessSpan');
 
@@ -11,58 +13,20 @@ document.updateEmail.onsubmit = updateEmail
 
 async function updatePassword(event) {
   event.preventDefault(event);
-  const form = event.target;
-  const userData = new FormData(form);
-  const fetchOptions = {
-    method: 'POST',
-    body: new URLSearchParams(userData),
-    redirect: 'follow',
-  };
+  const form = event.target
   try {
-    const response = await fetch(form.action, fetchOptions);
-    if (response.status === 400) {
-      const jsonResponse = await response.json();
-      if (jsonResponse.errors) {
-        updatePasswordSuccessSpan.innerHTML = '';
-        updatePasswordErrorSpan.innerHTML = jsonResponse.errors[0].msg;
-      } else {
-        updatePasswordErrorSpan.innerHTML = jsonResponse.msg;
-      }
-    } else {
-      const jsonResponse = await response.json();
-      updatePasswordErrorSpan.innerHTML = ''
-      updatePasswordSuccessSpan.innerHTML = jsonResponse.msg;
-    }
-  } catch (error) {
+    await ajax.postUpdateAndAdd(form, updatePasswordErrorSpan, updatePasswordSuccessSpan)
+  } catch(error) {
     throw error
   }
 }
 
 async function updateEmail(event) {
-  event.preventDefault(event)
-  const form = event.target;
-  const userData = new FormData(form);
-  const fetchOptions = {
-    method: 'POST',
-    body: new URLSearchParams(userData),
-    redirect: 'follow',
-  };
+  event.preventDefault(event);
+  const form = event.target
   try {
-    const response = await fetch(form.action, fetchOptions);
-    if (response.status === 400) {
-      const jsonResponse = await response.json();
-      if (jsonResponse.errors) {
-        updateEmailSuccessSpan.innerHTML = '';
-        updateEmailErrorSpan.innerHTML = jsonResponse.errors[0].msg;
-      } else {
-        updateEmailErrorSpan.innerHTML = jsonResponse.msg;
-      }
-    } else {
-      const jsonResponse = await response.json();
-      updateEmailErrorSpan.innerHTML = ''
-      updateEmailSuccessSpan.innerHTML = jsonResponse.msg;
-    }
-  } catch (error) {
+    await ajax.postUpdateAndAdd(form, updateEmailErrorSpan, updateEmailSuccessSpan)
+  } catch(error) {
     throw error
   }
 }
