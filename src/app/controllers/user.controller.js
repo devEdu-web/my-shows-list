@@ -141,9 +141,12 @@ class UserController {
         movieId: id,
         userId: userId,
       });
-      const movieDetails = await TMDBMovie.getMovieDetails(id);
       if (movieExistsInUserList)
         return res.status(400).json({ msg: 'Item already on list.' });
+
+      /* TODO: If the user does not have a movie/show in they're list it may be a good idea send the response to the user saying that the movie is added, and save the movie into the database on the background, after the response is sent. On second thought, if there is an error while saving the show/movie the response that it was added will be sent and the movie won't be save. */
+
+      const movieDetails = await TMDBMovie.getMovieDetails(id);
 
       const movieToBeSaved = new Movie({
         userId,
@@ -155,12 +158,13 @@ class UserController {
         popularity: movieDetails.popularity,
         voteCount: movieDetails.vote_count,
       });
-      const movie = await movieToBeSaved.save();
+      await movieToBeSaved.save();
       res.status(201).json({
         msg: 'Movie added.',
-        movieAdded: movie
+        // movieAdded: movie
       });
     } catch (error) {
+      console.log(error)
       res.status(400).json({
         msg: 'Movie already on list'
       });
@@ -177,9 +181,14 @@ class UserController {
           userScore: newScore,
         }
       );
-      res.status(201).json({ msg: 'Movie Updated' });
+      if(movie) {
+        return res.status(201).json({ msg: 'Movie Updated' });
+      }
+      return res.status(400).json({
+        msg: 'Movies does not exist in the user list.'
+      })
     } catch (error) {
-      res.status(400).json({ msg: error.message });
+      return res.status(400).json({ msg: error.message });
     }
   }
 
@@ -234,13 +243,16 @@ class UserController {
     const { userId } = req.cookies;
 
     try {
-      await Show.findOneAndUpdate(
+      const show = await Show.findOneAndUpdate(
         { userId: userId, showId: id },
         {
           userScore: newScore,
         }
       );
-      res.status(201).json({ msg: 'Show Updated' });
+      if(show) {
+        return res.status(201).json({ msg: 'Show Updated' });
+      }
+      return res.status(400).json({msg: 'Show does not exist in user list.'})
     } catch (error) {
       res.status(400).json({ msg: error.message });
     }
