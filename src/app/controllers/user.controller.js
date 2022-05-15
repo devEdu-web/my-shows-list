@@ -190,13 +190,6 @@ class UserController {
     const { userId } = req.cookies;
 
     try {
-      const movieExistsInUserList = await Movie.findOne({
-        movieId: id,
-        userId: userId,
-      });
-      if (movieExistsInUserList)
-        return res.status(400).json({ msg: 'Item already on list.' });
-
       /* TODO: If the user does not have a movie/show in they're list it may be a good idea send the response to the user saying that the movie is added, and save the movie into the database on the background, after the response is sent. On second thought, if there is an error while saving the show/movie the response that it was added will be sent and the movie won't be save. */
 
       const movieDetails = await TMDBMovie.getMovieDetails(id);
