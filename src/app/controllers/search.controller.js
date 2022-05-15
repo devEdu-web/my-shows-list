@@ -9,6 +9,7 @@ class searchController {
     try {
       const { query } = req.query;
       const { userName } = req.cookies;
+      const { profileUrl } = req.cookies
       const showsResult = await Search.searchShow(query);
       const moviesResult = await Search.searchMovie(query);
 
@@ -29,6 +30,7 @@ class searchController {
       });
 
       res.render('searchResult', {
+        profileUrl,
         userName,
         posterPathUrl,
         result: resultSorted,
@@ -41,10 +43,12 @@ class searchController {
     const { id } = req.params;
     const { type } = req.query;
     const { userName } = req.cookies;
+    const { profileUrl } = req.cookies
     // TODO put this inside a try / catch
     if (type == 'show') {
       const showDetails = await Show.getShowDetails(id);
       return res.render('details', {
+        profileUrl,
         userName,
         posterPathUrl,
         details: showDetails,
@@ -54,6 +58,7 @@ class searchController {
       // type == movie
       const movieDetails = await Movie.getMovieDetails(id);
       return res.render('details', {
+        profileUrl,
         userName,
         posterPathUrl,
         details: movieDetails,

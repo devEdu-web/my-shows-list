@@ -1,9 +1,8 @@
-const dotenv = require('dotenv');
-dotenv.config();
-
+require('dotenv').config;
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const cloudinary = require('cloudinary').v2
 
 const authRouter = require('./routes/auth.routes.js');
 const homeRouter = require('./routes/home.routes.js');
@@ -13,6 +12,11 @@ const { isUserAuthenticated } = require('./app/middlewares/permissions');
 
 // const __dirname = dirname(fileURLToPath(import.meta.url));
 
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+})
 class App {
   constructor() {
     this.express = express();

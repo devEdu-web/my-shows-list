@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const cloudinary = require('cloudinary').v2
 const { validationResult } = require('express-validator');
 const Show = require('../schemas/Shows');
 const Movie = require('../schemas/Movies');
@@ -10,7 +11,9 @@ const posterPathUrl = 'https://image.tmdb.org/t/p/original/';
 class UserController {
   getSettingsPage(req, res, next) {
     const { userName } = req.cookies
+    const { profileUrl } = req.cookies
     res.render('settings', {
+      profileUrl,
       userName
     });
   }
@@ -19,9 +22,11 @@ class UserController {
     const { id } = req.params;
     const { userId } = req.cookies;
     const { userName } = req.cookies
+    const { profileUrl } = req.cookies
     try {
       const show = await Show.findOne({ showId: id, userId: userId });
       res.render('editShow', {
+        profileUrl,
         userName,
         posterPathUrl,
         show: show,
@@ -36,10 +41,12 @@ class UserController {
     const { id } = req.params;
     const { userId } = req.cookies;
     const { userName } = req.cookies
+    const { profileUrl } = req.cookies
 
     try {
       const movie = await Movie.findOne({ movieId: id, userId: userId });
       res.render('editMovie', {
+        profileUrl,
         userName,
         posterPathUrl,
         movie: movie,
@@ -100,12 +107,52 @@ class UserController {
     }
   }
 
+  async updatePicture(req, res, next) {
+    const { userId } = req.cookies
+    const picture = req.file
+
+    if(!picture) return res.status(400).json({
+      msg: 'Size or format not supported.'
+    })
+
+    if(picture.size > 2000000) {
+      return res.status(400).json({
+        msg: 'Size or format not supported.'
+      })
+    }
+
+    try {
+      const savedPicture = await cloudinary.uploader.upload(picture.path, {
+        public_id: userId,
+        folder: 'my_shows_list'
+      })
+
+      const userUpdated = await User.findOneAndUpdate({_id: userId}, {
+        profilePictureUrl: savedPicture.url
+      }, { new: true })
+
+      res.cookie('profileUrl', userUpdated.profilePictureUrl)
+
+      return res.status(201).json({
+        msg: 'Picture Uploaded'
+      })
+
+    } catch(error) {
+      console.log(error)
+      res.status(400).json({
+        msg: error.message
+      })
+    }
+  }
+
   async getMoviesListPage(req, res, next) {
     const { userId } = req.cookies;
     const { userName } = req.cookies
+    const { profileUrl } = req.cookies
     try {
       const moviesList = await Movie.find({ userId });
       res.render('userMovieList', {
+        profileUrl,
         userName,
         quantity: moviesList.length,
         moviesList,
@@ -119,16 +166,20 @@ class UserController {
   async getShowsListPage(req, res, next) {
     const { userId } = req.cookies;
     const { userName } = req.cookies
+    const { profileUrl } = req.cookies
     try {
       const showsList = await Show.find({ userId });
       res.render('userShowsList', {
+        profileUrl,
         userName,
         quantity: showsList.length,
         showsList,
         posterPathUrl,
       });
     } catch (error) {
-      res.json(error);
+      res.status(400).json({
+        msg: error.message
+      });
     }
   }
 

@@ -74,6 +74,25 @@ class Ajax {
   
   }
 
+  async updatePicture(form ,errorSpan, successSpan) {
+    const userData = new FormData(form)
+    const fetchOptions = {
+      method: 'POST',
+      body: userData,
+      redirect: 'follow',
+    };
+    try {
+      const response = await this.request(form.action, fetchOptions)
+      if(!response.error) {
+        successSpan.innerHTML = response.data.msg
+      } else {
+        errorSpan.innerHTML = response.errors.msg
+      }
+    } catch (error) {
+      
+    }
+  }
+
   async postUpdateAndAdd(form, errorSpan, successSpan) {
     const userData = new FormData(form);
     const fetchOptions = {

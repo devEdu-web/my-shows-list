@@ -5,10 +5,17 @@
 }
 
 .profilePicture {
-    width: 55px;
-    height: 55px;
-    background-color: grey;
+    width: 60px;
+    height: 60px;
+    /* background-color: grey; */
     border-radius: 50%;
+}
+
+#userPicture {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: fill;
 }
 
 .dropdown-menu {

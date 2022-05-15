@@ -15,7 +15,14 @@ const UserSchema = new Schema({
     password: {
         type: String,
         required: true
+    },
+    profilePictureUrl: {
+        type: String,
+        required: true,
+        default: 'undefined',
     }
+}, {
+    versionKey: false
 })
 
 const User = mongoose.model('User', UserSchema)

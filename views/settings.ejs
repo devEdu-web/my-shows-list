@@ -41,14 +41,16 @@
             </form>
         </div>
 
-        <!-- <div class="change-username-container settings-container d-flex flex-column align-items-center">
-            <p class="fs-5 fw-bold">Change Username</p>
-            <form class="d-flex flex-column align-items-center gap-3" action="/user/settings/newUsername">
-                <input type="text" name="username" id="" placeholder="New username">
-                <input type="password" name="currentPassword" id="" placeholder="Confirm current password">
-                <input class="btn btn-primary" type="submit" value="Change username">
+        <div class="change-username-container settings-container d-flex flex-column align-items-center">
+            <p class="fs-5 fw-bold">Change Profile Picture</p>
+            <form enctype="multipart/form-data" name="updatePicture" method="post" class="d-flex flex-column align-items-center gap-3" action="/user/settings/newPicture">
+                <input class="form-control w-75" type="file" name="updatedPicture" id="">
+                <input type="password" name="currentPassword" placeholder="Confirm current password">
+                <input class="btn btn-primary" type="submit" value="Change Picture">
+                <span id="updatePictureErrorSpan" class="text-danger"></span>
+                <span id="updatePictureSuccessSpan" class="text-success"></span>
             </form>
-        </div> -->
+        </div>
 
 
     </main>
