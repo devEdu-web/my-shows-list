@@ -111,6 +111,8 @@ class UserController {
     const { userId } = req.cookies
     const picture = req.file
 
+    // TODO: add this validation to a middleware
+
     if(!picture) return res.status(400).json({
       msg: 'Size or format not supported.'
     })
