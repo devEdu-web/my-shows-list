@@ -84,8 +84,6 @@ class UserController {
     const { newEmail, currentPassword } = req.body;
 
     try {
-      // TODO: Maybe add this kind of code to a middleware
-      
       const user = await User.findById(userId);
       const doesPasswordsMatch = await bcrypt.compare(
         currentPassword,
@@ -175,8 +173,6 @@ class UserController {
     const { userId } = req.cookies;
 
     try {
-      /* TODO: If the user does not have a movie/show in they're list it may be a good idea send the response to the user saying that the movie is added, and save the movie into the database on the background, after the response is sent. On second thought, if there is an error while saving the show/movie the response that it was added will be sent and the movie won't be save. */
-
       const movieDetails = await TMDBMovie.getMovieDetails(id);
 
       const movieToBeSaved = new Movie({
