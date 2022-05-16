@@ -8,7 +8,8 @@ const {
   doesUserHaveShowInList,
   isUserAuthorized,
   updateEmailValidation,
-  updatePasswordValidation
+  updatePasswordValidation,
+  validatePicture
 } = require('../app/middlewares/index')
 
 const { fileStorage, fileFilter } = require('../app/multerConfig/main')
@@ -28,7 +29,7 @@ userRouter.get('/list/movies/edit/:id', UserController.getEditMoviePage)
 userRouter.post('/settings/newPassword', updatePasswordValidation, UserController.updatePassword)
 userRouter.post('/settings/newEmail', updateEmailValidation, checkIfEmailExists, UserController.updateEmail)
 userRouter.post('/settings/newUsername')
-userRouter.post('/settings/newPicture', upload.single('updatedPicture'), UserController.updatePicture)
+userRouter.post('/settings/newPicture', upload.single('updatedPicture'), validatePicture, UserController.updatePicture)
 userRouter.post('/list/movies/add', isUserAuthorized, doesUserHaveMovieInList, UserController.addMovieToList)
 userRouter.post('/list/shows/add/', isUserAuthorized, doesUserHaveShowInList, UserController.addShowToList)
 userRouter.post('/list/shows/update', isUserAuthorized, UserController.updateShow)

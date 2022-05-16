@@ -109,18 +109,6 @@ class UserController {
     const { userId } = req.cookies
     const picture = req.file
 
-    // TODO: add this validation to a middleware
-
-    if(!picture) return res.status(400).json({
-      msg: 'Size or format not supported.'
-    })
-
-    if(picture.size > 2000000) {
-      return res.status(400).json({
-        msg: 'Size or format not supported.'
-      })
-    }
-
     try {
       const savedPicture = await cloudinary.uploader.upload(picture.path, {
         public_id: userId,

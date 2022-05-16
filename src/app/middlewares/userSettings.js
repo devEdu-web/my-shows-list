@@ -14,6 +14,21 @@ async function checkIfEmailExists(req, res, next) {
   }
 }
 
+function validatePicture(req, res, next) {
+  const picture = req.file
+  if(!picture) return res.status(400).json({
+    msg: 'Size or format not supported.'
+  })
+
+  if(picture.size > 2000000) {
+    return res.status(400).json({
+      msg: 'Size or format not supported.'
+    })
+  }
+  next()
+}
+
 module.exports = {
-  checkIfEmailExists
+  checkIfEmailExists,
+  validatePicture
 }

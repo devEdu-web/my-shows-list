@@ -1,6 +1,6 @@
 const { isUserAuthenticated, isUserAuthorized } = require('./permissions')
 const { doesUserHaveShowInList, doesUserHaveMovieInList } = require('./userList')
-const { checkIfEmailExists } = require('./userSettings')
+const { checkIfEmailExists, validatePicture } = require('./userSettings')
 const { registerValidation, updateEmailValidation, updatePasswordValidation } = require('./validation')
 
 
@@ -12,5 +12,6 @@ module.exports = {
   checkIfEmailExists,
   registerValidation,
   updateEmailValidation,
-  updatePasswordValidation
+  updatePasswordValidation,
+  validatePicture
 }
