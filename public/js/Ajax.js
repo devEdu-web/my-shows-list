@@ -84,8 +84,10 @@ class Ajax {
     try {
       const response = await this.request(form.action, fetchOptions)
       if(!response.error) {
+        errorSpan.innerHTML = ''
         successSpan.innerHTML = response.data.msg
       } else {
+        successSpan.innerHTML = ''
         errorSpan.innerHTML = response.errors.msg
       }
     } catch (error) {
@@ -104,8 +106,10 @@ class Ajax {
     try {
       const response = await this.request(form.action, fetchOptions)
       if(!response.error) {
+        errorSpan.innerHTML = ''
         successSpan.innerHTML = response.data.msg
       } else {
+        successSpan.innerHTML = ''
         errorSpan.innerHTML = response.errors.msg
       }
     } catch (error) {
