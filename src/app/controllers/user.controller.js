@@ -255,13 +255,6 @@ class UserController {
     const { id, score } = req.body;
     const { userId } = req.cookies;
     try {
-      const showExistsInUserList = await Show.findOne({
-        showId: id,
-        userId: userId,
-      });
-      if (showExistsInUserList)
-        return res.status(400).json({ msg: 'Item already on list' });
-
       const showDetails = await TMDBShow.getShowDetails(id);
       const showToBeSaved = new Show({
         userId,
