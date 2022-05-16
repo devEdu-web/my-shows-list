@@ -1,15 +1,12 @@
 require('dotenv').config();
 const axios = require('axios').default;
-const qs = require('querystring');
+const Tmdb = require('./Tmdb')
 const API_KEY = process.env.API_KEY;
 
-class Movie {
-  #popularMoviesUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`;
-  #topRatingMoviesUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}`;
-  #movieDetailsUrl = `https://api.themoviedb.org/3/movie`;
+class Movie  extends Tmdb {
   async getPopularMovies() {
     try {
-      const response = await axios.get(this.#popularMoviesUrl);
+      const response = await axios.get(this.popularMoviesUrl);
       return response.data;
     } catch (error) {
       return undefined;
@@ -18,7 +15,7 @@ class Movie {
 
   async getTopRatingMovies() {
     try {
-      const response = await axios.get(this.#topRatingMoviesUrl);
+      const response = await axios.get(this.topRatingMoviesUrl);
       return response.data;
     } catch (error) {
       return undefined;
@@ -28,7 +25,7 @@ class Movie {
   async getMovieDetails(id) {
     try {
       const response = await axios.get(
-        `${this.#movieDetailsUrl}/${id}?api_key=${API_KEY}`
+        `${this.movieDetailsUrl}/${id}?api_key=${API_KEY}`
       );
       return response.data;
     } catch (error) {

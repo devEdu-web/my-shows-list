@@ -2,7 +2,6 @@ const Search = require('../../services/tmdb/search');
 const Movie = require('../../services/tmdb/movies');
 const Show = require('../../services/tmdb/shows');
 const addProperty = require('../../utils/addProperty');
-const posterPathUrl = 'https://image.tmdb.org/t/p/original/';
 
 class searchController {
   async searchResult(req, res, next) {
@@ -32,7 +31,7 @@ class searchController {
       res.render('searchResult', {
         profileUrl,
         userName,
-        posterPathUrl,
+        posterPathUrl: Movie.posterPathUrl,
         result: resultSorted,
       });
     } catch (error) {
@@ -50,7 +49,7 @@ class searchController {
         return res.render('details', {
           profileUrl,
           userName,
-          posterPathUrl,
+          posterPathUrl: Movie.posterPathUrl,
           details: showDetails,
           type: 'show',
         });
@@ -60,7 +59,7 @@ class searchController {
         return res.render('details', {
           profileUrl,
           userName,
-          posterPathUrl,
+          posterPathUrl: Movie.posterPathUrl,
           details: movieDetails,
           type: 'movie',
         });

@@ -6,7 +6,6 @@ const Movie = require('../schemas/Movies');
 const User = require('../schemas/User');
 const TMDBMovie = require('../../services/tmdb/movies');
 const TMDBShow = require('../../services/tmdb/shows');
-const posterPathUrl = 'https://image.tmdb.org/t/p/original/';
 
 class UserController {
   getSettingsPage(req, res, next) {
@@ -28,7 +27,7 @@ class UserController {
       res.render('editShow', {
         profileUrl,
         userName,
-        posterPathUrl,
+        posterPathUrl: TMDBMovie.posterPathUrl,
         show: show,
         type: 'show',
       });
@@ -48,7 +47,7 @@ class UserController {
       res.render('editMovie', {
         profileUrl,
         userName,
-        posterPathUrl,
+        posterPathUrl: TMDBMovie.posterPathUrl,
         movie: movie,
         type: 'movie',
       });
@@ -144,7 +143,7 @@ class UserController {
         userName,
         quantity: moviesList.length,
         moviesList,
-        posterPathUrl,
+        posterPathUrl: TMDBMovie.posterPathUrl,
       });
     } catch (error) {
       res.json(error);
@@ -162,7 +161,7 @@ class UserController {
         userName,
         quantity: showsList.length,
         showsList,
-        posterPathUrl,
+        posterPathUrl: TMDBMovie.posterPathUrl
       });
     } catch (error) {
       res.status(400).json({
