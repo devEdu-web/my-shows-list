@@ -44,27 +44,33 @@ class searchController {
     const { type } = req.query;
     const { userName } = req.cookies;
     const { profileUrl } = req.cookies
-    // TODO put this inside a try / catch
-    if (type == 'show') {
-      const showDetails = await Show.getShowDetails(id);
-      return res.render('details', {
-        profileUrl,
-        userName,
-        posterPathUrl,
-        details: showDetails,
-        type: 'show',
-      });
-    } else {
-      // type == movie
-      const movieDetails = await Movie.getMovieDetails(id);
-      return res.render('details', {
-        profileUrl,
-        userName,
-        posterPathUrl,
-        details: movieDetails,
-        type: 'movie',
-      });
+    try {
+      if (type == 'show') {
+        const showDetails = await Show.getShowDetails(id);
+        return res.render('details', {
+          profileUrl,
+          userName,
+          posterPathUrl,
+          details: showDetails,
+          type: 'show',
+        });
+      } else {
+        // type == movie
+        const movieDetails = await Movie.getMovieDetails(id);
+        return res.render('details', {
+          profileUrl,
+          userName,
+          posterPathUrl,
+          details: movieDetails,
+          type: 'movie',
+        });
+      }
+    } catch(error) {
+      res.status(500).json({
+        msg: error.message
+      })
     }
+
   }
 }
 

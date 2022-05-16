@@ -1,10 +1,17 @@
 const express = require('express')
 const multer = require('multer')
 const UserController = require('../app/controllers/user.controller.js')
-const { isUserAuthorized } = require('../app/middlewares/permissions')
-const { doesUserHaveMovieInList, doesUserHAveShowInList } = require('../app/middlewares/userList')
+
+const {
+  checkIfEmailExists,
+  doesUserHaveMovieInList,
+  doesUserHaveShowInList,
+  isUserAuthorized,
+  updateEmailValidation,
+  updatePasswordValidation
+} = require('../app/middlewares/index')
+
 const { fileStorage, fileFilter } = require('../app/multerConfig/main')
-const { updatePasswordValidation, updateEmailValidation } = require('../app/middlewares/validation');
 const userRouter = express.Router()
 
 const upload = multer({
@@ -19,11 +26,11 @@ userRouter.get('/list/shows/edit/:id', UserController.getEditShowPage)
 userRouter.get('/list/movies/edit/:id', UserController.getEditMoviePage)
 
 userRouter.post('/settings/newPassword', updatePasswordValidation, UserController.updatePassword)
-userRouter.post('/settings/newEmail', updateEmailValidation, UserController.updateEmail)
+userRouter.post('/settings/newEmail', updateEmailValidation, checkIfEmailExists, UserController.updateEmail)
 userRouter.post('/settings/newUsername')
 userRouter.post('/settings/newPicture', upload.single('updatedPicture'), UserController.updatePicture)
 userRouter.post('/list/movies/add', isUserAuthorized, doesUserHaveMovieInList, UserController.addMovieToList)
-userRouter.post('/list/shows/add/', isUserAuthorized, doesUserHAveShowInList, UserController.addShowToList)
+userRouter.post('/list/shows/add/', isUserAuthorized, doesUserHaveShowInList, UserController.addShowToList)
 userRouter.post('/list/shows/update', isUserAuthorized, UserController.updateShow)
 userRouter.post('/list/movies/update/', isUserAuthorized, UserController.updateMovie)
 

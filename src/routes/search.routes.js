@@ -1,5 +1,5 @@
 const { searchResult, getDetails } = require('../app/controllers/search.controller.js');
-const { isUserAuthorized } = require('../app/middlewares/permissions')
+const { isUserAuthorized } = require('../app/middlewares/index')
 const express = require('express')
 const searchRouter = express.Router()
 

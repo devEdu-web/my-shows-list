@@ -1,7 +1,11 @@
 const express = require('express');
+
+const { 
+  isUserAuthenticated,
+  registerValidation
+} = require('../app/middlewares')
+
 const {getRegisterPage, getLoginPage, saveUser, logUser, logout} = require('../app/controllers/auth.controller.js');
-const { registerValidation } = require('../app/middlewares/validation');
-const { isUserAuthenticated } = require('../app/middlewares/permissions')
 const authRouter = express.Router();
 
 

@@ -19,7 +19,7 @@ async function doesUserHaveMovieInList(req, res, next) {
   }
 }
 
-async function doesUserHAveShowInList(req, res, next) {
+async function doesUserHaveShowInList(req, res, next) {
   const { id } = req.body;
   const { userId } = req.cookies;
   try {
@@ -39,5 +39,5 @@ async function doesUserHAveShowInList(req, res, next) {
 
 module.exports = {
   doesUserHaveMovieInList,
-  doesUserHAveShowInList,
+  doesUserHaveShowInList,
 };

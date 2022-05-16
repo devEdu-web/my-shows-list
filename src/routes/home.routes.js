@@ -1,5 +1,5 @@
 const {getHomePage} = require('../app/controllers/home.controller.js')
-const { isUserAuthorized } = require('../app/middlewares/permissions')
+const { isUserAuthorized } = require('../app/middlewares/index')
 const express = require('express')
 const homeRouter = express.Router()
 

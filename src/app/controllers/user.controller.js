@@ -86,9 +86,7 @@ class UserController {
 
     try {
       // TODO: Maybe add this kind of code to a middleware
-      const findExistingEmail = await User.findOne({ email: newEmail });
-      if (findExistingEmail) throw new Error('Email already in use.');
-
+      
       const user = await User.findById(userId);
       const doesPasswordsMatch = await bcrypt.compare(
         currentPassword,
