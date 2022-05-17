@@ -4,14 +4,13 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const cloudinary = require('cloudinary').v2
 const expressSession = require('express-session')
+const MongoStore = require('connect-mongo')
 
 const authRouter = require('./routes/auth.routes.js');
 const homeRouter = require('./routes/home.routes.js');
 const searchRouter = require('./routes/search.routes.js');
 const userRouter = require('./routes/user.routes.js');
 const { isUserAuthenticated } = require('./app/middlewares/permissions');
-const oneDay = 
-// const __dirname = dirname(fileURLToPath(import.meta.url));
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD,
@@ -21,12 +20,16 @@ cloudinary.config({
 
 const sessionConfig = {
   secret: process.env.SESSION_SECRET,
-  saveUninitialized: true,
+  saveUninitialized: false,
   resave: false,
   cookie: {
     httpOnly: true,
     expires: 1000 * 60 * 60 * 24 // 1 day
-  }
+  },
+  store: MongoStore.create({
+    mongoUrl: process.env.DEV_DB_URL,
+    autoRemove: 'native'
+  })
 }
 
 class App {

@@ -8,7 +8,7 @@ async function getHomePage(req, res, next) {
   const topRatedMovies = await Movie.getTopRatingMovies();
   const popularShows = await Show.getPopularShows();
   const topRatedShows = await Show.getTopRatedShows();
-
+  console.log(req.session)
   res.render('home', {
     userName,
     profilePictureUrl,

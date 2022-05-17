@@ -21,7 +21,7 @@ class UserController {
     const { id } = req.params;
     const { userId } = req.session.user;
     const { userName } = req.session.user
-    const { profilePictureUrl } = req.cookies
+    const { profilePictureUrl } = req.session.user
     try {
       const show = await Show.findOne({ showId: id, userId: userId });
       res.render('editShow', {
