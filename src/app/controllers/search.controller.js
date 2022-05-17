@@ -41,7 +41,7 @@ class searchController {
   async getDetails(req, res, next) {
     const { id } = req.params;
     const { type } = req.query;
-    const { userName } = req.sessions.user;
+    const { userName } = req.session.user;
     const { profilePictureUrl } = req.session.user
     try {
       if (type == 'show') {

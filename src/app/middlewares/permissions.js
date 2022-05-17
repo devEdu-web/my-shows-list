@@ -8,13 +8,10 @@ function isUserAuthorized(req, res, next) {
 }
 
 function isUserAuthenticated(req, res, next) {
-  const { token } = req.cookies;
-  try {
-    jwt.verify(token, process.env.JWT_SECRET);
-    res.redirect(302, '/home');
-  } catch (error) {
-    next();
-  }
+  const { user } = req.session;
+  if(user) 
+    return res.redirect(302, '/home')
+  next()
 }
 
 module.exports = {
