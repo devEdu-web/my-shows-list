@@ -2,8 +2,8 @@ const Movie = require('../../services/tmdb/movies');
 const Show = require('../../services/tmdb/shows');
 
 async function getHomePage(req, res, next) {
-  const { userName } = req.cookies
-  const { profileUrl } = req.cookies
+  const { userName } = req.session.user
+  const { profilePictureUrl } = req.session.user
   const popularMovies = await Movie.getPopularMovies();
   const topRatedMovies = await Movie.getTopRatingMovies();
   const popularShows = await Show.getPopularShows();
@@ -11,7 +11,7 @@ async function getHomePage(req, res, next) {
 
   res.render('home', {
     userName,
-    profileUrl,
+    profilePictureUrl,
     posterPathUrl: Movie.posterPathUrl,
     popularMovies: popularMovies.results,
     topRatedMovies: topRatedMovies.results,

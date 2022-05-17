@@ -3,13 +3,14 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const cloudinary = require('cloudinary').v2
+const expressSession = require('express-session')
 
 const authRouter = require('./routes/auth.routes.js');
 const homeRouter = require('./routes/home.routes.js');
 const searchRouter = require('./routes/search.routes.js');
 const userRouter = require('./routes/user.routes.js');
 const { isUserAuthenticated } = require('./app/middlewares/permissions');
-
+const oneDay = 
 // const __dirname = dirname(fileURLToPath(import.meta.url));
 
 cloudinary.config({
@@ -17,6 +18,17 @@ cloudinary.config({
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET
 })
+
+const sessionConfig = {
+  secret: process.env.SESSION_SECRET,
+  saveUninitialized: true,
+  resave: false,
+  cookie: {
+    httpOnly: true,
+    expires: 1000 * 60 * 60 * 24 // 1 day
+  }
+}
+
 class App {
   constructor() {
     this.express = express();
@@ -30,6 +42,7 @@ class App {
     this.express.use(express.json());
     this.express.use(express.urlencoded({ extended: true }));
     this.express.use(cookieParser());
+    this.express.use(expressSession(sessionConfig))
   }
 
   routes() {

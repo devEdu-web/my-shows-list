@@ -7,8 +7,8 @@ class searchController {
   async searchResult(req, res, next) {
     try {
       const { query } = req.query;
-      const { userName } = req.cookies;
-      const { profileUrl } = req.cookies
+      const { userName } = req.session.user;
+      const { profilePictureUrl } = req.session.user
       const showsResult = await Search.searchShow(query);
       const moviesResult = await Search.searchMovie(query);
 
@@ -29,7 +29,7 @@ class searchController {
       });
 
       res.render('searchResult', {
-        profileUrl,
+        profilePictureUrl,
         userName,
         posterPathUrl: Movie.posterPathUrl,
         result: resultSorted,
@@ -41,13 +41,13 @@ class searchController {
   async getDetails(req, res, next) {
     const { id } = req.params;
     const { type } = req.query;
-    const { userName } = req.cookies;
-    const { profileUrl } = req.cookies
+    const { userName } = req.sessions.user;
+    const { profilePictureUrl } = req.session.user
     try {
       if (type == 'show') {
         const showDetails = await Show.getShowDetails(id);
         return res.render('details', {
-          profileUrl,
+          profilePictureUrl,
           userName,
           posterPathUrl: Movie.posterPathUrl,
           details: showDetails,
@@ -57,7 +57,7 @@ class searchController {
         // type == movie
         const movieDetails = await Movie.getMovieDetails(id);
         return res.render('details', {
-          profileUrl,
+          profilePictureUrl,
           userName,
           posterPathUrl: Movie.posterPathUrl,
           details: movieDetails,

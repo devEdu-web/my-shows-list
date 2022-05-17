@@ -10,6 +10,7 @@ class Auth {
   }
 
   getLoginPage(req, res, next) {
+    console.log(req.session.user)
     res.render('login');
   }
 
@@ -44,23 +45,11 @@ class Auth {
       if (!user || !doesPasswordsMatch)
         return res.status(400).json({ msg: 'Email or password invalid.' });
 
-      const token = jwt.sign(
-        {
-          id: user._id,
-          name: user.name,
-        },
-        process.env.JWT_SECRET,
-        {
-          expiresIn: '1h',
-        }
-      );
-
-      res.cookie('token', token);
-      res.cookie('userId', user._id.toString());
-      res.cookie('userName', user.name)
-      res.cookie('profileUrl', user.profilePictureUrl)
-
-        console.log(user)
+      req.session.user = {
+        userId: user._id.toString(),
+        userName: user.name,
+        profilePictureUrl: user.profilePictureUrl
+      }
 
       res.location('/home')
       res.status(200).json({
@@ -73,7 +62,7 @@ class Auth {
   }
 
   async logout(req, res, next) {
-    res.cookie('token', '');
+    await req.session.destroy()
     res.redirect('/auth/login');
   }
 }

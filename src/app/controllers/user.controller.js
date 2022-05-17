@@ -9,23 +9,23 @@ const TMDBShow = require('../../services/tmdb/shows');
 
 class UserController {
   getSettingsPage(req, res, next) {
-    const { userName } = req.cookies
-    const { profileUrl } = req.cookies
+    const { userName } = req.session.user
+    const { profilePictureUrl } = req.session.user
     res.render('settings', {
-      profileUrl,
+      profilePictureUrl,
       userName
     });
   }
 
   async getEditShowPage(req, res, next) {
     const { id } = req.params;
-    const { userId } = req.cookies;
-    const { userName } = req.cookies
-    const { profileUrl } = req.cookies
+    const { userId } = req.session.user;
+    const { userName } = req.session.user
+    const { profilePictureUrl } = req.cookies
     try {
       const show = await Show.findOne({ showId: id, userId: userId });
       res.render('editShow', {
-        profileUrl,
+        profilePictureUrl,
         userName,
         posterPathUrl: TMDBMovie.posterPathUrl,
         show: show,
@@ -38,14 +38,14 @@ class UserController {
 
   async getEditMoviePage(req, res, next) {
     const { id } = req.params;
-    const { userId } = req.cookies;
-    const { userName } = req.cookies
-    const { profileUrl } = req.cookies
+    const { userId } = req.session.user;
+    const { userName } = req.session.user
+    const { profilePictureUrl } = req.session.user
 
     try {
       const movie = await Movie.findOne({ movieId: id, userId: userId });
       res.render('editMovie', {
-        profileUrl,
+        profilePictureUrl,
         userName,
         posterPathUrl: TMDBMovie.posterPathUrl,
         movie: movie,
@@ -57,7 +57,7 @@ class UserController {
   }
 
   async updatePassword(req, res, next) {
-    const { userId } = req.cookies;
+    const { userId } = req.session.user;
     const { newPassword, currentPassword } = req.body;
     const errors = validationResult(req);
     if (!errors.isEmpty()) return res.status(400).json(errors);
@@ -80,7 +80,7 @@ class UserController {
   }
 
   async updateEmail(req, res, next) {
-    const { userId } = req.cookies;
+    const { userId } = req.session.user;
     const { newEmail, currentPassword } = req.body;
 
     try {
@@ -103,7 +103,7 @@ class UserController {
   }
 
   async updatePicture(req, res, next) {
-    const { userId } = req.cookies
+    const { userId } = req.session.user
     const picture = req.file
 
     try {
@@ -131,13 +131,13 @@ class UserController {
   }
 
   async getMoviesListPage(req, res, next) {
-    const { userId } = req.cookies;
-    const { userName } = req.cookies
-    const { profileUrl } = req.cookies
+    const { userId } = req.session.user;
+    const { userName } = req.session.user
+    const { profilePictureUrl } = req.session.user
     try {
       const moviesList = await Movie.find({ userId });
       res.render('userMovieList', {
-        profileUrl,
+        profilePictureUrl,
         userName,
         quantity: moviesList.length,
         moviesList,
@@ -149,13 +149,13 @@ class UserController {
   }
 
   async getShowsListPage(req, res, next) {
-    const { userId } = req.cookies;
-    const { userName } = req.cookies
-    const { profileUrl } = req.cookies
+    const { userId } = req.session.user;
+    const { userName } = req.session.user
+    const { profilePictureUrl } = req.session.user
     try {
       const showsList = await Show.find({ userId });
       res.render('userShowsList', {
-        profileUrl,
+        profilePictureUrl,
         userName,
         quantity: showsList.length,
         showsList,
@@ -170,7 +170,7 @@ class UserController {
 
   async addMovieToList(req, res, next) {
     const { id, score } = req.body;
-    const { userId } = req.cookies;
+    const { userId } = req.session.user;
 
     try {
       const movieDetails = await TMDBMovie.getMovieDetails(id);
@@ -200,7 +200,7 @@ class UserController {
 
   async updateMovie(req, res, next) {
     const { id, newScore } = req.body;
-    const { userId } = req.cookies;
+    const { userId } = req.session.user;
     try {
       const movie = await Movie.findOneAndUpdate(
         { userId: userId, movieId: id },
@@ -220,7 +220,7 @@ class UserController {
   }
 
   async deleteMovie(req, res, next) {
-    const { userId } = req.cookies;
+    const { userId } = req.session.user;
     const { id } = req.params;
 
     try {
@@ -234,7 +234,7 @@ class UserController {
 
   async addShowToList(req, res, next) {
     const { id, score } = req.body;
-    const { userId } = req.cookies;
+    const { userId } = req.session.user;
     try {
       const showDetails = await TMDBShow.getShowDetails(id);
       const showToBeSaved = new Show({
@@ -260,7 +260,7 @@ class UserController {
   }
   async updateShow(req, res, next) {
     const { id, newScore } = req.body;
-    const { userId } = req.cookies;
+    const { userId } = req.session.user;
 
     try {
       const show = await Show.findOneAndUpdate(
@@ -279,7 +279,7 @@ class UserController {
   }
 
   async deleteShow(req, res, next) {
-    const { userId } = req.cookies;
+    const { userId } = req.session.user;
     const { id } = req.params;
 
     try {
@@ -293,3 +293,6 @@ class UserController {
 }
 
 module.exports = new UserController();
+
+
+// TODO: Add the userId and other user info into an object somewhere  
