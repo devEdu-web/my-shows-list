@@ -62,7 +62,7 @@ class Auth {
   }
 
   async logout(req, res, next) {
-    await req.session.user.destroy()
+    await req.session.destroy()
     res.redirect('/auth/login');
   }
 }
