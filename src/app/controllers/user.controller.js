@@ -116,7 +116,7 @@ class UserController {
         profilePictureUrl: savedPicture.url
       }, { new: true })
 
-      res.cookie('profileUrl', userUpdated.profilePictureUrl)
+      req.session.user.profilePictureUrl = userUpdated.profilePictureUrl
 
       return res.status(201).json({
         msg: 'Picture Uploaded'
