@@ -1,5 +1,6 @@
 const path = require('path');
 const User = require('../schemas/User');
+const GoogleOAuth = require('../../services/google/Google');
 const bcrypt = require('bcrypt');
 const { validationResult } = require('express-validator');
 
@@ -9,8 +10,48 @@ class Auth {
   }
 
   getLoginPage(req, res, next) {
-    console.log(req.session.user)
+    console.log(req.session.user);
     res.render('login');
+  }
+
+  getGoogleConsentScreen(req, res, next) {
+    const consentScreenUrl = GoogleOAuth.getConsentScreenUrl();
+    res.redirect(307, consentScreenUrl);
+  }
+
+  async googleCallbackHandler(req, res, next) {
+    const { code } = req.query;
+    const { access_token, id_token } = await GoogleOAuth.getTokens(code);
+    try {
+      const user = await GoogleOAuth.getUser(access_token, id_token);
+
+      // TODO: When you add the verify email functionality, do not save user without making sure his email is verified
+
+      const newUser = await User.findOneAndUpdate(
+        { email: user.email },
+        {
+          email: user.email,
+          name: user.given_name,
+          profilePictureUrl: user.picture,
+        },
+        {
+          upsert: true,
+          new: true,
+        }
+      );
+
+      req.session.user = {
+        userId: newUser._id.toString(),
+        userName: newUser.name,
+        profilePictureUrl: newUser.profilePictureUrl,
+      };
+
+      return res.redirect('/home');
+    } catch (error) {
+      res.status(500).json({
+        msg: error.message,
+      });
+    }
   }
 
   async saveUser(req, res, next) {
@@ -47,21 +88,20 @@ class Auth {
       req.session.user = {
         userId: user._id.toString(),
         userName: user.name,
-        profilePictureUrl: user.profilePictureUrl
-      }
+        profilePictureUrl: user.profilePictureUrl,
+      };
 
-      res.location('/home')
+      res.location('/home');
       res.status(200).json({
-        msg: 'User logged.'
-      })
-
+        msg: 'User logged.',
+      });
     } catch (error) {
       return res.status(400).json({ msg: error.message });
     }
   }
 
   async logout(req, res, next) {
-    await req.session.destroy()
+    await req.session.destroy();
     res.redirect('/auth/login');
   }
 }

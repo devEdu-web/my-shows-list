@@ -47,6 +47,10 @@ input[type="submit"] {
     font-weight: bold;
 }
 
+.googleLogin {
+    width: 80%;
+}
+
 #loginLink, #registerLink {
     color: #E28413;
 }
