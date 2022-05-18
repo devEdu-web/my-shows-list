@@ -57,7 +57,7 @@ describe('Authentication', () => {
     }
   });
 
-  it('should log user with valid credentials and receive an JWT token', async () => {
+  it('should log user with valid credentials and create session', async () => {
     const mockUser = {
       email: 'dudu@gmail.com',
       password: 'eduardo',
@@ -65,7 +65,7 @@ describe('Authentication', () => {
 
     const response = await request(app).post('/auth/login').send(mockUser);
     expect(response.status).toBe(200);
-    expect(response.header['set-cookie'].length).toBeGreaterThan(1);
+    expect(response.header['set-cookie'].length).toBeGreaterThan(0);
   });
 
   it('should not be able to access protected routes', async () => {

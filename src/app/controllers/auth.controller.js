@@ -1,7 +1,6 @@
 const path = require('path');
 const User = require('../schemas/User');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const { validationResult } = require('express-validator');
 
 class Auth {

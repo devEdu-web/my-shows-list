@@ -1,5 +1,3 @@
-const jwt = require('jsonwebtoken');
-
 function isUserAuthorized(req, res, next) {
   const { user } = req.session
   if(!user) 
