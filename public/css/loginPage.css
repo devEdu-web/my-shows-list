@@ -1,17 +1,17 @@
-#registerContainer{
-    border-radius: 20px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 32vw;
-    background-color: white;
-    color: black;
-    height: 60vh;
-}
-
-@media screen and (min-height: 900px) {
+@media screen and (min-height: 1000px) {
     #registerContainer {
         height: 40vh;
+    }
+}
+
+@media screen and (max-height: 700px) {
+    #registerContainer {
+        height: 70vh;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    h2{
+        font-size: 1.2rem;
     }
 }
