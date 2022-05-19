@@ -3,7 +3,7 @@ const Show = require('../schemas/Shows');
 
 async function doesUserHaveMovieInList(req, res, next) {
   const { id } = req.body;
-  const { userId } = req.cookies;
+  const { userId } = req.session.user;
   try {
     const movieExistsInUserList = await Movie.findOne({
       movieId: id,
@@ -21,7 +21,7 @@ async function doesUserHaveMovieInList(req, res, next) {
 
 async function doesUserHaveShowInList(req, res, next) {
   const { id } = req.body;
-  const { userId } = req.cookies;
+  const { userId } = req.session.user;
   try {
     const showExistsInUserList = await Show.findOne({
       showId: id,
