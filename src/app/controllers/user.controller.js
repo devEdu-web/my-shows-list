@@ -11,7 +11,7 @@ class UserController {
   getSettingsPage(req, res, next) {
     const { userName } = req.session.user
     const { profilePictureUrl } = req.session.user
-    res.render('settings', {
+    return res.render('settings', {
       profilePictureUrl,
       userName
     });
@@ -24,7 +24,7 @@ class UserController {
     const { profilePictureUrl } = req.session.user
     try {
       const show = await Show.findOne({ showId: id, userId: userId });
-      res.render('editShow', {
+      return res.render('editShow', {
         profilePictureUrl,
         userName,
         posterPathUrl: TMDBMovie.posterPathUrl,
@@ -32,7 +32,9 @@ class UserController {
         type: 'show',
       });
     } catch (error) {
-      throw error
+      return res.status(500).json({
+        msg: error.message
+      })
     }
   }
 
@@ -52,7 +54,9 @@ class UserController {
         type: 'movie',
       });
     } catch (error) {
-      throw error
+      return res.status(500).json({
+        msg: error.message
+      })
     }
   }
 
@@ -136,7 +140,7 @@ class UserController {
     const { profilePictureUrl } = req.session.user
     try {
       const moviesList = await Movie.find({ userId });
-      res.render('userMovieList', {
+      return res.render('userMovieList', {
         profilePictureUrl,
         userName,
         quantity: moviesList.length,
@@ -144,7 +148,9 @@ class UserController {
         posterPathUrl: TMDBMovie.posterPathUrl,
       });
     } catch (error) {
-      res.json(error);
+      return res.status(500).json({
+        msg: error.message
+      });
     }
   }
 
@@ -154,7 +160,7 @@ class UserController {
     const { profilePictureUrl } = req.session.user
     try {
       const showsList = await Show.find({ userId });
-      res.render('userShowsList', {
+      return res.render('userShowsList', {
         profilePictureUrl,
         userName,
         quantity: showsList.length,
@@ -186,12 +192,11 @@ class UserController {
         voteCount: movieDetails.vote_count,
       });
       await movieToBeSaved.save();
-      res.status(201).json({
+      return res.status(201).json({
         msg: 'Movie added.',
         // movieAdded: movie
       });
     } catch (error) {
-      console.log(error)
       res.status(400).json({
         msg: 'Movie already on list'
       });
@@ -225,10 +230,9 @@ class UserController {
 
     try {
       await Movie.findOneAndDelete({ userId, movieId: id });
-      res.redirect('/user/list/movies');
+      return res.redirect('/user/list/movies');
     } catch (error) {
-      res.json({ msg: error.message });
-      throw error;
+      return res.json({ msg: error.message });
     }
   }
 
@@ -274,7 +278,7 @@ class UserController {
       }
       return res.status(400).json({msg: 'Show does not exist in user list.'})
     } catch (error) {
-      res.status(400).json({ msg: error.message });
+      return res.status(500).json({ msg: error.message });
     }
   }
 
@@ -286,8 +290,7 @@ class UserController {
       await Show.findOneAndDelete({ userId, showId: id });
       res.redirect('/user/list/shows');
     } catch (error) {
-      res.json({ msg: error.message });
-      throw error;
+      return res.status(500).json({ msg: error.message });
     }
   }
 }

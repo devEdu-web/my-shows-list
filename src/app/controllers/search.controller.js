@@ -28,14 +28,16 @@ class searchController {
         if (a.popularity > b.popularity) return -1;
       });
 
-      res.render('searchResult', {
+      return res.render('searchResult', {
         profilePictureUrl,
         userName,
         posterPathUrl: Movie.posterPathUrl,
         result: resultSorted,
       });
     } catch (error) {
-      res.send(error);
+      return res.status(500).json({
+        msg: error.message
+      })
     }
   }
   async getDetails(req, res, next) {
@@ -65,7 +67,7 @@ class searchController {
         });
       }
     } catch(error) {
-      res.status(500).json({
+      return res.status(500).json({
         msg: error.message
       })
     }

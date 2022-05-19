@@ -6,17 +6,16 @@ const { validationResult } = require('express-validator');
 
 class Auth {
   getRegisterPage(req, res, next) {
-    res.render('register');
+    return res.render('register');
   }
 
   getLoginPage(req, res, next) {
-    console.log(req.session.user);
-    res.render('login');
+    return res.render('login');
   }
 
   getGoogleConsentScreen(req, res, next) {
     const consentScreenUrl = GoogleOAuth.getConsentScreenUrl();
-    res.redirect(307, consentScreenUrl);
+    return res.redirect(307, consentScreenUrl);
   }
 
   async googleCallbackHandler(req, res, next) {
@@ -92,7 +91,7 @@ class Auth {
       };
 
       res.location('/home');
-      res.status(200).json({
+      return res.status(200).json({
         msg: 'User logged.',
       });
     } catch (error) {
@@ -101,8 +100,14 @@ class Auth {
   }
 
   async logout(req, res, next) {
-    await req.session.destroy();
-    res.redirect('/auth/login');
+    try {
+      await req.session.destroy();
+      res.redirect('/auth/login');
+    } catch(error) {
+      return res.status(500).json({
+        msg: error.message
+      })
+    }
   }
 }
 
