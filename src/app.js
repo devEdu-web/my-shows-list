@@ -11,6 +11,7 @@ const homeRouter = require('./routes/home.routes.js');
 const searchRouter = require('./routes/search.routes.js');
 const userRouter = require('./routes/user.routes.js');
 const { isUserAuthenticated } = require('./app/middlewares/permissions');
+const db_url = require('./config/database.js')
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD,
@@ -27,7 +28,7 @@ const sessionConfig = {
     expires: 1000 * 60 * 60 * 24 // 1 day
   },
   store: MongoStore.create({
-    mongoUrl: process.env.DEV_DB_URL,
+    mongoUrl: db_url,
     autoRemove: 'native'
   })
 }

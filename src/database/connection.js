@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 class Database {
 
     async dbConnect(url) {
+        console.log(url)
         await mongoose.connect(url, {
             autoIndex: true
         });
