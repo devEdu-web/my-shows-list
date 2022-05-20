@@ -11,7 +11,6 @@ const server = http.createServer(app);
 async function start() {
     await database.dbConnect(db_url)
     server.listen(process.env.PORT)
-    console.log(db_url)
     console.log('Database ready and server listening')
 }
 
