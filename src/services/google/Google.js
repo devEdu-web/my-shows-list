@@ -5,7 +5,7 @@ class GoogleOAuth {
   constructor() {
     this.rootUrl = 'https://accounts.google.com/o/oauth2/v2/auth';
     this.getTokensUrl = 'https://accounts.google.com/o/oauth2/token';
-    this.callbackUrl = 'http://localhost:8080/auth/oauth/google/callback';
+    this.callbackUrl = 'https://myshowslist.herokuapp.com/auth/oauth/google/callback';
     (this.getUserUrl = 'https://www.googleapis.com/oauth2/v1/userinfo'),
       (this.scopes = [
         'https://www.googleapis.com/auth/userinfo.email',
