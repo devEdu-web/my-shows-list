@@ -1,8 +1,4 @@
 const mongoose = require("mongoose");
-const { MongoMemoryServer } = require('mongodb-memory-server')
-
-const mongoServer = new MongoMemoryServer()
-
 class Database {
 
     async dbConnect(url) {
