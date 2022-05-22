@@ -16,9 +16,6 @@ class Database {
         return mongoose.connection.readyState
     }
 
-    async clearCollection() {
-        await mongoose.connection.db.dropCollection('users')
-    }
 }
 
 module.exports = new Database()
