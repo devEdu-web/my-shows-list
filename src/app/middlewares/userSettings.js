@@ -15,7 +15,13 @@ async function checkIfEmailExists(req, res, next) {
 }
 
 function validatePicture(req, res, next) {
-  const picture = req.file
+  const picture = req.files.updatedPicture
+  const acceptedMimeTypes = ['image/jpeg', 'image/jpg', 'image/png']
+
+  if(!acceptedMimeTypes.includes(picture.mimetype)) return res.status(400).json({
+    msg: 'Size or format not supported.'
+  })
+
   if(!picture) return res.status(400).json({
     msg: 'Size or format not supported.'
   })
@@ -24,7 +30,7 @@ function validatePicture(req, res, next) {
     return res.status(400).json({
       msg: 'Size or format not supported.'
     })
-  }
+  }    
   next()
 }
 

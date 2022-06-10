@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const cloudinary = require('cloudinary').v2
 const expressSession = require('express-session')
 const MongoStore = require('connect-mongo')
+const fileUpload = require('express-fileupload')
 
 const authRouter = require('./routes/auth.routes.js');
 const homeRouter = require('./routes/home.routes.js');
@@ -47,6 +48,10 @@ class App {
     this.express.use(express.urlencoded({ extended: true }));
     this.express.use(cookieParser());
     this.express.use(expressSession(sessionConfig))
+    this.express.use(fileUpload({
+      useTempFiles: true,
+      tempFileDir: '/tmp/',
+    }))
   }
 
   routes() {

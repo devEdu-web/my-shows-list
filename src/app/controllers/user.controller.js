@@ -108,10 +108,10 @@ class UserController {
 
   async updatePicture(req, res, next) {
     const { userId } = req.session.user
-    const picture = req.file
+    const picture = req.files.updatedPicture
 
     try {
-      const savedPicture = await cloudinary.uploader.upload(picture.path, {
+      const savedPicture = await cloudinary.uploader.upload(picture.tempFilePath, {
         public_id: userId,
         folder: 'my_shows_list'
       })
