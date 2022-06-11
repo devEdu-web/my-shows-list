@@ -140,11 +140,12 @@ class UserController {
     const { profilePictureUrl } = req.session.user
     try {
       const moviesList = await Movie.find({ userId });
+      // console.log(moviesList)
       return res.render('userMovieList', {
         profilePictureUrl,
         userName,
         quantity: moviesList.length,
-        moviesList,
+        moviesList: moviesList.reverse(),
         posterPathUrl: TMDBMovie.posterPathUrl,
       });
     } catch (error) {
@@ -164,7 +165,7 @@ class UserController {
         profilePictureUrl,
         userName,
         quantity: showsList.length,
-        showsList,
+        showsList: showsList.reverse(),
         posterPathUrl: TMDBMovie.posterPathUrl
       });
     } catch (error) {
