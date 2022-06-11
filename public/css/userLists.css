@@ -16,3 +16,12 @@
 i {
     color: #E28413;
 }
+
+.container {
+    background-color: red;
+    min-width: 90vw;
+}
+
+@media screen and (min-width: 1000px) {
+    
+}
