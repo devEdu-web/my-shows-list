@@ -20,6 +20,10 @@ const UserSchema = new Schema({
         type: String,
         required: true,
         default: 'undefined',
+    },
+    isVerified: {
+        type: Boolean,
+        default: false
     }
 }, {
     versionKey: false
