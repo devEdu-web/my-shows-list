@@ -1,24 +1,24 @@
-require('dotenv').config({
-  path: '../../../.env'
-})
+const mailConfig = require('../../config/mail')
 const nodemailer = require('nodemailer')
 const ejs = require('ejs')
+const path = require('path')
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: mailConfig.service,
   auth: {
-    user: process.env.GMAIL_EMAIL,
-    pass: process.env.GMAIL_PASSWORD
+    user: mailConfig.auth.user,
+    pass: mailConfig.auth.pass
   }
 })
 
-async function send(receiver, link) {
+async function send(receiver, token) {
+  const link = `http://localhost:8080/auth/confirm/${token}`
   try {
-    const data = await ejs.renderFile('./link.ejs', { link })
+    const data = await ejs.renderFile(path.join(__dirname, 'link.ejs'), { link })
     const options = {
-      from: process.env.GMAIL_EMAIL,
+      from: mailConfig.auth.user,
       to: receiver,
-      subject: 'Cant believe it worked',
+      subject: 'Confirmation link.',
       html: data
     }
     await transporter.sendMail(options)
@@ -28,4 +28,4 @@ async function send(receiver, link) {
 
 }
 
-module.exports = send
+module.exports.send = send

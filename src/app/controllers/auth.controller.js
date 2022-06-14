@@ -1,8 +1,11 @@
-const path = require('path');
 const User = require('../schemas/User');
 const GoogleOAuth = require('../../services/google/Google');
+const ConfirmationToken = require('../schemas/ConfirmationToken')
+const mail = require('../../services/mail/index')
+const cryto = require('crypto')
 const bcrypt = require('bcrypt');
 const { validationResult } = require('express-validator');
+
 
 class Auth {
   getRegisterPage(req, res, next) {
@@ -13,9 +16,25 @@ class Auth {
     return res.render('login');
   }
 
+  getConfirmationPage(req, res, next) {
+    return res.render('confirmation')
+  }
+
   getGoogleConsentScreen(req, res, next) {
     const consentScreenUrl = GoogleOAuth.getConsentScreenUrl();
     return res.redirect(307, consentScreenUrl);
+  }
+
+  async confirmationHandler(req, res, next) {
+    const token = req.params.token
+    try {
+      const userToken = await ConfirmationToken.findOne({ token })
+      await User.updateOne({_id: userToken.userId}, { isVerified: true })
+      await ConfirmationToken.deleteOne({ _id: userToken._id })
+      res.redirect('/auth/login')
+    } catch(error) {
+
+    }
   }
 
   async googleCallbackHandler(req, res, next) {
@@ -65,9 +84,19 @@ class Auth {
         email,
         password: encryptedPassword,
       });
-      res.location('/auth/login');
+
+      const token = new ConfirmationToken({
+        userId: newUser._id,
+        token: cryto.randomBytes(32).toString('hex')
+      })
+
+      await token.save()
+      await mail.send(newUser.email, token.token)
+
+      res.location('/auth/confirm');
       return res.status(201).json(newUser);
     } catch (error) {
+      console.log(error)
       return res.status(400).json({ msg: 'Email already exists.' });
     }
   }

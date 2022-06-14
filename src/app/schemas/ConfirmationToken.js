@@ -1,7 +1,7 @@
 const { Schema } = require('mongoose');
 const mongoose = require('mongoose')
-// const expirationTime = 1000 * 60 * 60 * 24;
-const expirationTime = 1000 * 60;
+const expirationTime = 1000 * 60 * 60 * 24;
+// const expirationTime = 1000 * 60;
 
 const ConfirmationTokenSchema = new Schema({
   userId: {
