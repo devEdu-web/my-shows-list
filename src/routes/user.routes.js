@@ -1,6 +1,6 @@
 const express = require('express')
 const UserController = require('../app/controllers/user.controller.js')
-
+const Middleware = require('../app/middlewares/main')
 const {
   checkIfEmailExists,
   doesUserHaveMovieInList,

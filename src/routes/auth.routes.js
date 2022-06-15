@@ -1,9 +1,5 @@
 const express = require('express');
-
-const { 
-  isUserAuthenticated,
-  registerValidation
-} = require('../app/middlewares')
+const { isUserAuthenticated, registerValidation, isUserEmailVerified } = require('../app/middlewares/index.js')
 
 const {getRegisterPage, getLoginPage, saveUser, logUser, logout, getGoogleConsentScreen, googleCallbackHandler, getConfirmationPage, confirmationHandler } = require('../app/controllers/auth.controller.js');
 const authRouter = express.Router();
@@ -15,7 +11,7 @@ authRouter.get('/logout', logout)
 authRouter.get('/confirm', getConfirmationPage)
 authRouter.get('/confirm/:token', confirmationHandler)
 authRouter.post('/register', isUserAuthenticated, registerValidation, saveUser)
-authRouter.post('/login', isUserAuthenticated, logUser)
+authRouter.post('/login', isUserAuthenticated, isUserEmailVerified, logUser)
 
 authRouter.get('/oauth/google', getGoogleConsentScreen)
 authRouter.get('/oauth/google/callback', googleCallbackHandler)

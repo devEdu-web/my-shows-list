@@ -33,7 +33,7 @@ class Auth {
       await ConfirmationToken.deleteOne({ _id: userToken._id })
       res.redirect('/auth/login')
     } catch(error) {
-
+      res.status(500).json(error)
     }
   }
 
@@ -96,7 +96,6 @@ class Auth {
       res.location('/auth/confirm');
       return res.status(201).json(newUser);
     } catch (error) {
-      console.log(error)
       return res.status(400).json({ msg: 'Email already exists.' });
     }
   }

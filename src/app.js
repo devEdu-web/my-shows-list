@@ -11,7 +11,7 @@ const authRouter = require('./routes/auth.routes.js');
 const homeRouter = require('./routes/home.routes.js');
 const searchRouter = require('./routes/search.routes.js');
 const userRouter = require('./routes/user.routes.js');
-const { isUserAuthenticated } = require('./app/middlewares/permissions');
+const { isUserAuthenticated } = require('./app/middlewares/main');
 const db_url = require('./config/database.js')
 
 cloudinary.config({

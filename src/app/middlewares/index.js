@@ -1,8 +1,18 @@
-const { isUserAuthenticated, isUserAuthorized } = require('./permissions')
-const { doesUserHaveShowInList, doesUserHaveMovieInList } = require('./userList')
-const { checkIfEmailExists, validatePicture } = require('./userSettings')
-const { registerValidation, updateEmailValidation, updatePasswordValidation } = require('./validation')
+const {
+  isUserAuthenticated,
+  isUserAuthorized,
+  doesUserHaveShowInList,
+  doesUserHaveMovieInList,
+  checkIfEmailExists,
+  validatePicture,
+  isUserEmailVerified,
+} = require('./main');
 
+const {
+  registerValidation,
+  updateEmailValidation,
+  updatePasswordValidation,
+} = require('./validation');
 
 module.exports = {
   isUserAuthenticated,
@@ -13,5 +23,6 @@ module.exports = {
   registerValidation,
   updateEmailValidation,
   updatePasswordValidation,
-  validatePicture
-}
+  validatePicture,
+  isUserEmailVerified,
+};
