@@ -51,6 +51,7 @@ class Auth {
           email: user.email,
           name: user.given_name,
           profilePictureUrl: user.picture,
+          isVerified: true
         },
         {
           upsert: true,
