@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
 })
 
 async function send(receiver, token) {
-  const link = `http://localhost:8080/auth/confirm/${token}`
+  const link = `${mailConfig.baseUrl}/${token}`
   try {
     const data = await ejs.renderFile(path.join(__dirname, 'link.ejs'), { link })
     const options = {
