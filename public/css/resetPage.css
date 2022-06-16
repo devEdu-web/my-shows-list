@@ -1,0 +1,32 @@
+.or {
+  width: 50%;
+  /* overflow: hidden; */
+  /* color: red */
+  /* text-align: center; */
+}
+
+.or::before, .or::after {
+  background-color: rgb(105, 95, 95);
+  content: "";
+  display: inline-block;
+  height: 1px;
+  position: relative;
+  vertical-align: middle;
+  width: 75%;
+}
+
+.or::before {
+  right: 0.5em;
+  margin-left: -75%;
+}
+
+.or::after {
+  left: 0.5em;
+  margin-right: -75%;
+}
+
+@media screen and (max-width: 360px) {
+    main {
+      min-height: 65vh;
+    }
+}

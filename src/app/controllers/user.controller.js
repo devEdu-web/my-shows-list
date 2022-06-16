@@ -11,7 +11,7 @@ class UserController {
   getSettingsPage(req, res, next) {
     const { userName } = req.session.user
     const { profilePictureUrl } = req.session.user
-    return res.render('settings', {
+    return res.render('user/settings', {
       profilePictureUrl,
       userName
     });
@@ -24,7 +24,7 @@ class UserController {
     const { profilePictureUrl } = req.session.user
     try {
       const show = await Show.findOne({ showId: id, userId: userId });
-      return res.render('editShow', {
+      return res.render('user/editShow', {
         profilePictureUrl,
         userName,
         posterPathUrl: TMDBMovie.posterPathUrl,
@@ -46,7 +46,7 @@ class UserController {
 
     try {
       const movie = await Movie.findOne({ movieId: id, userId: userId });
-      res.render('editMovie', {
+      res.render('user/editMovie', {
         profilePictureUrl,
         userName,
         posterPathUrl: TMDBMovie.posterPathUrl,

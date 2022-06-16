@@ -9,15 +9,19 @@ const { validationResult } = require('express-validator');
 
 class Auth {
   getRegisterPage(req, res, next) {
-    return res.render('register');
+    return res.render('auth/register');
   }
 
   getLoginPage(req, res, next) {
-    return res.render('login');
+    return res.render('auth/login');
   }
 
   getConfirmationPage(req, res, next) {
-    return res.render('confirmation')
+    return res.render('auth/confirmation')
+  }
+
+  getResetPasswordPage(req, res, next) {
+    return res.render('auth/resetPassword')
   }
 
   getGoogleConsentScreen(req, res, next) {

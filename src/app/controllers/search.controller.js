@@ -28,7 +28,7 @@ class searchController {
         if (a.popularity > b.popularity) return -1;
       });
 
-      return res.render('searchResult', {
+      return res.render('search/searchResult', {
         profilePictureUrl,
         userName,
         posterPathUrl: Movie.posterPathUrl,
@@ -58,7 +58,7 @@ class searchController {
       } else {
         // type == movie
         const movieDetails = await Movie.getMovieDetails(id);
-        return res.render('details', {
+        return res.render('search/details', {
           profilePictureUrl,
           userName,
           posterPathUrl: Movie.posterPathUrl,
