@@ -48,7 +48,7 @@ class searchController {
     try {
       if (type == 'show') {
         const showDetails = await Show.getShowDetails(id);
-        return res.render('details', {
+        return res.render('search/details', {
           profilePictureUrl,
           userName,
           posterPathUrl: Movie.posterPathUrl,
