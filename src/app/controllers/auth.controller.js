@@ -1,11 +1,14 @@
 const User = require('../schemas/User');
 const GoogleOAuth = require('../../services/google/Google');
-const ConfirmationToken = require('../schemas/ConfirmationToken')
-const mail = require('../../services/mail/index')
-const cryto = require('crypto')
-const bcrypt = require('bcrypt');
-const { validationResult } = require('express-validator');
+const ConfirmationToken = require('../schemas/ConfirmationToken');
+const ResetToken = require('../schemas/resetToken');
 
+const crypto = require('crypto');
+const bcrypt = require('bcrypt');
+const mongoose = require('mongoose');
+
+const mail = require('../../services/mail/index');
+const { validationResult } = require('express-validator');
 
 class Auth {
   getRegisterPage(req, res, next) {
@@ -17,28 +20,20 @@ class Auth {
   }
 
   getConfirmationPage(req, res, next) {
-    return res.render('auth/confirmation')
+    return res.render('auth/confirmation');
   }
 
-  getResetPasswordPage(req, res, next) {
-    return res.render('auth/resetPassword')
+  getResetPasswordRequestPage(req, res, next) {
+    return res.render('auth/resetPasswordLink');
+  }
+
+  getResetPageConfirmation(req, res, next) {
+    return res.render('auth/reset');
   }
 
   getGoogleConsentScreen(req, res, next) {
     const consentScreenUrl = GoogleOAuth.getConsentScreenUrl();
     return res.redirect(307, consentScreenUrl);
-  }
-
-  async confirmationHandler(req, res, next) {
-    const token = req.params.token
-    try {
-      const userToken = await ConfirmationToken.findOne({ token })
-      await User.updateOne({_id: userToken.userId}, { isVerified: true })
-      await ConfirmationToken.deleteOne({ _id: userToken._id })
-      res.redirect('/auth/login')
-    } catch(error) {
-      res.status(500).json(error)
-    }
   }
 
   async googleCallbackHandler(req, res, next) {
@@ -55,7 +50,7 @@ class Auth {
           email: user.email,
           name: user.given_name,
           profilePictureUrl: user.picture,
-          isVerified: true
+          isVerified: true,
         },
         {
           upsert: true,
@@ -92,11 +87,11 @@ class Auth {
 
       const token = new ConfirmationToken({
         userId: newUser._id,
-        token: cryto.randomBytes(32).toString('hex')
-      })
+        token: crypto.randomBytes(32).toString('hex'),
+      });
 
-      await token.save()
-      await mail.send(newUser.email, token.token)
+      await token.save();
+      await mail.sendConfirmationLink(newUser.email, token.token);
 
       res.location('/auth/confirm');
       return res.status(201).json(newUser);
@@ -136,10 +131,90 @@ class Auth {
     try {
       await req.session.destroy();
       res.redirect('/auth/login');
-    } catch(error) {
+    } catch (error) {
       return res.status(500).json({
-        msg: error.message
-      })
+        msg: error.message,
+      });
+    }
+  }
+
+  async confirmationCallbackHandler(req, res, next) {
+    const token = req.params.token;
+    try {
+      const userToken = await ConfirmationToken.findOne({ token });
+      await User.updateOne({ _id: userToken.userId }, { isVerified: true });
+      await ConfirmationToken.deleteOne({ _id: userToken._id });
+      res.redirect('/auth/login');
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  }
+
+  async sendResetLinkPassword(req, res, next) {
+    const { email } = req.body;
+    try {
+      const user = await User.findOne({ email });
+      if (!user) return res.status(400).json({ msg: 'User not found.' });
+
+      const newToken = await ResetToken.findOneAndUpdate(
+        { userId: user._id.toString() },
+        {
+          userId: user._id.toString(),
+          token: crypto.randomBytes(32).toString('hex'),
+        },
+        {
+          upsert: true.valueOf,
+          new: true,
+        }
+      );
+      await mail.sendResetPasswordLink(user.email, newToken.token);
+
+      res.location('/auth/resetPage');
+      return res.status(201).json({
+        msg: 'Email sent',
+      });
+    } catch (error) {
+      res.status(500).json({
+        msg: error.message,
+      });
+    }
+  }
+
+  async resetPasswordRedirectHandler(req, res, next) {
+    const { token } = req.params;
+    try {
+      const findToken = await ResetToken.findOne({ token });
+      if (!findToken) return res.status(400).json({ msg: 'User not found.' });
+      return res.render('auth/resetPasswordForm', {
+        userId: findToken.userId,
+      });
+    } catch (error) {
+      res.status(500).json({
+        msg: error.message,
+      });
+    }
+  }
+
+  async resetPasswordController(req, res, next) {
+    const { newPassword, userId } = req.body;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) return res.status(400).json(errors);
+
+    try {
+      const passwordEncrypted = await bcrypt.hash(newPassword, 10);
+      await User.updateOne(
+        { _id: userId },
+        { password: passwordEncrypted }
+      );
+
+      res.location('/auth/login');
+      return res.status(201).json({
+        msg: 'Password updated.',
+      });
+    } catch (error) {
+      res.status(500).json({
+        msg: error.message,
+      });
     }
   }
 }

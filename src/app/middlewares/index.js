@@ -12,6 +12,7 @@ const {
   registerValidation,
   updateEmailValidation,
   updatePasswordValidation,
+  resetPasswordValidation,
 } = require('./validation');
 
 module.exports = {
@@ -25,4 +26,5 @@ module.exports = {
   updatePasswordValidation,
   validatePicture,
   isUserEmailVerified,
+  resetPasswordValidation,
 };
