@@ -17,26 +17,30 @@
         </nav>
     </header>
 
-    <main id="registerContainer" class="d-flex flex-column align-items-center gap-5 p-3">
+    <main id="registerContainer" class="d-flex flex-column align-items-center gap-4 p-3 container">
 
-        <h2>Sign in into your account</h2>
+        <h2>Sign in</h2>
 
-        <form action="/auth/login" id="loginForm" name="loginForm" method="post" class="d-flex flex-column align-items-center justify-content-center gap-5 w-75">
+        <form action="/auth/login" id="loginForm" name="loginForm" method="post" class="d-flex flex-column align-items-center justify-content-center gap-3 w-75">
         
             <input class="w-100" type="email" name="email" id="emailInput" placeholder="Email">
             <input class="w-100" type="password" name="password" id="passwordInput" placeholder="Password">
 
-            <div class="d-flex flex-column align-items-center">
+            <div class="d-flex flex-column align-items-center w-100 gap-2">
+                <a href="/auth/reset/request" class="mb-4 text-dark">Forgot password?</a>
                 <input class="mb-3" type="submit" value="Log in">
-                <span>Doesn't have an account? <a href="/auth/register" id="registerLink">Register</a></span>
-                <a href="/auth/reset/request" >Forgot password?</a>
+
+                <hr class="w-100 bg-dark">                
+
+                <a href="/auth/oauth/google" class="btn btn-danger googleLogin w-100">Log in with google</a>
                 <span id="errorSpan" class="text-danger"></span>
             </div>
             
-            
+
+            <span class="fixed-bottom text-center">Doesn't have an account? <a href="/auth/register" id="registerLink">Register</a></span>
             
         </form>
-        <a href="/auth/oauth/google" class="btn btn-primary googleLogin">Log in with google</a>
+
 
     </main>
 

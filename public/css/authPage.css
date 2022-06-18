@@ -1,5 +1,5 @@
 body {
-    background-color: #02020A;
+    background-color: #121212;
     color: white;
     min-height: 100vh;
 }
@@ -24,23 +24,21 @@ a {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 32vw;
+    width: 30vw;
     background-color: white;
     color: black;
-    height: 70vh;
+    min-height: 60vh;
 }
 
 input[type="text"], input[type="email"], input[type="password"] {
     outline: none;
-    border: none;
-    border-bottom: 1px solid black;
     padding: 5px 10px;
 }
 
 input[type="submit"] {
-    /* width: 60%; */
+    width: 100%;
     border: none;
-    border-radius: 100px;
+    border-radius: 5px;
     padding: 5px 20px;
     background-color: #004FFF;
     color: white;
