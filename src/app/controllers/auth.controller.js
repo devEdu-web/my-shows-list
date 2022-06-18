@@ -5,7 +5,6 @@ const ResetToken = require('../schemas/resetToken');
 
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
-const mongoose = require('mongoose');
 
 const mail = require('../../services/mail/index');
 const { validationResult } = require('express-validator');
