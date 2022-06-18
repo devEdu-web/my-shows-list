@@ -141,7 +141,7 @@ class UserController {
     try {
       const moviesList = await Movie.find({ userId });
       // console.log(moviesList)
-      return res.render('userMovieList', {
+      return res.render('user/userMovieList', {
         profilePictureUrl,
         userName,
         quantity: moviesList.length,
@@ -161,7 +161,7 @@ class UserController {
     const { profilePictureUrl } = req.session.user
     try {
       const showsList = await Show.find({ userId });
-      return res.render('userShowsList', {
+      return res.render('user/userShowsList', {
         profilePictureUrl,
         userName,
         quantity: showsList.length,
