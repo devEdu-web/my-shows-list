@@ -68,7 +68,7 @@
 
                 <div class="row">
 
-                    <form name="addForm" action="<%= type == 'movie' ? `/user/list/movies/add/` : `/user/list/shows/add/` %>" method="post" class="d-flex flex-column flex-sm-row aling-items-center gap-3">
+                    <form name="addForm" action="<%= type == 'movie' ? `/user/list/movies/add/` : `/user/list/shows/add/` %>" method="post" class="d-flex flex-column flex-sm-row aling-items-center gap-3  mt-2">
                         <input type="hidden" name="id" value="<%= details.id %>">
 
                         <div class="form-group d-flex align-items-center">
@@ -110,50 +110,19 @@
             <i class="cast-prev fa-solid fa-angle-left"></i>
             <div class="cast-glider">
 
-                <div class="cast-info d-flex flex-column align-items-center">
-                    <img class="cast-picture" src="<%= `${posterPathUrl}/${details.poster_path}` %>" alt="">
-                    <span>Cast name</span>
-                </div>
-    
-                <div class="cast-info d-flex flex-column align-items-center">
-                    <img class="cast-picture" src="<%= `${posterPathUrl}/${details.poster_path}` %>" alt="">
-                    <span>Cast name</span>
-                </div>
-    
-                <div class="cast-info d-flex flex-column align-items-center">
-                    <img class="cast-picture" src="<%= `${posterPathUrl}/${details.poster_path}` %>" alt="">
-                    <span>Cast name</span>
-                </div>
-    
-                <div class="cast-info d-flex flex-column align-items-center">
-                    <img class="cast-picture" src="<%= `${posterPathUrl}/${details.poster_path}` %>" alt="">
-                    <span>Cast name</span>
-                </div>
-    
-                <div class=" cast-info d-flex flex-column align-items-center">
-                    <img class="cast-picture" src="<%= `${posterPathUrl}/${details.poster_path}` %>" alt="">
-                    <span>Cast name</span>
-                </div>
-    
-                <div class="cast-info d-flex flex-column align-items-center">
-                    <img class="cast-picture" src="<%= `${posterPathUrl}/${details.poster_path}` %>" alt="">
-                    <span>Cast name</span>
-                </div>
-    
-                <div class="cast-info d-flex flex-column align-items-center">
-                    <img class="cast-picture" src="<%= `${posterPathUrl}/${details.poster_path}` %>" alt="">
-                    <span>Cast name</span>
-                </div>
-    
-                <div class="cast-info d-flex flex-column align-items-center">
-                    <img class="cast-picture" src="<%= `${posterPathUrl}/${details.poster_path}` %>" alt="">
-                    <span>Cast name</span>
-                </div>
-    
-                <div class="cast-info d-flex flex-column align-items-center">
-                    <img class="cast-picture" src="<%= `${posterPathUrl}/${details.poster_path}` %>" alt="">
-                    <span>Cast name</span>
-                </div>
+                <% cast.forEach(castItem => { %> 
+                    <div class="cast-info d-flex flex-column align-items-center">
+
+                        <% if(castItem.profile_path) { %> 
+                            <img class="cast-picture" src="<%= `${posterPathUrl}/${castItem.profile_path}` %>" alt="">
+                         <% } else { %>    
+                            <img class="cast-picture" src="https://padletuploads.blob.core.windows.net/prod/338313757/xv9cNVhJOnCldshv-zjMjA/f41906143bc5eb004cac88418b2a97a7.jpeg" alt="">
+                        <% } %> 
+
+                        <small><%= castItem.original_name %></small>
+                    </div>
+                <% }) %> 
+
 
             </div>
             <i class="cast-next control fa-solid fa-angle-right"></i>

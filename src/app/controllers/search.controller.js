@@ -58,12 +58,15 @@ class searchController {
       } else {
         // type == movie
         const movieDetails = await Movie.getMovieDetails(id);
+        const movieCast = await Movie.getCast(id)
+        console.log(movieCast)
         return res.render('search/details', {
           profilePictureUrl,
           userName,
           posterPathUrl: Movie.posterPathUrl,
           details: movieDetails,
           type: 'movie',
+          cast: movieCast.cast
         });
       }
     } catch(error) {

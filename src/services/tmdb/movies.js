@@ -32,6 +32,14 @@ class Movie  extends Tmdb {
       return undefined;
     }
   }
+  async getCast(id) {
+    try {
+      const response = await axios.get(`${this.movieDetailsUrl}/${id}/credits?api_key=${API_KEY}`)
+      return response.data
+    } catch(error) {
+      return undefined
+    }
+  }
 }
 
 module.exports = new Movie();

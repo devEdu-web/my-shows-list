@@ -6,6 +6,7 @@ class Tmdb {
     this.searchBaseUrl = `https://api.themoviedb.org/3/search`;
 
     this.posterPathUrl = 'https://image.tmdb.org/t/p/original/';
+    this.castPictureUrl = 'https://image.tmdb.org/t/p/original/';
 
     this.popularMoviesUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`;
     this.topRatingMoviesUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}`;
