@@ -1,8 +1,15 @@
+body {
+    background-color: #121212;
+    color: white;
+}
+
+#mainTitle {
+    color: white;
+    font-size: 1.8em;
+}
+
 main {
-    width: 60vw;
-    /* border: 0.5px solid rgba(255, 255, 255, 0.5); */
-    background-color: #1E1E1E;
-    border-radius: 10px;
+    width: 75vw;
 }
 
 .title-container {
@@ -24,8 +31,15 @@ img {
     height: 100%;
 }
 
-.major-info-container {
-    background-color: #2E2E2E;   
+.cast-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.similar-movie-picture {
+    width: 190px;
+    height: 250px;
 }
 
 i {
@@ -41,8 +55,8 @@ select {
 }
 
 input[type="submit"] {
-    font-size: 12px;
-    padding: 3px 30px;
+    font-size: 16px;
+    padding: 3px 40px;
     border: none;
     border-radius: 100px;
     outline: none;
@@ -55,6 +69,7 @@ input[type="submit"] {
     main {
         width: 70vw;
     }
+
 }
 
 @media screen and (max-width: 530px) {
@@ -71,4 +86,10 @@ input[type="submit"] {
         text-align: center;
     } */
 
+}
+
+@media screen and (max-width: 390px) {
+    /* .glider {
+        width: 40vw;
+    } */
 }
