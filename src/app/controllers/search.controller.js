@@ -48,12 +48,15 @@ class searchController {
     try {
       if (type == 'show') {
         const showDetails = await Show.getShowDetails(id);
+        const showCast = await Show.getCast(id)
+        console.log(showCast)
         return res.render('search/details', {
           profilePictureUrl,
           userName,
           posterPathUrl: Movie.posterPathUrl,
           details: showDetails,
           type: 'show',
+          cast: showCast.cast
         });
       } else {
         // type == movie
