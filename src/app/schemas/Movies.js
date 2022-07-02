@@ -36,7 +36,7 @@ const MoviesSchema = new Schema({
     required: true,
   },
   genresId: {
-    type: [Number],
+    type: [{id: Number, name: 'String'}],
   },
 });
 

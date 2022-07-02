@@ -70,7 +70,7 @@
                     <form name="addForm" action="<%= type == 'movie' ? `/user/list/movies/add/` : `/user/list/shows/add/` %>" method="post" class="d-flex flex-column flex-sm-row aling-items-center gap-3  mt-2">
                         <input type="hidden" name="id" value="<%= details.id %>">
 
-                        <div class="form-group d-flex align-items-center">
+                        <div class="form-group d-flex align-items-center d-flex flex-column">
                             <input type="submit" value="Add">
                             <span id="errorSpan" class="text-danger"></span>
                             <span id="successSpan" class="text-success"></span>

@@ -43,15 +43,20 @@ class UserController {
     const { userId } = req.session.user;
     const { userName } = req.session.user
     const { profilePictureUrl } = req.session.user
-
+    
     try {
       const movie = await Movie.findOne({ movieId: id, userId: userId });
+      const movieCast = await TMDBMovie.getCast(id)
+      const recommendations = await TMDBMovie.getRecommendations(id)
+
       res.render('user/editMovie', {
         profilePictureUrl,
         userName,
         posterPathUrl: TMDBMovie.posterPathUrl,
         movie: movie,
         type: 'movie',
+        cast: movieCast.cast,
+        recommendations: recommendations.results
       });
     } catch (error) {
       return res.status(500).json({
@@ -191,6 +196,7 @@ class UserController {
         posterPath: movieDetails.poster_path,
         popularity: movieDetails.popularity,
         voteCount: movieDetails.vote_count,
+        genresId: movieDetails.genres
       });
       await movieToBeSaved.save();
       return res.status(201).json({
@@ -214,6 +220,7 @@ class UserController {
           userScore: newScore,
         }
       );
+      console.log(movie)
       if(movie) {
         return res.status(201).json({ msg: 'Movie Updated' });
       }
@@ -221,6 +228,7 @@ class UserController {
         msg: 'Movies does not exist in the user list.'
       })
     } catch (error) {
+      console.log(error)
       return res.status(400).json({ msg: error.message });
     }
   }
