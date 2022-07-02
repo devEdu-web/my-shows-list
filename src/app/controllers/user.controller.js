@@ -24,12 +24,17 @@ class UserController {
     const { profilePictureUrl } = req.session.user
     try {
       const show = await Show.findOne({ showId: id, userId: userId });
+      const showCast = await TMDBShow.getCast(id)
+      console.log(show)
+      const recommendations = await TMDBShow.getRecommendations(id)
       return res.render('user/editShow', {
         profilePictureUrl,
         userName,
         posterPathUrl: TMDBMovie.posterPathUrl,
         show: show,
         type: 'show',
+        cast: showCast.cast,
+        recommendations: recommendations.results
       });
     } catch (error) {
       return res.status(500).json({
@@ -259,6 +264,7 @@ class UserController {
         posterPath: showDetails.poster_path,
         popularity: showDetails.popularity,
         voteCount: showDetails.vote_count,
+        genresId: showDetails.genres
       });
       const show = await showToBeSaved.save();
       return res.status(201).json({

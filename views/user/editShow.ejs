@@ -6,56 +6,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/30222b3036.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/css/global.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.css">
+    <!-- <link rel="stylesheet" href="/css/global.css"> -->
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/detail.css">
-    <title>Edit Show</title>
+    <!-- <link rel="stylesheet" href="/css/homePage.css"> -->
+    <title>Details</title>
 </head>
 <body>
     <header class="mb-5">
         <%- include('../templates/navigation.ejs') %> 
     </header>
 
+    <!-- <main>
 
-    <main class="bg d-flex p-sm-5 flex-column align-items-center">
-
-        <div class="title-container row p-2 mb-3">
-            <h2><%= show.showTitle %> </h2>
+        <div class="show-poster col-1 g-0 bg-danger">
+            <img src="<%= `${posterPathUrl}/${show.poster_path}` %>" alt="">
         </div>
+        <h1>desgraça</h1>
 
-        <div class="show-info-container row d-flex justify-content-center gap-3">
-            <div class="show-poster col-1 g-0 bg-danger">
+    </main> -->
+
+    <main class="bg d-flex flex-column align-items-center mx-auto mb-5">
+
+
+        <div class="show-info-container row d-flex justify-content-center gap-3 py-4">
+            <div class="show-poster col-1 g-0">
                 <img src="<%= `${posterPathUrl}/${show.posterPath}` %>" alt="">
             </div>
 
             <div class="col">
 
-                <div class="row mb-3">
-                    <div class="major-info-container p-3 d-flex justify-content-between align-items-center">
+                <div class="row">
+                    <div class="title-info d-flex justify-content-between align-items-center">
+                        <h2><%= show.showTitle %> </h2>
+                    </div>
+                </div>
 
-                        <span class="me-1">Your score: </span>
-
-                        
-                        <div>
-                            <i class="fa-solid fa-star"></i>
-                            <span><%= show.userScore %> </span>
-                        </div>
-
-
+                <div class="row mb-2">
+                    <div class="major-info-container p-3 d-flex flex-column">
+                        <span>Popularity: <%= show.popularity %> </span>
+                        <span>Vote count: <%= show.vote_count %> </span>
 
                     </div>
                 </div>
 
                 <div class="row mb-2 border-bottom border-light">
                     <p class="text-justify" id="show-description"><%= show.overview %> </p>
+                    <ol class="list-inline d-flex gap-2">
+                        <% show.genresId.forEach(genre => { %> 
+                            <li class="list-inline-item text-secondary"><%= genre.name %></li>
+                        <% }) %> 
+                    </ol>
                 </div>
 
-                <div class="row">
-                    <span class="mb-2 fs-5" id="add-to-list-title">Update</span>
-                    
 
-                    <form name="editShowForm" action="/user/list/shows/update/" method="post" class="d-flex flex-column aling-items-start gap-3">
+                <div class="row">
+
+                    <form name="addForm" action="/user/list/shows/update/" method="post" class="d-flex flex-column flex-sm-row aling-items-center gap-3  mt-2">
                         <input type="hidden" name="id" value="<%= show.showId %>">
+
+                        <div class="form-group d-flex align-items-center d-flex flex-column">
+                            <input type="submit" value="Update">
+                        </div>
 
                         <div class="form-gorup d-flex align-items-center gap-2">
                             <label for="score" class="">Score: </label>
@@ -71,13 +84,10 @@
                                 <option value="9">9 (Great)</option>
                                 <option value="10">10 (Masterpiece)</option>
                             </select>
-                        </div>
-
-                        <div class="form-group d-flex gap-2 align-items-center">
-                            <input type="submit" value="Update">
                             <span id="errorSpan" class="text-danger"></span>
                             <span id="successSpan" class="text-success"></span>
                         </div>
+
 
                     </form>
 
@@ -88,11 +98,89 @@
 
         </div>
 
-
     </main>
 
+    <div class="mx-auto w-75 mb-5"> 
+        <p class="fs-5">Cast</p>
+        <div class="cast-container d-flex align-items-center gap-2">
+            <i class="cast-prev fa-solid fa-angle-left"></i>
+            <div class="cast-glider w-100 ">
+
+                <% cast.forEach(castItem => { %> 
+                    <div class="cast-info d-flex flex-column align-items-center">
+
+                        <% if(castItem.profile_path) { %> 
+                            <img class="cast-picture" src="<%= `${posterPathUrl}/${castItem.profile_path}` %>" alt="">
+                         <% } else { %>    
+                            <img class="cast-picture" src="https://padletuploads.blob.core.windows.net/prod/338313757/xv9cNVhJOnCldshv-zjMjA/f41906143bc5eb004cac88418b2a97a7.jpeg" alt="">
+                        <% } %> 
+
+                        <small><%= castItem.original_name %></small>
+                    </div>
+                <% }) %> 
+
+
+            </div>
+            <i class="cast-next control fa-solid fa-angle-right"></i>
+
+        </div>
+
+    </div>
+
+
+    
+    <div class="mx-auto w-75 mb-3">
+        <p class="fs-5">You may also like</p>
+
+        <div class="similar-shows-container d-flex align-items-center gap-2">
+            <i class="similar-shows-prev fa-solid fa-angle-left"></i>
+            <div class="similar-shows-glider d-flex gap-2 w-100">
+
+                <% recommendations.forEach(recommendation => { %> 
+
+                    <div class="d-flex justify-content-center">
+                        <% if(type == 'show') { %>
+
+                            <% if(recommendation.poster_path) { %> 
+                                <a href="<%= `/search/details/${recommendation.id}?type=show` %>">
+                                    <img class="similar-movie-picture" src="<%= `${posterPathUrl}/${recommendation.poster_path}` %>" alt="">
+                                </a>
+                            <% } else { %> 
+                                <a href="<%= `/search/details/${recommendation.id}?type=show` %>">
+                                    <img class="similar-movie-picture" src="https://place-hold.it/170x250" alt="">
+                                </a>
+                            <% } %> 
+
+                        <% } else { %> 
+                            <% if(recommendation.poster_path) { %> 
+                                <a href="<%= `/search/details/${recommendation.id}?type=movie` %>">
+                                    <img class="similar-movie-picture" src="<%= `${posterPathUrl}/${recommendation.poster_path}` %>" alt="">
+                                </a>
+                            <% } else { %> 
+                                <a href="<%= `/search/details/${recommendation.id}?type=movie` %>">
+                                    <img class="similar-movie-picture" src="https://place-hold.it/170x250" alt="">
+                                </a>
+                            <% } %> 
+                        <% } %> 
+                    </div>
+
+                <% }) %> 
+
+    
+                
+            </div>
+            <i class="similar-shows-next control fa-solid fa-angle-right"></i>
+        </div>
+
+    </div>
+
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.js"></script>
+    <script src="/js/detailsPage.js"></script>
     <script src="/js/Ajax.js"></script>
-    <script src="/js/editShowAjax.js"></script>
+    <script src="/js/addToListAjax.js"></script>
 </body>
 </html>
