@@ -133,44 +133,31 @@
 
 
     
-    <div class="mx-auto w-75">
+    <div class="mx-auto w-75 mb-3">
         <p class="fs-5">You may also like</p>
 
         <div class="similar-shows-container d-flex align-items-center gap-2">
             <i class="similar-shows-prev fa-solid fa-angle-left"></i>
             <div class="similar-shows-glider d-flex gap-2 w-100">
-                <div class="d-flex justify-content-center">
-                    <img class="similar-movie-picture" src="<%= `${posterPathUrl}/${details.poster_path}` %>" alt="">
-                </div>
+
+                <% recommendations.forEach(recommendation => { %> 
+
+                    <div class="d-flex justify-content-center">
+                        <% if(type == 'show') { %>
+                            <a href="<%= `/search/details/${recommendation.id}?type=show` %>">
+                                <img class="similar-movie-picture" src="<%= `${posterPathUrl}/${recommendation.poster_path}` %>" alt="">
+                            </a>
+                        <% } else { %> 
+                            <a href="<%= `/search/details/${recommendation.id}?type=movie` %>">
+                                <img class="similar-movie-picture" src="<%= `${posterPathUrl}/${recommendation.poster_path}` %>" alt="">
+                            </a>
+                        <% } %> 
+                    </div>
+
+                <% }) %> 
+
     
-                <div class="d-flex justify-content-center">
-                    <img class="similar-movie-picture" src="<%= `${posterPathUrl}/${details.poster_path}` %>" alt="">
-                </div>
-    
-                <div class="d-flex justify-content-center">
-                    <img class="similar-movie-picture" src="<%= `${posterPathUrl}/${details.poster_path}` %>" alt="">
-                </div>
-    
-                <div class="d-flex justify-content-center">
-                    <img class="similar-movie-picture" src="<%= `${posterPathUrl}/${details.poster_path}` %>" alt="">
-                </div>
-
-                <div class="d-flex justify-content-center">
-                    <img class="similar-movie-picture" src="<%= `${posterPathUrl}/${details.poster_path}` %>" alt="">
-                </div>
-
-                <div class="d-flex justify-content-center">
-                    <img class="similar-movie-picture" src="<%= `${posterPathUrl}/${details.poster_path}` %>" alt="">
-                </div>
-
-                <div class="d-flex justify-content-center">
-                    <img class="similar-movie-picture" src="<%= `${posterPathUrl}/${details.poster_path}` %>" alt="">
-                </div>
-
-                <div class="d-flex justify-content-center">
-                    <img class="similar-movie-picture" src="<%= `${posterPathUrl}/${details.poster_path}` %>" alt="">
-                </div>
-
+                
             </div>
             <i class="similar-shows-next control fa-solid fa-angle-right"></i>
         </div>

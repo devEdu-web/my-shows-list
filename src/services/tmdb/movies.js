@@ -40,6 +40,15 @@ class Movie  extends Tmdb {
       return undefined
     }
   }
+
+  async getRecommendations(id) {
+    try {
+      const response = await axios.get(`${this.movieDetailsUrl}/${id}/recommendations?api_key=${API_KEY}`)
+      return response.data
+    } catch(error) {
+      return undefined
+    }
+  }
 }
 
 module.exports = new Movie();

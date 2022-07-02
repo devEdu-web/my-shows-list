@@ -49,7 +49,7 @@ class searchController {
       if (type == 'show') {
         const showDetails = await Show.getShowDetails(id);
         const showCast = await Show.getCast(id)
-        console.log(showCast)
+        // console.log(showCast)
         return res.render('search/details', {
           profilePictureUrl,
           userName,
@@ -62,14 +62,17 @@ class searchController {
         // type == movie
         const movieDetails = await Movie.getMovieDetails(id);
         const movieCast = await Movie.getCast(id)
-        console.log(movieCast)
+        const recommendations = await Movie.getRecommendations(id)
+        console.log(recommendations.results[0])
+        // console.log(movieCast)
         return res.render('search/details', {
           profilePictureUrl,
           userName,
           posterPathUrl: Movie.posterPathUrl,
           details: movieDetails,
           type: 'movie',
-          cast: movieCast.cast
+          cast: movieCast.cast,
+          recommendations: recommendations.results
         });
       }
     } catch(error) {
