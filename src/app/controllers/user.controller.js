@@ -25,7 +25,6 @@ class UserController {
     try {
       const show = await Show.findOne({ showId: id, userId: userId });
       const showCast = await TMDBShow.getCast(id)
-      console.log(show)
       const recommendations = await TMDBShow.getRecommendations(id)
       return res.render('user/editShow', {
         profilePictureUrl,
@@ -225,7 +224,6 @@ class UserController {
           userScore: newScore,
         }
       );
-      console.log(movie)
       if(movie) {
         return res.status(201).json({ msg: 'Movie Updated' });
       }

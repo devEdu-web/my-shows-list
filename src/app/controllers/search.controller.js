@@ -1,6 +1,8 @@
 const Search = require('../../services/tmdb/search');
 const Movie = require('../../services/tmdb/movies');
 const Show = require('../../services/tmdb/shows');
+const userMovies = require('../schemas/Movies')
+const userShows = require('../schemas/Shows')
 const addProperty = require('../../utils/addProperty');
 
 class searchController {
@@ -41,6 +43,7 @@ class searchController {
     }
   }
   async getDetails(req, res, next) {
+    const { userId } = req.session.user
     const { id } = req.params;
     const { type } = req.query;
     const { userName } = req.session.user;
@@ -50,6 +53,13 @@ class searchController {
         const showDetails = await Show.getShowDetails(id);
         const showCast = await Show.getCast(id)
         const recommendations = await Show.getRecommendations(id)
+        const isShowOnUserList = await userShows.findOne(
+          {
+            userId: userId,
+            showId: id
+          }
+        )
+        
         return res.render('search/details', {
           profilePictureUrl,
           userName,
@@ -57,13 +67,20 @@ class searchController {
           details: showDetails,
           type: 'show',
           cast: showCast.cast,
-          recommendations: recommendations.results
+          recommendations: recommendations.results,
+          isOnUserList: isShowOnUserList
         });
       } else {
         // type == movie
         const movieDetails = await Movie.getMovieDetails(id);
         const movieCast = await Movie.getCast(id)
         const recommendations = await Movie.getRecommendations(id)
+        const isMovieOnUserList = await userMovies.findOne(
+          {
+            userId: userId,
+            movieId: id
+          }
+        )
         return res.render('search/details', {
           profilePictureUrl,
           userName,
@@ -71,7 +88,8 @@ class searchController {
           details: movieDetails,
           type: 'movie',
           cast: movieCast.cast,
-          recommendations: recommendations.results
+          recommendations: recommendations.results,
+          isOnUserList: isMovieOnUserList
         });
       }
     } catch(error) {

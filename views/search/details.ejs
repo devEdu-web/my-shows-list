@@ -65,34 +65,44 @@
                 </div>
 
 
-                <div class="row">
+                <div class="form-container">
 
-                    <form name="addForm" action="<%= type == 'movie' ? `/user/list/movies/add/` : `/user/list/shows/add/` %>" method="post" class="d-flex flex-column flex-sm-row aling-items-center gap-3  mt-2">
-                        <input type="hidden" name="id" value="<%= details.id %>">
-
-                        <div class="form-group d-flex align-items-center d-flex flex-column">
-                            <input type="submit" value="Add">
-                            <span id="errorSpan" class="text-danger"></span>
-                            <span id="successSpan" class="text-success"></span>
+                    <% if(isOnUserList) { %> 
+                        <div class="btn btn-success  mt-2">
+                            <span>Item on list.</span>
                         </div>
+                    <% } else { %> 
 
-                        <div class="form-gorup d-flex align-items-center gap-2">
-                            <label for="score" class="">Score: </label>
-                            <select name="score" id="score" class="">
-                                <option value="1">1 (Appalling)</option>
-                                <option value="2">2 (Horrible)</option>
-                                <option value="3">3 (Very bad)</option>
-                                <option value="4">4 (Bad)</option>
-                                <option value="5">5 (Average)</option>
-                                <option value="6">6 (Fine)</option>
-                                <option value="7">7 (Good)</option>
-                                <option value="8">8 (Very Good)</option>
-                                <option value="9">9 (Great)</option>
-                                <option value="10">10 (Masterpiece)</option>
-                            </select>
-                        </div>
+                        <form name="addForm" id="add-to-list-form" action="<%= type == 'movie' ? `/user/list/movies/add/` : `/user/list/shows/add/` %>" method="post" class="d-flex flex-column flex-sm-row aling-items-center gap-3  mt-3">
+                            <input type="hidden" name="id" value="<%= details.id %>">
+    
+                            <div class="form-group d-flex align-items-center d-flex flex-column">
+                                <input type="submit" value="Add">
+                                <span id="errorSpan" class="text-danger"></span>
+                                <span id="successSpan" class="text-success"></span>
+                            </div>
+    
+                            <div class="form-gorup d-flex align-items-center gap-2">
+                                <label for="score" class="">Score: </label>
+                                <select name="score" id="score" class="">
+                                    <option value="1">1 (Appalling)</option>
+                                    <option value="2">2 (Horrible)</option>
+                                    <option value="3">3 (Very bad)</option>
+                                    <option value="4">4 (Bad)</option>
+                                    <option value="5">5 (Average)</option>
+                                    <option value="6">6 (Fine)</option>
+                                    <option value="7">7 (Good)</option>
+                                    <option value="8">8 (Very Good)</option>
+                                    <option value="9">9 (Great)</option>
+                                    <option value="10">10 (Masterpiece)</option>
+                                </select>
+                            </div>
+    
+                        </form>
 
-                    </form>
+                    <% } %> 
+
+                    
 
                 </div>
 
