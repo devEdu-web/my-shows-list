@@ -63,6 +63,12 @@ new Glider(castGlider, {
   },
   responsive: [
     {
+      breakpoint: 1400,
+      settings: {
+        slidesToShow: 6,
+      },
+    },
+    {
       breakpoint: 1100,
       settings: {
         slidesToShow: 5,
