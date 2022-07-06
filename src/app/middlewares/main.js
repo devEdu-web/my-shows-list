@@ -25,11 +25,11 @@ class Middleware {
       if(user.isVerified) 
         return next()
       res.status(404).json({
-        msg: 'Email invalid.'
+        msg: 'Email or password invalid.'
       })
     } catch(error) {
       res.status(500).json({
-        msg: error.msg
+        msg: 'Email or password invalid'
       })
     }
   }
