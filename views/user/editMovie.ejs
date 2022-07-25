@@ -18,21 +18,12 @@
         <%- include('../templates/navigation.ejs') %> 
     </header>
 
-    <!-- <main>
-
-        <div class="show-poster col-1 g-0 bg-danger">
-            <img src="<%= `${posterPathUrl}/${movie.poster_path}` %>" alt="">
-        </div>
-        <h1>desgraça</h1>
-
-    </main> -->
-
     <main class="bg d-flex flex-column align-items-center mx-auto mb-5">
 
 
         <div class="show-info-container row d-flex justify-content-center gap-3 py-4">
             <div class="show-poster col-1 g-0">
-                <img src="<%= `${posterPathUrl}/${movie.posterPath}` %>" alt="">
+                <img loading="lazy" src="<%= `${posterPathUrl}/${movie.posterPath}` %>" alt="">
             </div>
 
             <div class="col">
@@ -110,9 +101,9 @@
                     <div class="cast-info d-flex flex-column align-items-center">
 
                         <% if(castItem.profile_path) { %> 
-                            <img class="cast-picture" src="<%= `${posterPathUrl}/${castItem.profile_path}` %>" alt="">
+                            <img loading="lazy" class="cast-picture" src="<%= `${posterPathUrl}/${castItem.profile_path}` %>" alt="">
                          <% } else { %>    
-                            <img class="cast-picture" src="https://padletuploads.blob.core.windows.net/prod/338313757/xv9cNVhJOnCldshv-zjMjA/f41906143bc5eb004cac88418b2a97a7.jpeg" alt="">
+                            <img loading="lazy" class="cast-picture" src="https://padletuploads.blob.core.windows.net/prod/338313757/xv9cNVhJOnCldshv-zjMjA/f41906143bc5eb004cac88418b2a97a7.jpeg" alt="">
                         <% } %> 
 
                         <small><%= castItem.original_name %></small>
@@ -143,22 +134,22 @@
 
                             <% if(recommendation.poster_path) { %> 
                                 <a href="<%= `/search/details/${recommendation.id}?type=show` %>">
-                                    <img class="similar-movie-picture" src="<%= `${posterPathUrl}/${recommendation.poster_path}` %>" alt="">
+                                    <img loading="lazy" class="similar-movie-picture" src="<%= `${posterPathUrl}/${recommendation.poster_path}` %>" alt="">
                                 </a>
                             <% } else { %> 
                                 <a href="<%= `/search/details/${recommendation.id}?type=show` %>">
-                                    <img class="similar-movie-picture" src="https://place-hold.it/170x250" alt="">
+                                    <img loading="lazy" class="similar-movie-picture" src="https://place-hold.it/170x250" alt="">
                                 </a>
                             <% } %> 
 
                         <% } else { %> 
                             <% if(recommendation.poster_path) { %> 
                                 <a href="<%= `/search/details/${recommendation.id}?type=movie` %>">
-                                    <img class="similar-movie-picture" src="<%= `${posterPathUrl}/${recommendation.poster_path}` %>" alt="">
+                                    <img loading="lazy" class="similar-movie-picture" src="<%= `${posterPathUrl}/${recommendation.poster_path}` %>" alt="">
                                 </a>
                             <% } else { %> 
                                 <a href="<%= `/search/details/${recommendation.id}?type=movie` %>">
-                                    <img class="similar-movie-picture" src="https://place-hold.it/170x250" alt="">
+                                    <img loading="lazy" class="similar-movie-picture" src="https://place-hold.it/170x250" alt="">
                                 </a>
                             <% } %> 
                         <% } %> 

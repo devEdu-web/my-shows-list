@@ -23,7 +23,7 @@
         </div>
         <% showsList.forEach(show => { %> 
             <div class="card text-white">
-                <img class="card-img" src="<%= `${posterPathUrl}/${show.posterPath}` %>" alt="">
+                <img loading="lazy" class="card-img" src="<%= `${posterPathUrl}/${show.posterPath}` %>" alt="">
     
                 <div class="card-img-overlay p-0 d-flex flex-column justify-content-end gap-1">
                     <div class="overlay-content p-2 fw-bold d-flex justify-content-between align-items-center">

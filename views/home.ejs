@@ -39,7 +39,7 @@
                     <% topRatedMovies.forEach(movie => { %> 
                         <div class="card text-white">
                             <a href="<%= `/search/details/${movie.id}?type=movie` %>">
-                                <img class="card-img" src="<%= `${posterPathUrl}/${movie.poster_path}` %>" alt="">
+                                <img loading="lazy" class="card-img" src="<%= `${posterPathUrl}/${movie.poster_path}` %>" alt="">
                             </a>
                         </div>
                     <% }) %>  
@@ -60,7 +60,7 @@
                     <% popularMovies.forEach(movie => { %> 
                         <div class="card text-white">
                             <a href="<%= `/search/details/${movie.id}?type=movie` %>">
-                                <img class="card-img" src="<%= `${posterPathUrl}/${movie.poster_path}` %>" alt="">
+                                <img loading="lazy" class="card-img" src="<%= `${posterPathUrl}/${movie.poster_path}` %>" alt="">
                             </a>
                         </div>
                     <% }) %>    
@@ -84,7 +84,7 @@
                     <% topRatedShows.forEach(show => { %> 
                         <div class="card text-white">
                             <a href="<%= `/search/details/${show.id}?type=show` %>">
-                                <img class="card-img" src="<%= `${posterPathUrl}/${show.poster_path}` %>" alt="">
+                                <img loading="lazy" class="card-img" src="<%= `${posterPathUrl}/${show.poster_path}` %>" alt="">
                             </a>
                         </div>
                     <% }) %>  
@@ -105,7 +105,7 @@
                     <% popularShows.forEach(show => { %> 
                         <div class="card text-white">
                             <a href="<%= `/search/details/${show.id}?type=show` %>">
-                                <img class="card-img" src="<%= `${posterPathUrl}/${show.poster_path}` %>" alt="">
+                                <img loading="lazy" class="card-img" src="<%= `${posterPathUrl}/${show.poster_path}` %>" alt="">
                             </a>
                         </div>
                     <% }) %> 
