@@ -5,6 +5,10 @@ const nodemailer = require('nodemailer');
 const ejs = require('ejs');
 const path = require('path');
 
+require('dotenv').config({
+  path: path.join(__dirname, '..', '..', '..', '.env')
+})
+
 class Mail {
   constructor() {
     this.transporter = nodemailer.createTransport({

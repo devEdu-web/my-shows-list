@@ -6,9 +6,9 @@ require('dotenv').config({
 let baseUrl;
 
 if(process.env.NODE_ENV == 'production') {
-  baseUrl = process.env.BASE_PROD_URL
+  baseUrl = process.env.CONFIRMATION_BASE_PROD_URL
 } else {
-  baseUrl = process.env.BASE_DEV_URL
+  baseUrl = process.env.CONFIRMATION_BASE_DEV_URL
 }
 
 

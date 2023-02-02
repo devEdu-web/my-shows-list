@@ -24,7 +24,7 @@ class Middleware {
       const user = await User.findOne({ email })
       if(user.isVerified) 
         return next()
-      res.status(404).json({
+      res.status(403).json({
         msg: 'Email or password invalid.'
       })
     } catch(error) {
@@ -85,6 +85,11 @@ class Middleware {
   }
   
   validatePicture(req, res, next) {
+    if(!req.files) {
+      return res.status(400).json({
+        msg: 'No file was selected.'
+      })
+    }
     const picture = req.files.updatedPicture
     const acceptedMimeTypes = ['image/jpeg', 'image/jpg', 'image/png']
   
