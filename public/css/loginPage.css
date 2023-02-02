@@ -1,6 +1,8 @@
-@media screen and (min-height: 1000px) {
+@media screen and (min-width: 1600px) {
     #registerContainer {
-        height: 40vh;
+        /* background-color: red; */
+        min-height: 50vh;
+        width: 23vw;
     }
 }
 

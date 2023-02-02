@@ -84,9 +84,3 @@ input[type="submit"] {
     }
 
 }
-
-@media screen and (min-height: 900px) {
-    #registerContainer {
-        height: 50vh;
-    }
-}

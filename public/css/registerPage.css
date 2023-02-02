@@ -1,3 +1,10 @@
 #registerContainer {
-  min-height: 75vh;
+  min-height: 65vh;
+}
+
+@media screen and (min-width: 1600px) {
+  #registerContainer {
+    min-height: 50vh;
+    width: 22vw;
+  }
 }
